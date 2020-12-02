@@ -35,7 +35,7 @@ const Layout = () => {
                 </div>
               </div>
             ) : (
-              <h1>Ingreso</h1>
+              <h1>Ingreso prohibido</h1>
             )}
           </Switch>
         </ScrollToTop>
