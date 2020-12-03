@@ -67,7 +67,7 @@ function CategoryEditForm() {
       <div className="col-md-4">
         <EditCategories
           titulo={"Equipos"}
-          colorDeFondo={"rgba(224,224,224,0.2)"}
+          colorDeFondo={""}
           global={global.equipos}
           updateGlobalState={updateGlobalState}
           objectAttr={"equipos"}
@@ -76,7 +76,7 @@ function CategoryEditForm() {
       <div className="col-md-4">
         <EditCategories
           titulo={"Escenario"}
-          colorDeFondo={"rgba(224,224,224,0.2)"}
+          colorDeFondo={""}
           global={global.escenario}
           updateGlobalState={updateGlobalState}
           objectAttr="escenario"
@@ -85,7 +85,7 @@ function CategoryEditForm() {
       <div className="col-md-4">
         <EditCategories
           titulo={"Food & Drinks"}
-          colorDeFondo={"rgba(224,224,224,0.2)"}
+          colorDeFondo={""}
           global={global.foodanddrinks}
           objectAttr={"foodanddrinks"}
         />

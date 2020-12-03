@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navlist } from "./navlist";
-// import "../styles/navbar.css";
 
 export const Navbar = () => {
   return (

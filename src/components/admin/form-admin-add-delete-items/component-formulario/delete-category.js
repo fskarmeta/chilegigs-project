@@ -18,7 +18,7 @@ export const DeleteCategory = ({ onlyCategories, getCategory }) => {
       <label htmlFor="categorias">Borrar Categoria Completa</label>
       <div>
         <div>
-          <Select options={options} onChange={onChange} />
+          <Select options={options} onChange={onChange} menuPlacement={"top"} />
         </div>
       </div>
       <span

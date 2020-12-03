@@ -18,7 +18,11 @@ export const DeleteItem = ({ object, getAndDeleteItem }) => {
       <div>
         <div>
           <div>
-            <Select options={options} onChange={onChange} />
+            <Select
+              options={options}
+              onChange={onChange}
+              menuPlacement={"top"}
+            />
           </div>
         </div>
         <span

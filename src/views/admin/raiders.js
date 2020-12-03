@@ -2,7 +2,7 @@ import CategoryEditForm from "../../components/admin/CategoryEdit";
 
 export const Raider = () => {
   return (
-    <div className="col-md-12">
+    <div className="container w-75 mt-3">
       <CategoryEditForm />
     </div>
   );
