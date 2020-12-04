@@ -28,7 +28,7 @@ const HomeEditForm = () => {
     setHome(objectCopy);
   }
 
-  // traer devuelta un array con las citas que quedan y sustituyo el antigup
+  // traer devuelta un array con las citas que quedan y sustituyo el antiguo
   function citasBorradas(arr) {
     let objectCopy = { ...home };
     objectCopy.citas = arr;
