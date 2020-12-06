@@ -6,6 +6,7 @@ import { HelloWorld } from "./views/admin/admin_helloworld";
 import { Raider } from "./views/admin/raiders";
 import { AdminHome } from "./views/admin/home";
 import { AdminNav } from "./components/admin/navbar_admin";
+import { EditarPerfil } from "./views/dj/editar_perfil";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -20,6 +21,9 @@ const Layout = () => {
           <Switch>
             <Route exact path="/">
               <h1>Not found!</h1>
+            </Route>
+            <Route exact path="/editprofile">
+              <EditarPerfil />
             </Route>
             {admin ? (
               <div className="row">

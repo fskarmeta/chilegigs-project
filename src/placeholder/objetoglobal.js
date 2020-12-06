@@ -17,10 +17,7 @@ export const objetosGlobales = {
     },
     {
       label: "Mixer",
-      options: [
-        { value: "10 entradas", label: "10 entradas", group: "Mixer" },
-        { value: "8 entradas", label: "8 entradas", group: "Mixer" },
-      ],
+      options: [{ value: "entradas", label: "entradas", group: "Mixer" }],
     },
   ],
   escenario: [
