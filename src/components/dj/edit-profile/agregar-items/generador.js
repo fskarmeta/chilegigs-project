@@ -21,6 +21,9 @@ const Generador = ({
 
   function agregarItem() {
     let arrCopy = [...arr];
+    if (arrCopy.length > 25) {
+      return;
+    }
     arrCopy.push(`${value} ${item.value}`);
     updateRequisitosProfile(atributo, arrCopy);
     setArr(arrCopy);
@@ -34,6 +37,9 @@ const Generador = ({
     }
     setCustomval(false);
     let arrCopy = [...arr];
+    if (arrCopy.length > 25) {
+      return;
+    }
     arrCopy.push(custom);
     updateRequisitosProfile(atributo, arrCopy);
     setArr(arrCopy);
