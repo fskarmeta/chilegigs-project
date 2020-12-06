@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
         {
           label: "Editar Perfil",
-          to: "../editprofile",
+          to: "../dj/edit",
         },
         {
           label: "Cuenta",

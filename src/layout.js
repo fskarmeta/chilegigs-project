@@ -22,7 +22,7 @@ const Layout = () => {
             <Route exact path="/">
               <h1>Not found!</h1>
             </Route>
-            <Route exact path="/editprofile">
+            <Route exact path="/dj/edit">
               <EditarPerfil />
             </Route>
             {admin ? (
