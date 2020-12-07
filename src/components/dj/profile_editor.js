@@ -14,11 +14,14 @@ const ProfileEditor = () => {
   //setear acá el perfil del usurio actual desde el store
   const [perfil, setPerfil] = useState(ejemploPerfil);
 
+  // useeffect fetch de perfil y/o objetos globales
+
   // aplicar fetch PUT y luego Get (al perfil)
   function updateProfile(obj) {
     console.log(obj);
     let objCopy = { ...perfil };
     setPerfil({ ...objCopy, ...obj });
+    //al hacer el put de perfil
   }
 
   // aplicar fetch PUT y luego Get (al perfil)
@@ -27,6 +30,7 @@ const ProfileEditor = () => {
     setPerfil({
       ...objectCopy,
       requisitos: { ...objectCopy.requisitos, [key]: item },
+      // hacer el put de perfil
     });
   }
   return (
