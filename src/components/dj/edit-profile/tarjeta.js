@@ -223,7 +223,7 @@ const Tarjeta = ({ updateProfile }) => {
   return (
     <div className="border border-dark p-3 rounded mt-2">
       <div className="d-flex justify-content-start mb-1 ml-4">
-        <h3>Tarjeta</h3>
+        <h3>Perfil</h3>
       </div>
 
       <div className="col-md-12">
