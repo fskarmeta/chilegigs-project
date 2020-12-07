@@ -22,16 +22,16 @@ const DatosPersonales = ({ updateProfile }) => {
   const [ok, setOk] = useState(false);
   function mandarDatos() {
     if (
-      nombre.length > 30 ||
-      apellido.length > 30 ||
-      nacionalidad.length > 30 ||
-      celular.length > 30 ||
-      rut.length > 30 ||
-      calle.length > 30 ||
-      numero.length > 30 ||
-      ciudad.length > 30 ||
-      region.length > 30 ||
-      pais.length > 30
+      nombre.length > 25 ||
+      apellido.length > 25 ||
+      nacionalidad.length > 25 ||
+      celular.length > 25 ||
+      rut.length > 25 ||
+      calle.length > 25 ||
+      numero.length > 25 ||
+      ciudad.length > 25 ||
+      region.length > 25 ||
+      pais.length > 25
     ) {
       return setError(true);
     }
@@ -104,7 +104,7 @@ const DatosPersonales = ({ updateProfile }) => {
               type="text"
               className="form-control"
               id="Nacionalidad"
-              placeholder="nacionalidad"
+              placeholder="Nacionalidad"
               value={nacionalidad}
               onChange={(e) => setNacionalidad(e.target.value)}
             />

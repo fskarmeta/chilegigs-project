@@ -9,11 +9,28 @@ export const Subheader = ({ updateHome }) => {
   const [box2title, setBox2title] = useState("");
   const [box2text, setBox2text] = useState("");
 
-  function captureImage(e) {
-    let img = e.target.value;
-    let replaced = img.replace(/^(.*[\\\/])/, "");
-    updateHome("subheader", "image", `./img/home/${replaced}`);
-  }
+  const [cita, setCita] = useState("");
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "home_preset");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/chilegigs/image/upload/",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage(file.secure_url);
+    updateHome("subheader", "image", file.secure_url);
+    setLoading(false);
+  };
 
   function updateBox1() {
     let box = { title: box1title, text: box1text };
@@ -34,16 +51,25 @@ export const Subheader = ({ updateHome }) => {
       <div className="row">
         <span className="font-weight-bold mb-3">SUBHEADER</span>
       </div>
-      <div className="row">
+      <div className="row d-flex flex-column">
+        {loading ? null : (
+          <img
+            src={image}
+            alt=""
+            className="img-thumbnail"
+            style={{ width: "300px" }}
+          />
+        )}
         <span className="font-weight-light pb-1">Cambiar imagen de fondo</span>
-        <div class="custom-file mb-3">
+        <div class="custom-file">
           <input
             type="file"
-            class="custom-file-input"
+            name="file"
+            className="custom-file-input"
             id="customFile"
-            onChange={(e) => captureImage(e)}
+            onChange={uploadImage}
           />
-          <label class="custom-file-label" for="customFile">
+          <label className="custom-file-label" htmlFor="customFile">
             Selecciona archivo
           </label>
         </div>

@@ -1,4 +1,4 @@
-let Home = {
+const Home = {
   header: {
     image: "./img/home/header.jpg",
     cita: "hola buenos días",

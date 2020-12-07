@@ -2,27 +2,52 @@ import React, { useState } from "react";
 
 export const Header = ({ updateHome }) => {
   const [cita, setCita] = useState("");
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  function setImg(e) {
-    let img = e.target.value;
-    let replaced = img.replace(/^(.*[\\\/])/, "");
-    updateHome("header", "image", `./img/home/${replaced}`);
-  }
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "home_preset");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/chilegigs/image/upload/",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage(file.secure_url);
+    updateHome("header", "image", file.secure_url);
+    setLoading(false);
+  };
+
   return (
     <div className="col-md-12">
       <div className="row">
         <span className="font-weight-bold mb-3">HEADER</span>
       </div>
       <div className="row d-flex flex-column">
+        {loading ? null : (
+          <img
+            src={image}
+            alt=""
+            className="img-thumbnail"
+            style={{ width: "300px" }}
+          />
+        )}
         <span className="font-weight-light pb-1">Cambiar imagen de fondo</span>
         <div class="custom-file">
           <input
             type="file"
-            class="custom-file-input"
+            name="file"
+            className="custom-file-input"
             id="customFile"
-            onChange={(e) => setImg(e)}
+            onChange={uploadImage}
           />
-          <label class="custom-file-label" for="customFile">
+          <label className="custom-file-label" htmlFor="customFile">
             Selecciona archivo
           </label>
         </div>

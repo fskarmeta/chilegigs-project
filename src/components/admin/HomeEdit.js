@@ -4,11 +4,11 @@ import { Subheader } from "./edit-home/subheader";
 import { Citas } from "./edit-home/citas";
 import { BorrarCitas } from "./edit-home/borrar-citas";
 // importacion de objeto de ejemplo
-// import Home from "../../placeholder/objetoglobal";
+import Home from "../../placeholder/homeobject";
 
 // falta agregar los fetch , token y path's
 const HomeEditForm = () => {
-  const [home, setHome] = useState({});
+  const [home, setHome] = useState(Home);
 
   // Ejemplo: key1 = "header", key2 = "cita", item = "La mejor página" | Actualiza propiedad del objeto
   function updateHome(key1, key2, item) {
