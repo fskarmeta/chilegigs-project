@@ -61,3 +61,14 @@ export const ejemploPerfil = {
     },
   ],
 };
+
+export const ejemploPerfilCliente = {
+  status: "inactive",
+  nombre: "Juan",
+  apellido: "Perez",
+  imagen: "algo.jpg",
+  rut: "13234323-3",
+  nacionalidad: "Chileno",
+  pais: "Chile",
+  biografia: "hola soy juan",
+};

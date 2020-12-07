@@ -7,6 +7,7 @@ import { Raider } from "./views/admin/raiders";
 import { AdminHome } from "./views/admin/home";
 import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
+import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import Home from "./views/home/home";
 
 const Layout = () => {
@@ -25,6 +26,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/dj/edit">
               <EditarPerfil />
+            </Route>
+            <Route exact path="/client/edit">
+              <EditarPerfilCliente />
             </Route>
             {admin ? (
               <div className="row">
