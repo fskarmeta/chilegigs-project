@@ -18,9 +18,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           to: "../profile",
         },
         {
-          label: "Editar Perfil",
+          label: "Editar Perfil Dj",
           to: "../dj/edit",
         },
+        { label: "Editar Perfil Cliente", to: "../client/edit" },
+        { label: "Gigs Dj", to: "../dj/gigs" },
+        { label: "Gigs Cliente", to: "../client/gigs" },
         {
           label: "Cuenta",
           to: "../account",

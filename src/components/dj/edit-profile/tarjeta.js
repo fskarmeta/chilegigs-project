@@ -179,21 +179,6 @@ const Tarjeta = ({ updateProfile }) => {
       serviciosFinales.push(el.label);
     }
 
-    // setTarjeta({
-    //   status: "active",
-    //   artista: artista,
-    //   ciudad: minusculaCapitalizar(ciudad),
-    //   pais: minusculaCapitalizar(pais),
-    //   mixcloud: `https://www.mixcloud.com/${mixcloud}`,
-    //   soundcloud: `https://soundcloud.com/${soundcloud}`,
-    //   instagram: `https://www.instagram.com/${instagram}`,
-    //   estilos: estilosFinales,
-    //   servicios: serviciosFinales,
-    //   tecnica: tecnica.label,
-    //   agregar_cancion: agregar,
-    //   link: link,
-    // });
-
     updateProfile({
       status: "active",
       artista: artista,

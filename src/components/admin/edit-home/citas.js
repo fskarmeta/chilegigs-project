@@ -1,16 +1,39 @@
+import { object } from "prop-types";
 import React, { useState } from "react";
 
 export const Citas = ({ getCita }) => {
   const [objeto, setObjeto] = useState({ imagen: "", nombre: "", cita: "" });
   const [nombre, setNombre] = useState("");
   const [cita, setCita] = useState("");
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  function setImg(e) {
-    let objectCopy = { ...objeto };
-    let img = e.target.value;
-    let replaced = img.replace(/^(.*[\\\/])/, "");
-    setObjeto({ ...objectCopy, imagen: `./img/home/${replaced}` });
-  }
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "citas_preset");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/chilegigs/image/upload/",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage(file.secure_url);
+    let objectCopy = { ...object };
+    setObjeto({ ...objectCopy, imagen: file.secure_url });
+    setLoading(false);
+  };
+
+  // function setImg(e) {
+  //   let objectCopy = { ...objeto };
+  //   let img = e.target.value;
+  //   let replaced = img.replace(/^(.*[\\\/])/, "");
+  //   setObjeto({ ...objectCopy, imagen: `./img/home/${replaced}` });
+  // }
 
   return (
     <div className="col-md-12 mt-4">
@@ -18,17 +41,26 @@ export const Citas = ({ getCita }) => {
       <div className="row">
         <div className="col-md-6">
           <div>
-            <label className="font-weight-light mt-1 mb-1">
-              Imagen del Perfil
-            </label>
+            {loading ? null : (
+              <img
+                src={image}
+                alt=""
+                className="img-thumbnail"
+                style={{ width: "300px" }}
+              />
+            )}
+            <span className="font-weight-light pb-1">
+              Cambiar imagen de fondo
+            </span>
             <div class="custom-file">
               <input
                 type="file"
-                class="custom-file-input"
+                name="file"
+                className="custom-file-input"
                 id="customFile"
-                onChange={(e) => setImg(e)}
+                onChange={uploadImage}
               />
-              <label class="custom-file-label" for="customFile">
+              <label className="custom-file-label" htmlFor="customFile">
                 Selecciona archivo
               </label>
             </div>
@@ -80,6 +112,8 @@ export const Citas = ({ getCita }) => {
             getCita(objeto);
             setNombre("");
             setCita("");
+            setImage("");
+            setLoading(true);
           }}
         >
           Agregar Cita
