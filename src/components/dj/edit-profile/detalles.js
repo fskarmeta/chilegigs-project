@@ -36,12 +36,17 @@ const sino = [
   { label: "Si", value: "Si" },
   { label: "No", value: "No" },
 ];
+
+const validacionDetalles = (
+  <small className="text-success mt-1 pl-3">Detalles actualizados!</small>
+);
 const Detalles = ({ updateProfile }) => {
   const [durMin, setDurmin] = useState({ label: "", value: "" });
   const [durMax, setDurmax] = useState({ label: "", value: "" });
   const [staff, setStaff] = useState({ label: "", value: "" });
   const [viajes, setViajes] = useState({ label: "", value: "" });
   const [arriendo, setArriendo] = useState({});
+  const [ok, setOk] = useState(false);
 
   function mandarDetalles() {
     updateProfile({
@@ -51,6 +56,7 @@ const Detalles = ({ updateProfile }) => {
       viajes: viajes.value,
       arrienda_equipos: arriendo.value,
     });
+    setOk(true);
   }
   return (
     <div className="border border-dark p-3 mt-2 rounded">
@@ -110,6 +116,7 @@ const Detalles = ({ updateProfile }) => {
           Actualizar Detalles
         </span>
       </div>
+      {ok ? validacionDetalles : null}
     </div>
   );
 };

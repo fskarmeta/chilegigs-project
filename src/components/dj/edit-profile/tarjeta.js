@@ -29,6 +29,14 @@ const validacionLink = (
   <small className="text-danger pl-1">Link incorrecto</small>
 );
 
+const validacionImagen = (
+  <small className="text-danger pl-1">Elije una porfavor</small>
+);
+
+const validacionTarjeta = (
+  <small className="text-success mt-1">Tarjeta actualizada!</small>
+);
+
 function minusculaCapitalizar(string) {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 }
@@ -70,7 +78,39 @@ const Tarjeta = ({ updateProfile }) => {
   const [link, setLink] = useState("");
   const [linkval, setLinkval] = useState(false);
 
+  //imagenes
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [imageval, setImageval] = useState(false);
+
+  // todo valido
+  const [tarjetaval, setTarjetaval] = useState(false);
+
+  // funcion para subir imagen
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "profiles_preset");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/chilegigs/image/upload/",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage(file.secure_url);
+    setLoading(false);
+  };
+
   function mandarTarjeta() {
+    let imageCopy = image;
+    if (imageCopy === "") {
+      return setImageval(true);
+    }
     if (artista.length < 3 || artista.length > 20) {
       return setArtistaval(true);
     }
@@ -128,6 +168,7 @@ const Tarjeta = ({ updateProfile }) => {
     setServiciosval(false);
     setTecnicaval(false);
     setLinkval(false);
+    setTarjetaval(true);
 
     let estilosFinales = [];
     for (let el of estilos) {
@@ -166,6 +207,7 @@ const Tarjeta = ({ updateProfile }) => {
       tecnica: tecnica.label,
       agregar_cancion: agregar,
       url_cancion: link,
+      imagen: image,
     });
     setArtista("");
     setCiudad("");
@@ -189,22 +231,35 @@ const Tarjeta = ({ updateProfile }) => {
           <div className="col-md-3">
             <div className="col-md-12 mb-1">
               <div className="update-profile-image text-center">
-                <img
-                  src={unknownUserImagePath}
-                  alt=""
-                  className="img-thumbnail"
-                />
+                {loading ? (
+                  <img
+                    src={unknownUserImagePath}
+                    alt=""
+                    className="img-thumbnail"
+                    style={{ width: "300px" }}
+                  />
+                ) : (
+                  <img
+                    src={image}
+                    alt=""
+                    className="img-thumbnail"
+                    style={{ width: "300px" }}
+                  />
+                )}
               </div>
             </div>
             <div className="custom-file">
               <input
                 type="file"
+                name="file"
                 className="custom-file-input"
                 id="customFile"
+                onChange={uploadImage}
               />
               <label className="custom-file-label" htmlFor="customFile">
                 Imagen
               </label>
+              {imageval ? validacionImagen : null}
             </div>
           </div>
           <div className="col-md-9">
@@ -336,15 +391,18 @@ const Tarjeta = ({ updateProfile }) => {
                 </div>
               </div>
               <div className="form-row mt-3">
-                <div className="col-md-10">
-                  <span
-                    name="mandar-info-tarjeta"
-                    className="btn btn-primary mt-4"
-                    role="button"
-                    onClick={mandarTarjeta}
-                  >
-                    Crear Perfil
-                  </span>
+                <div className="col-md-10 d-flex flex-column">
+                  <div>
+                    <span
+                      name="mandar-info-tarjeta"
+                      className="btn btn-primary mt-4"
+                      role="button"
+                      onClick={mandarTarjeta}
+                    >
+                      Crear Perfil
+                    </span>
+                  </div>
+                  {tarjetaval ? validacionTarjeta : null}
                 </div>
               </div>
             </form>

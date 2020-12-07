@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
+const validacionDatos = (
+  <small className="text-success mt-1">Datos actualizados!</small>
+);
+
 const warning = <small className="text-danger">Campo demasiado largos</small>;
 const DatosPersonales = ({ updateProfile }) => {
   const [nombre, setNombre] = useState("");
@@ -15,6 +19,7 @@ const DatosPersonales = ({ updateProfile }) => {
   const [region, setRegion] = useState("");
   const [pais, setPais] = useState("");
   const [error, setError] = useState(false);
+  const [ok, setOk] = useState(false);
   function mandarDatos() {
     if (
       nombre.length > 30 ||
@@ -31,6 +36,7 @@ const DatosPersonales = ({ updateProfile }) => {
       return setError(true);
     }
     setError(false);
+    setOk(true);
     updateProfile({
       datos: {
         nombre: nombre,
@@ -191,6 +197,7 @@ const DatosPersonales = ({ updateProfile }) => {
           Actualizar Datos
         </button>
         {error ? warning : null}
+        {ok ? validacionDatos : null}
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ export const ejemploPerfil = {
   dur_min: "1:00 hrs",
   dur_max: "3:30 hrs",
   viajes: "Si",
+  imagen: "",
   staff: 0,
   arrienda_equipos: "no",
   requisitos: {

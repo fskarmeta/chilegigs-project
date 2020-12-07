@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
 const warning = <small className="text-danger">Texto demasiado largo</small>;
-
+const validacionBiografia = (
+  <small className="text-success mt-1 pl-3">Biografía actualizada!</small>
+);
 const Biografia = ({ updateProfile }) => {
   const [biografia, setBiografia] = useState("");
   const [biografiaval, setBiografiaval] = useState(false);
+  const [ok, setOk] = useState(false);
 
   function mandarBiografia() {
     if (biografia.length > 500) {
       return setBiografiaval(true);
     }
     setBiografiaval(false);
+    setOk(true);
     updateProfile({ biografia: biografia });
     setBiografiaval("");
   }
@@ -41,6 +45,7 @@ const Biografia = ({ updateProfile }) => {
           Actualizar Biografia
         </span>
       </div>
+      {ok ? validacionBiografia : null}
     </div>
   );
 };
