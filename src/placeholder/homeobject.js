@@ -6,10 +6,10 @@ const Home = {
   subheader: {
     image: "./img/home/subheader.jpg",
     color: "black",
-    title: "Chile gigs, el mejor lugar para Dj's",
+    title: "Creemos en el poder de la música",
     box1: {
       title: "+8.000",
-      text: "personas felices con nuestro producto",
+      text: "Personas felices con nuestro DJ's",
     },
     box2: {
       title: "+300 eventos",
