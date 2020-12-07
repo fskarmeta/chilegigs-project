@@ -14,6 +14,7 @@ const HomeEditForm = () => {
   function updateHome(key1, key2, item) {
     let objectCopy = { ...home };
     setHome({ ...objectCopy, [key1]: { ...objectCopy[key1], [key2]: item } });
+    //aca hacer put al home en el back
   }
 
   // Agrega citas al array de citas de home.citas
@@ -26,6 +27,7 @@ const HomeEditForm = () => {
       objectCopy.citas.push(obj);
     }
     setHome(objectCopy);
+    // put al home
   }
 
   // traer devuelta un array con las citas que quedan y sustituyo el antiguo
@@ -33,6 +35,7 @@ const HomeEditForm = () => {
     let objectCopy = { ...home };
     objectCopy.citas = arr;
     setHome(objectCopy);
+    // put al home
   }
   return (
     <div className="mt-5">

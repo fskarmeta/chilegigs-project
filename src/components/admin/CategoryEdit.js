@@ -18,6 +18,7 @@ function CategoryEditForm() {
   function updateGlobalState(attr, obj) {
     let globalCopy = { ...global };
     globalCopy[attr] = obj;
+    // esto deberá ser el put
     setGlobal(globalCopy);
     //mandar la actualización del fetch (here comes the PUT)
     //updateObject(globalCopy)
