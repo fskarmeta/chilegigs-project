@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import Login from "./components/login";
 import TipoDeCuenta from "./components/tipocuenta";
 import "./components/loginstyle.css";
+import "./modal.css";
 import CrearCuenta from "./components/crearcuenta";
 
 // OJO ACA ESTAN LOS FETCH PARA LOGEARSE Y CREAR CUENTA !
@@ -146,7 +147,7 @@ const ModalGeneral = ({ titulo }) => {
 
   return (
     <>
-      <li className="nav-item" onClick={handleShow}>
+      <li className="nav-item login-link" onClick={handleShow}>
         <span className="nav-link">{titulo}</span>
       </li>
 
