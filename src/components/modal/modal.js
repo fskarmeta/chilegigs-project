@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../store/appContext";
 import { Modal } from "react-bootstrap";
 import Login from "./components/login";
 import TipoDeCuenta from "./components/tipocuenta";
@@ -21,6 +22,8 @@ const mostrar = { display: "block" };
 const ocultar = { display: "none" };
 
 const ModalGeneral = ({ titulo }) => {
+  const { store, actions } = useContext(Context);
+
   //mostrar o no modal
   const [show, setShow] = useState(false);
 
@@ -82,7 +85,7 @@ const ModalGeneral = ({ titulo }) => {
   // fetch login
   //objeto que pasa acá se compone por {username: "" , password: ""}
   function LoginFetch(obj) {
-    fetch("http://localhost:5000/user/login", {
+    fetch(`${store.fetchUrl}user/login`, {
       method: "POST",
       body: JSON.stringify(obj),
       headers: {
@@ -95,12 +98,12 @@ const ModalGeneral = ({ titulo }) => {
       .then((data) => {
         console.log(data);
         if (data.msg) {
-          console.log("si");
           setErrorMsg(data.msg);
         } else {
           console.log("Usario Logeado");
-          // localStorage.setItem("token", data.token_de_acceso);
+          localStorage.setItem("token", data.token_de_accesso);
           // localStorage.removeItem("token");
+          actions.dataFromLogin(data);
           setErrorMsg("");
           setShow(false);
           //mandar al home
@@ -116,7 +119,7 @@ const ModalGeneral = ({ titulo }) => {
   //objeto que pasa acá se compone por {username: "" , password: ""}
   function CreateAccountFetch(obj) {
     console.log(obj);
-    fetch("http://localhost:5000/user/register", {
+    fetch(`${store.fetchUrl}user/register`, {
       method: "POST",
       body: JSON.stringify(obj),
       headers: {
@@ -129,6 +132,7 @@ const ModalGeneral = ({ titulo }) => {
       .then((data) => {
         if (data.msg) {
           console.log("Error de server");
+          setErrorMsg(data.msg);
         } else {
           console.log(data);
           console.log("Cuenta Creada");
