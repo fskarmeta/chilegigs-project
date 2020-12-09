@@ -4,6 +4,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       objetosGlobales: [],
       perfil: {},
       cuenta: {},
+      fetchUrl: "http://localhost:5000/",
+      token: "",
+      LoggedIn: false,
+      admin: false,
+      client: false,
+      dj: false,
       nav: [
         {
           label: "Home",
@@ -27,10 +33,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         {
           label: "Cuenta",
           to: "../account",
-        },
-        {
-          label: "Log In",
-          to: "../login",
         },
       ],
     },
