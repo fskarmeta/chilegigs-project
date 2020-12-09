@@ -6,10 +6,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       cuenta: {},
       fetchUrl: "http://localhost:5000/",
       token: "",
+      username: "",
       LoggedIn: false,
-      admin: false,
-      client: false,
-      dj: false,
+      role: "",
       nav: [
         {
           label: "Home",
@@ -41,6 +40,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+      dataFromLogin: (data) => {
+        setStore({
+          cuenta: data.cuenta,
+          token: data.token_de_acceso,
+          role: data.cuenta.role.name,
+          username: data.cuenta.username,
+          LoggedIn: true,
+        });
+        localStorage.setItem("token", data.token_de_acceso);
       },
     },
   };

@@ -37,7 +37,7 @@ const CrearCuenta = ({
 
   function createAccount(e) {
     e.preventDefault();
-    if (username.length < 3 || username.length > 15) {
+    if (username.length < 3 || username.length > 50) {
       return setUsernameVal(true);
     }
     if (!/^(?!admin)^[a-zA-Z0-9]*$/gm.test(username)) {
