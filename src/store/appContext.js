@@ -18,8 +18,8 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
-      //los fetch
-    }, [setState]);
+      state.actions.getGlobalObjects();
+    }, []);
 
     return (
       <Context.Provider value={state}>
