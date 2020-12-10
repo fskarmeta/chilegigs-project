@@ -4,6 +4,7 @@ import { Context } from "../../store/appContext";
 import { Modal } from "react-bootstrap";
 import Login from "./components/login";
 import TipoDeCuenta from "./components/tipocuenta";
+import LoginExitoso from "./components/loginexitoso";
 import "./components/loginstyle.css";
 import "./modal.css";
 import CrearCuenta from "./components/crearcuenta";
@@ -52,6 +53,16 @@ const ModalGeneral = ({ titulo }) => {
 
   const [crearCuentaClientComp, setCrearCuentaClientComp] = useState(false);
 
+  // mostrar modal login exitoso
+
+  const [exitosoComp, setExitosoComp] = useState(false);
+
+  // const [status, setStatus] = useState(store.perfil_status);
+
+  // useEffect(() => {
+  //   setStatus(store.perfil_status);
+  // }, [loginComp]);
+
   function ocultarLoginMostrarCuentas() {
     setLoginComp(false);
     setTipoCuentaComp(true);
@@ -81,10 +92,36 @@ const ModalGeneral = ({ titulo }) => {
     setCon(false);
     setErrorMsg("");
     setExito(false);
+    setExitosoComp(false);
     setLoginComp(true);
   };
 
   let history = useHistory();
+  function routeAfterLogin() {
+    console.log("hola desde rutas");
+    if (store.perfil_status === "inactive") {
+      console.log("inactivo");
+      if (store.role === "dj") {
+        history.push("/dj/edit");
+        actions.loginToTrue();
+        handleClose();
+        setExitosoComp(false);
+      }
+      if (store.role === "client") {
+        history.push("/client/edit");
+        actions.loginToTrue();
+        handleClose();
+        setExitosoComp(false);
+      }
+    } else {
+      actions.loginToTrue();
+      handleClose();
+      setExitosoComp(false);
+    }
+    // handleClose();
+    // setExitosoComp(false);
+  }
+
   // fetch login
   //objeto que pasa acá se compone por {username: "" , password: ""}
   function LoginFetch(obj) {
@@ -103,20 +140,12 @@ const ModalGeneral = ({ titulo }) => {
         if (data.msg) {
           setErrorMsg(data.msg);
         } else {
-          // console.log(data);
-          // console.log("holi");
           actions.dataFromLogin(data);
-          // console.log(store.perfil_status);
-          // // console.log(fetchAndStatus);
-
           setErrorMsg("");
-          setShow(false);
-          if (data.cuenta.role.id === 2) {
-            history.push("/dj/edit");
-          }
-          if (data.cuenta.role.id === 3) {
-            history.push("/client/edit");
-          }
+
+          setExitosoComp(true);
+          setLoginComp(false);
+
           //mandar al home
         }
       })
@@ -204,6 +233,9 @@ const ModalGeneral = ({ titulo }) => {
             roleID={"3"}
             CreateAccountFetch={CreateAccountFetch}
           />
+        </div>
+        <div style={exitosoComp ? mostrar : ocultar}>
+          <LoginExitoso routeAfterLogin={routeAfterLogin} />
         </div>
       </Modal>
     </>

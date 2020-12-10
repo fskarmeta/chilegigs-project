@@ -32,7 +32,7 @@ const ProfileEditor = () => {
     return () => {
       setPerfil(store.perfil);
     };
-  });
+  }, [perfil]);
 
   function updateProfile(obj) {
     console.log(obj);

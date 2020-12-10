@@ -48,6 +48,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
+      loginToTrue: () => {
+        setStore({ LoggedIn: true });
+      },
       dataFromLogin: (data) => {
         setStore({
           cuenta: data.cuenta,
@@ -55,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           role: data.cuenta.role.name,
           username: data.cuenta.username,
           user_id: data.cuenta.id,
-          LoggedIn: true,
+          // LoggedIn: true,
         });
         sessionStorage.setItem("token", data.token_de_acceso);
 
