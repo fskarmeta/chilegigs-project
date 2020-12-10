@@ -13,6 +13,8 @@ const ProfileEditor = () => {
   //setear al objetoglobal el fetch del objeto global de requisitos
   const { store, actions } = useContext(Context);
 
+  const [status, setStatus] = useState(store.perfil_status);
+
   const [objetoGlobal, setObjetosGlobal] = useState(store.requisitos);
   //setear acá el perfil del usurio actual desde el store
   const [perfil, setPerfil] = useState(store.perfil);
@@ -24,7 +26,14 @@ const ProfileEditor = () => {
       console.log("unmount");
     };
   }, []);
-  // aplicar fetch PUT y luego Get (al perfil)
+
+  useEffect(() => {
+    setPerfil(store.perfil);
+    return () => {
+      setPerfil(store.perfil);
+    };
+  });
+
   function updateProfile(obj) {
     console.log(obj);
     let objCopy = { ...perfil };
@@ -33,6 +42,8 @@ const ProfileEditor = () => {
     //
     //al hacer el put de perfil
     actions.updateProfile({ ...objCopy, ...obj });
+    actions.fetchIndividualDjProfileAfterLogin(store.user_id, store.token);
+    store.perfil_status = "active";
   }
 
   // aplicar fetch PUT y luego Get (al perfil)
@@ -43,14 +54,20 @@ const ProfileEditor = () => {
       ...objectCopy,
       requisitos: { ...objectCopy.requisitos, [key]: item },
     });
-    //
+
     actions.updateProfile({
       ...objectCopy,
       requisitos: { ...objectCopy.requisitos, [key]: item },
     });
+    actions.fetchIndividualDjProfileAfterLogin(store.user_id, store.token);
   }
   return (
     <div className="container">
+      {store.perfil_status === "inactive" ? (
+        <h4 className="text-center m-3">
+          Porfavor crea un perfil para activar tu cuenta
+        </h4>
+      ) : null}
       <Tarjeta updateProfile={updateProfile} />
       <Biografia updateProfile={updateProfile} />
       <Detalles updateProfile={updateProfile} />

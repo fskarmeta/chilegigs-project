@@ -1,8 +1,11 @@
+import React, { useContext } from "react";
+import { Context } from "../../../store/appContext";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
 import Generador from "./agregar-items/generador";
 const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
+  const { store, actions } = useContext(Context);
   return (
     <div className="border border-dark p-3 mt-2 rounded">
       <div className="d-flex justify-content-start mb-1 ml-1">
@@ -20,7 +23,9 @@ const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
             <Generador
               titulo={"Equipos"}
               equipos={objetoGlobal.equipos}
-              array={!!perfil.requisitos && perfil.requisitos.equipos}
+              array={
+                !!store.perfil.requisitos && store.perfil.requisitos.equipos
+              }
               atributo={"equipos"}
               updateRequisitosProfile={updateRequisitosProfile}
             />
@@ -29,7 +34,9 @@ const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
             <Generador
               titulo={"Escenario"}
               equipos={objetoGlobal.escenario}
-              array={!!perfil.requisitos && perfil.requisitos.escenario}
+              array={
+                !!store.perfil.requisitos && store.perfil.requisitos.escenario
+              }
               atributo={"escenario"}
               updateRequisitosProfile={updateRequisitosProfile}
             />
@@ -38,7 +45,10 @@ const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
             <Generador
               titulo={"Food and Drinks"}
               equipos={objetoGlobal.foodanddrinks}
-              array={!!perfil.requisitos && perfil.requisitos.foodanddrinks}
+              array={
+                !!store.perfil.requisitos &&
+                store.perfil.requisitos.foodanddrinks
+              }
               atributo={"foodanddrinks"}
               updateRequisitosProfile={updateRequisitosProfile}
             />

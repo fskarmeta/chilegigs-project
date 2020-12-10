@@ -187,7 +187,7 @@ const Tarjeta = ({ updateProfile }) => {
       mixcloud: `https://www.mixcloud.com/${mixcloud}`,
       soundcloud: `https://soundcloud.com/${soundcloud}`,
       instagram: `https://www.instagram.com/${instagram}`,
-      estilos: estilosFinales,
+      generos: estilosFinales,
       servicios: serviciosFinales,
       tecnica: tecnica.label,
       agregar_cancion: agregar,

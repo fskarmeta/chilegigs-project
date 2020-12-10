@@ -58,6 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           LoggedIn: true,
         });
         sessionStorage.setItem("token", data.token_de_acceso);
+
         if (data.cuenta.role.name === "dj") {
           getActions().fetchIndividualDjProfileAfterLogin(
             data.cuenta.id,
@@ -157,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
       updateProfile: (obj) => {
-        console.log(obj);
+        // console.log(obj);
         fetch(`${getStore().fetchUrl}profile`, {
           method: "PUT",
           body: JSON.stringify(obj),
@@ -172,6 +173,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             if (data.msg) {
               console.log(data.msg);
+              if (getStore().role === "dj") {
+                getActions().fetchIndividualDjProfileAfterLogin(
+                  getStore().user_id,
+                  getStore().token
+                );
+              }
+              if (getStore().role === "client") {
+                getActions().fetchIndividualClientProfileAfterLogin(
+                  getStore().user_id,
+                  getStore().token
+                );
+              }
             }
           })
           .catch((error) => {

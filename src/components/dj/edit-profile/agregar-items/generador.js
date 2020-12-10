@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Select from "react-select";
 
 const warning = (
@@ -20,37 +21,43 @@ const Generador = ({
   const [customval, setCustomval] = useState(false);
 
   function agregarItem() {
-    let arrCopy = [...arr];
-    if (arrCopy.length > 25) {
-      return;
+    if (typeof arr === "object") {
+      let arrCopy = [...arr];
+      if (arrCopy.length > 25) {
+        return;
+      }
+      arrCopy.push(`${value} ${item.value}`);
+      updateRequisitosProfile(atributo, arrCopy);
+      setArr(arrCopy);
+      setValue("");
+      setItem({});
     }
-    arrCopy.push(`${value} ${item.value}`);
-    updateRequisitosProfile(atributo, arrCopy);
-    setArr(arrCopy);
-    setValue("");
-    setItem({});
   }
 
   function agregarCustomItem() {
-    if (custom.length > 40) {
-      return setCustomval(true);
+    if (typeof arr === "object") {
+      if (custom.length > 40) {
+        return setCustomval(true);
+      }
+      setCustomval(false);
+      let arrCopy = [...arr];
+      if (arrCopy.length > 25) {
+        return;
+      }
+      arrCopy.push(custom);
+      updateRequisitosProfile(atributo, arrCopy);
+      setArr(arrCopy);
+      setCustom("");
     }
-    setCustomval(false);
-    let arrCopy = [...arr];
-    if (arrCopy.length > 25) {
-      return;
-    }
-    arrCopy.push(custom);
-    updateRequisitosProfile(atributo, arrCopy);
-    setArr(arrCopy);
-    setCustom("");
   }
 
   function borrarItem(i) {
-    let arrCopy = [...arr];
-    arrCopy.splice(i, 1);
-    updateRequisitosProfile(atributo, arrCopy);
-    setArr(arrCopy);
+    if (typeof arr === "object") {
+      let arrCopy = [...arr];
+      arrCopy.splice(i, 1);
+      updateRequisitosProfile(atributo, arrCopy);
+      setArr(arrCopy);
+    }
   }
   return (
     <div className="row">
