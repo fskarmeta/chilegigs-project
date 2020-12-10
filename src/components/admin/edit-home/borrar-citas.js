@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../../../store/appContext";
 
 export const BorrarCitas = ({ citasArray, citasBorradas }) => {
   const [citas, setCitas] = useState([]);
+  const { store, actions } = useContext(Context);
   //   const [current, setCurrent] = useState(Number);
 
   useEffect(() => {
-    if (citasArray) {
-      setCitas(citasArray);
-    }
+    setCitas(store.home.citas);
   });
-
+  // [citas, setCitas]
   function borrarCita(i) {
     let arrayCopy = [...citas];
     arrayCopy.splice(i, 1);
+    // setCitas(arrayCopy);
     citasBorradas(arrayCopy);
   }
 

@@ -16,7 +16,19 @@ export const Navlist = () => {
             </Link>
           </li>
         ))}
-        <ModalGeneral titulo={"Log in"} />
+
+        {store.LoggedIn ? (
+          <li
+            className="nav-item login-link"
+            onClick={() => {
+              actions.logOut();
+            }}
+          >
+            <span className="nav-link">Log Out</span>
+          </li>
+        ) : (
+          <ModalGeneral titulo={"Log in"} />
+        )}
       </ul>
     </div>
   );

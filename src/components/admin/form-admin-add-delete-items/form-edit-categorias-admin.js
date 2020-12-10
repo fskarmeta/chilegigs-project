@@ -25,10 +25,12 @@ export const EditCategories = ({
   // Creamos un array solo con las categorías en el formato requerido para usar react-select, estas la pasaremos al componente que
   // requiera hacer el display
   useEffect(() => {
-    for (let element of object) {
-      let newObj = { value: element.label, label: element.label };
-      if (!onlyCategories.some((el) => el.value === newObj.value)) {
-        onlyCategories.push(newObj);
+    if (object) {
+      for (let element of object) {
+        let newObj = { value: element.label, label: element.label };
+        if (!onlyCategories.some((el) => el.value === newObj.value)) {
+          onlyCategories.push(newObj);
+        }
       }
     }
   });

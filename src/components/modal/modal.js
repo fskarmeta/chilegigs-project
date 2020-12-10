@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { Modal } from "react-bootstrap";
 import Login from "./components/login";
@@ -15,7 +16,7 @@ const ErrorDeConexion = (
 
 const creacionExitosa = (
   <small className="text-success">
-    Cuenta creada exitosamente, porfavor Ingresa
+    Cuenta creada exitosamente, porfavor ingresa con tu cuenta
   </small>
 );
 const mostrar = { display: "block" };
@@ -76,12 +77,14 @@ const ModalGeneral = ({ titulo }) => {
     setShow(false);
     setTipoCuentaComp(false);
     setCrearCuentaDJComp(false);
+    setCrearCuentaClientComp(false);
     setCon(false);
     setErrorMsg("");
     setExito(false);
     setLoginComp(true);
   };
 
+  let history = useHistory();
   // fetch login
   //objeto que pasa acá se compone por {username: "" , password: ""}
   function LoginFetch(obj) {
@@ -96,16 +99,24 @@ const ModalGeneral = ({ titulo }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.msg) {
           setErrorMsg(data.msg);
         } else {
-          console.log("Usario Logeado");
-          localStorage.setItem("token", data.token_de_accesso);
-          // localStorage.removeItem("token");
+          // console.log(data);
+          // console.log("holi");
           actions.dataFromLogin(data);
+          // console.log(store.perfil_status);
+          // // console.log(fetchAndStatus);
+
           setErrorMsg("");
           setShow(false);
+          if (data.cuenta.role.id === 2) {
+            history.push("/dj/edit");
+          }
+          if (data.cuenta.role.id === 3) {
+            history.push("/client/edit");
+          }
           //mandar al home
         }
       })

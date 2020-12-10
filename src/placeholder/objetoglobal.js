@@ -4,8 +4,8 @@ export const objetosGlobales = {
       label: "Controladores",
       options: [
         {
-          value: "Ableton Push 3",
-          label: "Ableton Push 3",
+          value: "Ableton Push 3 (desde el front)",
+          label: "Ableton Push 3 (desde el front)",
           group: "Controladores",
         },
         {
