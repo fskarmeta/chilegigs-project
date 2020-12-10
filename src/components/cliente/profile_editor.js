@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../store/appContext";
 import { ejemploPerfilCliente } from "../../placeholder/ejemploperfil";
 import ProfileEditor from "./agregar-items/perfilgeneral";
 import Biografia from "../dj/edit-profile/biografia";
 
 const ClientProfileEditor = () => {
+  const { store, actions } = useContext(Context);
   // acá tiene que llegar el perfil del usuario
-  const [perfil, setPerfil] = useState(ejemploPerfilCliente);
+  const [perfil, setPerfil] = useState(store.perfil);
 
   function updateProfile(obj) {
     let objCopy = { ...perfil };

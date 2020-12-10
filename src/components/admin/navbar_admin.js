@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const AdminNav = () => {
   return (
     <div className="row">
@@ -11,9 +13,9 @@ export const AdminNav = () => {
           </span>
         </div>
         <div className="row d-flex flex-column border-bottom border-dark">
-          <div className="btn">
+          <Link className="btn" to="../admin/home">
             <i className="fas fa-home fa-3x"></i>
-          </div>
+          </Link>
           <span className="m-1 font-weight-bold align-self-center">Home</span>
         </div>
         <div className="row d-flex flex-column border-bottom border-dark">
@@ -35,9 +37,9 @@ export const AdminNav = () => {
           <span className="align-self-center font-weight-bold">Gigs</span>
         </div>
         <div className="row d-flex flex-column border-bottom border-dark">
-          <div className="align-self-center btn">
+          <Link className="align-self-center btn" to="../admin/raider">
             <i className="fas fa-edit fa-3x"></i>
-          </div>
+          </Link>
           <span className="align-self-center font-weight-bold">Raider</span>
         </div>
       </div>

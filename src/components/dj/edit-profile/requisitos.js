@@ -20,7 +20,7 @@ const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
             <Generador
               titulo={"Equipos"}
               equipos={objetoGlobal.equipos}
-              array={perfil.requisitos.equipos}
+              array={!!perfil.requisitos && perfil.requisitos.equipos}
               atributo={"equipos"}
               updateRequisitosProfile={updateRequisitosProfile}
             />
@@ -29,7 +29,7 @@ const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
             <Generador
               titulo={"Escenario"}
               equipos={objetoGlobal.escenario}
-              array={perfil.requisitos.escenario}
+              array={!!perfil.requisitos && perfil.requisitos.escenario}
               atributo={"escenario"}
               updateRequisitosProfile={updateRequisitosProfile}
             />
@@ -38,7 +38,7 @@ const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
             <Generador
               titulo={"Food and Drinks"}
               equipos={objetoGlobal.foodanddrinks}
-              array={perfil.requisitos.foodanddrinks}
+              array={!!perfil.requisitos && perfil.requisitos.foodanddrinks}
               atributo={"foodanddrinks"}
               updateRequisitosProfile={updateRequisitosProfile}
             />

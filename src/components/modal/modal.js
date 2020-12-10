@@ -15,7 +15,7 @@ const ErrorDeConexion = (
 
 const creacionExitosa = (
   <small className="text-success">
-    Cuenta creada exitosamente, porfavor Ingresa
+    Cuenta creada exitosamente, porfavor ingresa con tu cuenta
   </small>
 );
 const mostrar = { display: "block" };
@@ -76,6 +76,7 @@ const ModalGeneral = ({ titulo }) => {
     setShow(false);
     setTipoCuentaComp(false);
     setCrearCuentaDJComp(false);
+    setCrearCuentaClientComp(false);
     setCon(false);
     setErrorMsg("");
     setExito(false);
@@ -100,9 +101,7 @@ const ModalGeneral = ({ titulo }) => {
         if (data.msg) {
           setErrorMsg(data.msg);
         } else {
-          console.log("Usario Logeado");
-          localStorage.setItem("token", data.token_de_accesso);
-          // localStorage.removeItem("token");
+          console.log("Usuario Logeado");
           actions.dataFromLogin(data);
           setErrorMsg("");
           setShow(false);
