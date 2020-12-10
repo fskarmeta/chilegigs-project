@@ -51,8 +51,26 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         localStorage.setItem("token", data.token_de_acceso);
       },
+      
     },
   };
 };
 
 export default getState;
+
+{/*getDjsDetails: id => {
+        let store = getStore()
+        fetch(`http://127.0.0.1:5000/catalogo/dj/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                setStore({
+                    getDjsDetails: data
+                })
+            });
+    },*/}
