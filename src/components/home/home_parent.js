@@ -20,7 +20,7 @@ const HomeParent = () => {
 
   useEffect(() => {
     getGlobalObjects();
-  }, [home]);
+  }, []);
   const getGlobalObjects = () => {
     fetch(`${store.fetchUrl}objetos`, {
       method: "GET",
