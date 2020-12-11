@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { objetosGlobales } from "../../placeholder/objetoglobal";
+import React, { useState, useContext, useEffect } from "react";
+//bafian
+
+import { Context } from "../../store/appContext";
+//
+// import { objetosGlobales } from "../../placeholder/objetoglobal";
 import Home from "../../placeholder/homeobject";
 import HeaderHome from "./HeaderHome";
 import Caja from "./Caja";
@@ -9,10 +13,35 @@ import Footer from "./Footer";
 //pasar comos props los objetos globales (objetos)
 
 const HomeParent = () => {
+  const { store, actions } = useContext(Context);
   const [home, setHome] = useState(Home);
 
+  useEffect(() => {
+    getGlobalObjects();
+  }, [home]);
+  const getGlobalObjects = () => {
+    fetch(`${store.fetchUrl}objetos`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setHome(data.home);
+        return data;
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div
+      style={{ overflow: "hidden", backgroundColor: `${home.subheader.color}` }}
+    >
       <HeaderHome header={home.header} />
       <Caja subheader={home.subheader} />
       <Carrusel citas={home.citas} />
