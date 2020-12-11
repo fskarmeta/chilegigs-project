@@ -6,7 +6,7 @@ const Home = {
   },
   subheader: {
     image: "./img/home/subheader.jpg",
-    color: "black",
+    color: "white",
     title: "Creemos en el poder de la música",
     box1: {
       title: "+8.000",

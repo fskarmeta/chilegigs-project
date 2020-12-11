@@ -66,7 +66,7 @@ const Detalles = ({ updateProfile }) => {
 
       <div className="col-md-12">
         <div className="row d-flex justify-content-center">
-          <div className="col-md-2">
+          <div className="col-md-4 mt-2">
             <div className="d-flex flex-column">
               <span className="font-weight-light align-self-center">
                 Duración Mínima
@@ -74,7 +74,7 @@ const Detalles = ({ updateProfile }) => {
               <Select options={tiempos} onChange={setDurmin} />
             </div>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-4 mt-2">
             <div className="d-flex flex-column">
               <span className="font-weight-light align-self-center">
                 Duración Máxima
@@ -82,7 +82,7 @@ const Detalles = ({ updateProfile }) => {
               <Select options={tiempos} onChange={setDurmax} />
             </div>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-4 mt-2">
             <div className="d-flex flex-column">
               <span className="font-weight-light align-self-center">
                 Acompañantes/Staff
@@ -90,7 +90,7 @@ const Detalles = ({ updateProfile }) => {
               <Select options={staffArr} onChange={setStaff} />
             </div>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-4 mt-2">
             <div className="d-flex flex-column">
               <span className="font-weight-light align-self-center">
                 Viajes
@@ -98,7 +98,7 @@ const Detalles = ({ updateProfile }) => {
               <Select options={sino} onChange={setViajes} />
             </div>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-4 mt-2">
             <div className="d-flex flex-column">
               <span className="font-weight-light align-self-center">
                 Arriendo Equipos

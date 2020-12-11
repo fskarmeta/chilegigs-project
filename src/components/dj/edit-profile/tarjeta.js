@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../../store/appContext";
 import unknownUserImagePath from "./unknown-user.jpg";
 import Select from "react-select";
 import { estilosOptions, serviciosOptions, tecnicaOptions } from "./items";
@@ -41,6 +42,7 @@ function minusculaCapitalizar(string) {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 }
 const Tarjeta = ({ updateProfile }) => {
+  const { store } = useContext(Context);
   // const [tarjeta, setTarjeta] = useState({});
   //artista y validacion
   const [artista, setArtista] = useState("");
@@ -213,12 +215,16 @@ const Tarjeta = ({ updateProfile }) => {
 
       <div className="col-md-12">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-12 col-lg-3">
             <div className="col-md-12 mb-1">
               <div className="update-profile-image text-center">
                 {loading ? (
                   <img
-                    src={unknownUserImagePath}
+                    src={
+                      !!store.perfil.imagen && store.perfil.imagen.length > 0
+                        ? store.perfil.imagen
+                        : unknownUserImagePath
+                    }
                     alt=""
                     className="img-thumbnail"
                     style={{ width: "300px" }}
@@ -247,10 +253,10 @@ const Tarjeta = ({ updateProfile }) => {
               {imageval ? validacionImagen : null}
             </div>
           </div>
-          <div className="col-md-9">
+          <div className="col-lg-9 col-md-12">
             <form>
               <div className="form-row mt-2">
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control "
@@ -260,7 +266,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {artistaval ? campoObligatorio : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control "
@@ -270,7 +276,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {ciudadval ? campoObligatorio : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control "
@@ -282,7 +288,7 @@ const Tarjeta = ({ updateProfile }) => {
                 </div>
               </div>
               <div className="form-row mt-5 mb-2">
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control"
@@ -292,7 +298,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {mixcloudval ? validacionSocialMedia : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control"
@@ -302,7 +308,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {soundcloudval ? validacionSocialMedia : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control"
@@ -314,7 +320,7 @@ const Tarjeta = ({ updateProfile }) => {
                 </div>
               </div>
               <div className="form-row mt-5 mb-2">
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <Select
                     isMulti
                     name="estilos"
@@ -327,7 +333,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {estilosval ? validacionEstilos : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <Select
                     isMulti
                     name="servicios"
@@ -340,7 +346,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {serviciosval ? validacionServicios : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <Select
                     name="tecnica"
                     options={tecnicaOptions}
