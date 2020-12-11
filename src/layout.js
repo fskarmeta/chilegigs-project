@@ -9,6 +9,7 @@ import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
 import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import Home from "./views/home/home";
+import NuevaClave from "./views/general/clave";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -29,6 +30,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/client/edit">
               <EditarPerfilCliente />
+            </Route>
+            <Route exact path="/recover/:token">
+              <NuevaClave />
             </Route>
             {admin ? (
               <div className="row">
