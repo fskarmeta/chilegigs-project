@@ -9,7 +9,7 @@ export const Subheader = ({ updateHome }) => {
   const [box2title, setBox2title] = useState("");
   const [box2text, setBox2text] = useState("");
 
-  const [cita, setCita] = useState("");
+  // const [cita, setCita] = useState("");
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
 

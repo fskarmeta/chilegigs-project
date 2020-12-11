@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       nav: [
         {
           label: "Home",
-          to: "../home",
+          to: "../",
         },
         {
           label: "Dj's",
