@@ -9,11 +9,13 @@ import HeaderHome from "./HeaderHome";
 import Caja from "./Caja";
 import Carrusel from "./Carrusel";
 import Footer from "./Footer";
+import Spinner from "./spinner";
 //importar tus subcomponentes
 //pasar comos props los objetos globales (objetos)
 
 const HomeParent = () => {
   const { store, actions } = useContext(Context);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [home, setHome] = useState(Home);
 
   useEffect(() => {
@@ -31,23 +33,33 @@ const HomeParent = () => {
       })
       .then((data) => {
         setHome(data.home);
+        setIsLoaded(true);
         return data;
       })
       .catch((error) => {
         console.log(error.message);
+        setIsLoaded(true);
+        setHome(Home);
       });
   };
 
-  return (
-    <div
-      style={{ overflow: "hidden", backgroundColor: `${home.subheader.color}` }}
-    >
-      <HeaderHome header={home.header} />
-      <Caja subheader={home.subheader} />
-      <Carrusel citas={home.citas} />
-      <Footer />
-    </div>
-  );
+  if (!isLoaded) {
+    return <Spinner />;
+  } else {
+    return (
+      <div
+        style={{
+          overflow: "hidden",
+          backgroundColor: `${home.subheader.color}`,
+        }}
+      >
+        <HeaderHome header={home.header} />
+        <Caja subheader={home.subheader} />
+        <Carrusel citas={home.citas} />
+        <Footer />
+      </div>
+    );
+  }
 };
 
 export default HomeParent;
