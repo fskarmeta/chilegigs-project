@@ -7,10 +7,14 @@ const validacionLink = (
   <small className="text-danger pl-1">Link incorrecto</small>
 );
 
+const todoOk = <small className="text-success pl-1">Todo ok !</small>;
+
 const AgregarCancion = ({ updateProfile }) => {
   const [value, setValue] = useState(2);
   const [link, setLink] = useState("");
   const [linkval, setLinkval] = useState(false);
+  const [ok, setOk] = useState(false);
+
   const handleChange = (val) => setValue(val);
 
   function actualizarDatos() {
@@ -28,11 +32,14 @@ const AgregarCancion = ({ updateProfile }) => {
       } else {
         let finalLink = linkCopy.match(/(?<=com).+/g);
         setLinkval(false);
+        setOk(true);
         let obj = { agregar_cancion: true, url_cancion: finalLink[0] };
         updateProfile(obj);
       }
     }
     if (value === 2) {
+      setLinkval(false);
+      setOk(true);
       let obj = { agregar_cancion: false, url_cancion: "nada" };
       updateProfile(obj);
     }
@@ -82,6 +89,7 @@ const AgregarCancion = ({ updateProfile }) => {
         >
           ActuarlizarDatos
         </span>
+        {ok ? todoOk : null}
       </div>
     </div>
   );
