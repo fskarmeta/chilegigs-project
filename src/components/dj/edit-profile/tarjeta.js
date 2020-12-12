@@ -128,12 +128,12 @@ const Tarjeta = ({ updateProfile }) => {
       }
     }
     if (soundcloud !== "") {
-      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(mixcloud)) {
+      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(soundcloud)) {
         return setSoundcloudval(true);
       }
     }
     if (instagram !== "") {
-      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(mixcloud)) {
+      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(instagram)) {
         return setInstagramval(true);
       }
     }
