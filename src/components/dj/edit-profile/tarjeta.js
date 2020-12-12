@@ -26,10 +26,6 @@ const validacionSocialMedia = (
   </small>
 );
 
-const validacionLink = (
-  <small className="text-danger pl-1">Link incorrecto</small>
-);
-
 const validacionImagen = (
   <small className="text-danger pl-1">Elije una porfavor</small>
 );
@@ -72,13 +68,6 @@ const Tarjeta = ({ updateProfile }) => {
   //tecnica y validacion
   const [tecnica, setTecnica] = useState("");
   const [tecnicaval, setTecnicaval] = useState(false);
-
-  //agregar link o no
-  const [agregar, setAgregar] = useState(false);
-
-  //link y validacion
-  const [link, setLink] = useState("");
-  const [linkval, setLinkval] = useState(false);
 
   //imagenes
   const [image, setImage] = useState("");
@@ -146,19 +135,6 @@ const Tarjeta = ({ updateProfile }) => {
     if (tecnica === "") {
       return setTecnicaval(true);
     }
-    let linkCopy = link;
-    if (agregar) {
-      if (linkCopy === "") {
-        return setLinkval(true);
-      }
-      if (
-        !/https?:\/\/(www\.)?[mixcloud\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(
-          linkCopy
-        )
-      ) {
-        return setLinkval(true);
-      }
-    }
 
     setArtistaval(false);
     setCiudadval(false);
@@ -169,7 +145,6 @@ const Tarjeta = ({ updateProfile }) => {
     setEstilosval(false);
     setServiciosval(false);
     setTecnicaval(false);
-    setLinkval(false);
     setTarjetaval(true);
 
     let estilosFinales = [];
@@ -180,8 +155,6 @@ const Tarjeta = ({ updateProfile }) => {
     for (let el of servicios) {
       serviciosFinales.push(el.label);
     }
-
-    let finalLink = linkCopy.match(/(?<=com).+/g);
 
     updateProfile({
       status: "active",
@@ -194,8 +167,6 @@ const Tarjeta = ({ updateProfile }) => {
       generos: estilosFinales,
       servicios: serviciosFinales,
       tecnica: tecnica.label,
-      agregar_cancion: agregar,
-      url_cancion: finalLink ? finalLink[0] : "",
       imagen: image,
     });
     setArtista("");
@@ -207,7 +178,6 @@ const Tarjeta = ({ updateProfile }) => {
     setEstilos([]);
     setServicios([]);
     setTecnica("");
-    setLink("");
   }
   return (
     <div className="border border-dark p-3 rounded mt-2">
@@ -359,28 +329,6 @@ const Tarjeta = ({ updateProfile }) => {
                     onChange={setTecnica}
                   />
                   {tecnicaval ? validacionTecnica : null}
-                </div>
-              </div>
-              <div className="form-row mt-5 mb-2">
-                <div className="col-md-10">
-                  <div className="ml-4">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="inlineCheckbox1"
-                      value="true"
-                      onChange={() => setAgregar(true)}
-                    />
-                    <label>Agregar mix desde Mixcloud a mi perfil</label>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="https://www.mixcloud.com/tu-perfil/tu-mix/"
-                    value={link}
-                    onChange={(e) => setLink(e.target.value)}
-                  />
-                  {linkval ? validacionLink : null}
                 </div>
               </div>
               <div className="form-row mt-3">
