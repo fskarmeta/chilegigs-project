@@ -181,6 +181,8 @@ const Tarjeta = ({ updateProfile }) => {
       serviciosFinales.push(el.label);
     }
 
+    let finalLink = linkCopy.match(/(?<=com).+/g);
+
     updateProfile({
       status: "active",
       artista: artista,
@@ -193,7 +195,7 @@ const Tarjeta = ({ updateProfile }) => {
       servicios: serviciosFinales,
       tecnica: tecnica.label,
       agregar_cancion: agregar,
-      url_cancion: link,
+      url_cancion: finalLink ? finalLink[0] : "",
       imagen: image,
     });
     setArtista("");
