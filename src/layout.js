@@ -8,6 +8,7 @@ import { AdminHome } from "./views/admin/home";
 import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
 import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
+import { DjProfile } from "./views/dj/perfil";
 import Home from "./views/home/home";
 import NuevaClave from "./views/general/clave";
 
@@ -24,6 +25,9 @@ const Layout = () => {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/profile/:username">
+              <DjProfile />
             </Route>
             <Route exact path="/dj/edit">
               <EditarPerfil />

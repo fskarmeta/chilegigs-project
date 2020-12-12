@@ -22,10 +22,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           to: "../catalogo",
         },
         {
-          label: "Perfil",
-          to: "../profile",
-        },
-        {
           label: "Editar Perfil Dj",
           to: "../dj/edit",
         },

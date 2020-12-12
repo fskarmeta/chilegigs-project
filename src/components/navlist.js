@@ -10,6 +10,11 @@ export const Navlist = () => {
   return (
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link className="nav-link" to={`../profile/${store.username}`}>
+            Perfil
+          </Link>
+        </li>
         {store.nav.map((link, index) => (
           <li className="nav-item" key={index}>
             <Link className="nav-link" to={link.to}>
