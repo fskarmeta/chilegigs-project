@@ -12,7 +12,12 @@ export const Navlist = () => {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to={`../profile/${store.username}`}>
-            Perfil
+            Perfil DJ
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to={`../client/profile/${store.username}`}>
+            Perfil Cliente
           </Link>
         </li>
         {store.nav.map((link, index) => (

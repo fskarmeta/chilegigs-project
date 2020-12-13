@@ -9,6 +9,7 @@ import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
 import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import { DjProfile } from "./views/dj/perfil";
+import { ClientProfile } from "./views/cliente/perfil";
 import Home from "./views/home/home";
 import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
@@ -34,6 +35,7 @@ const Layout = () => {
             <Route exact path="/profile/:username">
               <DjProfile />
             </Route>
+
             <Route exact path="/dj/edit">
               <EditarPerfil />
             </Route>
@@ -42,6 +44,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/recover/:token">
               <NuevaClave />
+            </Route>
+            <Route exact path="/client/profile/:username">
+              <ClientProfile />
             </Route>
             <div className="row">
               <div className="col-md-1">
