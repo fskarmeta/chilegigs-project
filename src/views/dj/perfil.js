@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import DjPerfil from "../../components/dj/perfil/perfil";
+import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import ReactDOM from "react-dom";
 import {
@@ -29,13 +30,15 @@ export const DjProfile = () => {
   const [perfilInactivo, setPerfilInactivo] = useState(false);
   let { username } = useParams();
 
+  let history = useHistory();
+
   useEffect(() => {
     if (!store.LoggedIn) {
       setLogMsg(true);
     } else {
       fetchProfile(username);
     }
-  }, [isLoaded]);
+  }, [store.LoggedIn]);
 
   const fetchProfile = (username) => {
     fetch(`${store.fetchUrl}dj/profile/username/${username}`, {

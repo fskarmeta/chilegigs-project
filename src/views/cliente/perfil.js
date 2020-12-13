@@ -35,7 +35,7 @@ export const ClientProfile = () => {
     } else {
       fetchProfile(username);
     }
-  }, [isLoaded]);
+  }, [store.LoggedIn]);
 
   const fetchProfile = (username) => {
     fetch(`${store.fetchUrl}client/profile/username/${username}`, {
@@ -71,6 +71,7 @@ export const ClientProfile = () => {
         setError(error);
       });
   };
+
   if (logMsg) {
     return (
       <>
