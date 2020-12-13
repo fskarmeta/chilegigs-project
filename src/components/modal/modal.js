@@ -8,6 +8,8 @@ import LoginExitoso from "./components/loginexitoso";
 import "./components/loginstyle.css";
 import "./modal.css";
 import CrearCuenta from "./components/crearcuenta";
+import Recuperar from "./components/recuperarpass";
+import RecuperacionExitosa from "./components/recuperacionexitosa";
 
 // OJO ACA ESTAN LOS FETCH PARA LOGEARSE Y CREAR CUENTA !
 
@@ -57,8 +59,13 @@ const ModalGeneral = ({ titulo }) => {
 
   const [exitosoComp, setExitosoComp] = useState(false);
 
-  // const [status, setStatus] = useState(store.perfil_status);
+  // mostrar modal Recuperar constraseña
 
+  const [recuperarComp, setRecuperarComp] = useState(false);
+
+  // mostrar modal de Recuperación exitosa
+
+  const [recupExit, setRecupExit] = useState(false);
   // useEffect(() => {
   //   setStatus(store.perfil_status);
   // }, [loginComp]);
@@ -83,6 +90,16 @@ const ModalGeneral = ({ titulo }) => {
     setCon(false);
   }
 
+  function ocultarLoginMostrarRecuperar() {
+    setErrorMsg("");
+    setLoginComp(false);
+    setExito(false);
+    setExitosoComp(false);
+    setRecupExit(false);
+    setCon(false);
+    setRecuperarComp(true);
+  }
+
   //cerrar modal
   const handleClose = () => {
     setShow(false);
@@ -93,6 +110,8 @@ const ModalGeneral = ({ titulo }) => {
     setErrorMsg("");
     setExito(false);
     setExitosoComp(false);
+    setRecuperarComp(false);
+    setRecupExit(false);
     setLoginComp(true);
   };
 
@@ -118,8 +137,11 @@ const ModalGeneral = ({ titulo }) => {
       handleClose();
       setExitosoComp(false);
     }
-    // handleClose();
-    // setExitosoComp(false);
+  }
+
+  function routerAfterRecuperacion() {
+    handleClose();
+    history.push("/");
   }
 
   // fetch login
@@ -158,7 +180,6 @@ const ModalGeneral = ({ titulo }) => {
   //fetch crear cuenta
   //objeto que pasa acá se compone por {username: "" , password: ""}
   function CreateAccountFetch(obj) {
-    console.log(obj);
     fetch(`${store.fetchUrl}user/register`, {
       method: "POST",
       body: JSON.stringify(obj),
@@ -189,6 +210,34 @@ const ModalGeneral = ({ titulo }) => {
       });
   }
 
+  // fetch recuperar contraseña
+
+  function recoverPassword(obj) {
+    fetch(`${store.fetchUrl}recover/password`, {
+      method: "PUT",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.msg) {
+          setErrorMsg(data.msg);
+        } else {
+          setErrorMsg("");
+          setRecuperarComp(false);
+          setRecupExit(true);
+          setCon(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setCon(true);
+      });
+  }
   return (
     <>
       <li className="nav-item login-link" onClick={handleShow}>
@@ -206,6 +255,7 @@ const ModalGeneral = ({ titulo }) => {
             con={con}
             ErrorDeConexion={ErrorDeConexion}
             ocultarLoginMostrarCuentas={ocultarLoginMostrarCuentas}
+            ocultarLoginMostrarRecuperar={ocultarLoginMostrarRecuperar}
           />
         </div>
         <div style={tipoCuentaComp ? mostrar : ocultar}>
@@ -236,6 +286,19 @@ const ModalGeneral = ({ titulo }) => {
         </div>
         <div style={exitosoComp ? mostrar : ocultar}>
           <LoginExitoso routeAfterLogin={routeAfterLogin} />
+        </div>
+        <div style={recuperarComp ? mostrar : ocultar}>
+          <Recuperar
+            errorMsg={errorMsg}
+            con={con}
+            ErrorDeConexion={ErrorDeConexion}
+            recoverPassword={recoverPassword}
+          />
+        </div>
+        <div style={recupExit ? mostrar : ocultar}>
+          <RecuperacionExitosa
+            routerAfterRecuperacion={routerAfterRecuperacion}
+          />
         </div>
       </Modal>
     </>

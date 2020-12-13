@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../../store/appContext";
 import { useForm } from "react-hook-form";
 import unknownUserImagePath from "./unknown-user.jpg";
+import { EditarPerfil } from "../../../views/dj/editar_perfil";
 
 const validacionImagen = (
   <small className="text-danger pl-1">Elije una foto de perfil porfavor</small>
@@ -11,6 +13,7 @@ const validacionOk = (
 );
 
 const ProfileEditor = ({ updateProfile }) => {
+  const { store } = useContext(Context);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [imageval, setImageval] = useState(false);
@@ -63,7 +66,11 @@ const ProfileEditor = ({ updateProfile }) => {
                 <div className="update-profile-image text-center">
                   {loading ? (
                     <img
-                      src={unknownUserImagePath}
+                      src={
+                        !!store.perfil.imagen && store.perfil.imagen.length > 0
+                          ? store.perfil.imagen
+                          : unknownUserImagePath
+                      }
                       alt=""
                       className="img-thumbnail"
                       style={{ width: "300px" }}

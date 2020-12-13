@@ -6,7 +6,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "popper.js";
 import "jquery";
 import Layout from "./layout";
-
+import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
     <Layout />

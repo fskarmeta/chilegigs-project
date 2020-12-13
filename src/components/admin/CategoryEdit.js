@@ -14,57 +14,42 @@ function CategoryEditForm() {
   // const [ok, setOk] = useState(false);
   // fetch de los objetos
 
+  useEffect(() => {
+    setGlobal(store.requisitos);
+  }, [global]);
   // actualizando el state con lo cambios y PUT fetch
   function updateGlobalState(attr, obj) {
     let globalCopy = { ...global };
     globalCopy[attr] = obj;
     // esto deberá ser el put
-    setGlobal(globalCopy);
+    // setGlobal(globalCopy);
+    requisitosToServer(globalCopy);
     //mandar la actualización del fetch (here comes the PUT)
     //updateObject(globalCopy)
   }
-
-  // const getObject = useRef(() => {});
-
-  // getObject.current = () => {
-  //   fetch(`${fetchURL}`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       // console.log(response);
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // console.log(data);
-  //       setGlobal(data);
-  //     })
-  //     .catch((error) => {
-  //       // console.log(error.message);
-  //     });
-  // };
-
-  // fetch actualizar array en el back
-
-  // const updateObject = (obj) => {
-  //   fetch(`${fetchURL}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     body: JSON.stringify(obj),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data))
-  //     .catch((error) => console.log(error));
-  // };
-  // if (!ok) {
-  //   return <div>Cargando componente</div>;
-  // } else {
+  function requisitosToServer(obj) {
+    console.log(obj);
+    fetch(`${store.fetchUrl}objetos/requisitos`, {
+      method: "PUT",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${store.token}`,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.msg) {
+          console.log(data.msg);
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    actions.getGlobalObjects();
+  }
   return (
     <div className="row">
       <div className="col-md-4">

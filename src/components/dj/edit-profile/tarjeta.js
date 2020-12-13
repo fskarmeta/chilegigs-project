@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../../store/appContext";
 import unknownUserImagePath from "./unknown-user.jpg";
 import Select from "react-select";
 import { estilosOptions, serviciosOptions, tecnicaOptions } from "./items";
@@ -25,10 +26,6 @@ const validacionSocialMedia = (
   </small>
 );
 
-const validacionLink = (
-  <small className="text-danger pl-1">Link incorrecto</small>
-);
-
 const validacionImagen = (
   <small className="text-danger pl-1">Elije una porfavor</small>
 );
@@ -41,6 +38,7 @@ function minusculaCapitalizar(string) {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 }
 const Tarjeta = ({ updateProfile }) => {
+  const { store } = useContext(Context);
   // const [tarjeta, setTarjeta] = useState({});
   //artista y validacion
   const [artista, setArtista] = useState("");
@@ -70,13 +68,6 @@ const Tarjeta = ({ updateProfile }) => {
   //tecnica y validacion
   const [tecnica, setTecnica] = useState("");
   const [tecnicaval, setTecnicaval] = useState(false);
-
-  //agregar link o no
-  const [agregar, setAgregar] = useState(false);
-
-  //link y validacion
-  const [link, setLink] = useState("");
-  const [linkval, setLinkval] = useState(false);
 
   //imagenes
   const [image, setImage] = useState("");
@@ -126,12 +117,12 @@ const Tarjeta = ({ updateProfile }) => {
       }
     }
     if (soundcloud !== "") {
-      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(mixcloud)) {
+      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(soundcloud)) {
         return setSoundcloudval(true);
       }
     }
     if (instagram !== "") {
-      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(mixcloud)) {
+      if (!/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim.test(instagram)) {
         return setInstagramval(true);
       }
     }
@@ -144,19 +135,6 @@ const Tarjeta = ({ updateProfile }) => {
     if (tecnica === "") {
       return setTecnicaval(true);
     }
-    let linkCopy = link;
-    if (agregar) {
-      if (linkCopy === "") {
-        return setLinkval(true);
-      }
-      if (
-        !/https?:\/\/(www\.)?[mixcloud\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(
-          linkCopy
-        )
-      ) {
-        return setLinkval(true);
-      }
-    }
 
     setArtistaval(false);
     setCiudadval(false);
@@ -167,7 +145,6 @@ const Tarjeta = ({ updateProfile }) => {
     setEstilosval(false);
     setServiciosval(false);
     setTecnicaval(false);
-    setLinkval(false);
     setTarjetaval(true);
 
     let estilosFinales = [];
@@ -190,8 +167,6 @@ const Tarjeta = ({ updateProfile }) => {
       generos: estilosFinales,
       servicios: serviciosFinales,
       tecnica: tecnica.label,
-      agregar_cancion: agregar,
-      url_cancion: link,
       imagen: image,
     });
     setArtista("");
@@ -203,7 +178,6 @@ const Tarjeta = ({ updateProfile }) => {
     setEstilos([]);
     setServicios([]);
     setTecnica("");
-    setLink("");
   }
   return (
     <div className="border border-dark p-3 rounded mt-2">
@@ -213,12 +187,16 @@ const Tarjeta = ({ updateProfile }) => {
 
       <div className="col-md-12">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-12 col-lg-3">
             <div className="col-md-12 mb-1">
               <div className="update-profile-image text-center">
                 {loading ? (
                   <img
-                    src={unknownUserImagePath}
+                    src={
+                      !!store.perfil.imagen && store.perfil.imagen.length > 0
+                        ? store.perfil.imagen
+                        : unknownUserImagePath
+                    }
                     alt=""
                     className="img-thumbnail"
                     style={{ width: "300px" }}
@@ -247,10 +225,10 @@ const Tarjeta = ({ updateProfile }) => {
               {imageval ? validacionImagen : null}
             </div>
           </div>
-          <div className="col-md-9">
+          <div className="col-lg-9 col-md-12">
             <form>
               <div className="form-row mt-2">
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control "
@@ -260,7 +238,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {artistaval ? campoObligatorio : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control "
@@ -270,7 +248,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {ciudadval ? campoObligatorio : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control "
@@ -282,7 +260,7 @@ const Tarjeta = ({ updateProfile }) => {
                 </div>
               </div>
               <div className="form-row mt-5 mb-2">
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control"
@@ -292,7 +270,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {mixcloudval ? validacionSocialMedia : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control"
@@ -302,7 +280,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {soundcloudval ? validacionSocialMedia : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <input
                     type="text"
                     className="form-control"
@@ -314,7 +292,7 @@ const Tarjeta = ({ updateProfile }) => {
                 </div>
               </div>
               <div className="form-row mt-5 mb-2">
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <Select
                     isMulti
                     name="estilos"
@@ -327,7 +305,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {estilosval ? validacionEstilos : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <Select
                     isMulti
                     name="servicios"
@@ -340,7 +318,7 @@ const Tarjeta = ({ updateProfile }) => {
                   />
                   {serviciosval ? validacionServicios : null}
                 </div>
-                <div className="col-md-4">
+                <div className="col-lg-4 col-md-12">
                   <Select
                     name="tecnica"
                     options={tecnicaOptions}
@@ -351,28 +329,6 @@ const Tarjeta = ({ updateProfile }) => {
                     onChange={setTecnica}
                   />
                   {tecnicaval ? validacionTecnica : null}
-                </div>
-              </div>
-              <div className="form-row mt-5 mb-2">
-                <div className="col-md-10">
-                  <div className="ml-4">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="inlineCheckbox1"
-                      value="true"
-                      onChange={() => setAgregar(true)}
-                    />
-                    <label>Agregar mix desde Mixcloud a mi perfil</label>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="https://www.mixcloud.com/tu-perfil/tu-mix/"
-                    value={link}
-                    onChange={(e) => setLink(e.target.value)}
-                  />
-                  {linkval ? validacionLink : null}
                 </div>
               </div>
               <div className="form-row mt-3">

@@ -1,11 +1,12 @@
 const Home = {
   header: {
-    image: "https://res.cloudinary.com/chilegigs/image/upload/v1607467204/home/imagen10_lbjxpa.jpg",
-    cita: "hola buenos días",
+    image:
+      "https://res.cloudinary.com/chilegigs/image/upload/v1607467204/home/imagen10_lbjxpa.jpg",
+    cita: "",
   },
   subheader: {
     image: "./img/home/subheader.jpg",
-    color: "black",
+    color: "white",
     title: "Creemos en el poder de la música",
     box1: {
       title: "+8.000",
@@ -18,20 +19,23 @@ const Home = {
   },
   citas: [
     {
-      imagen: "https://res.cloudinary.com/chilegigs/image/upload/v1607467268/citas/profile1_zioyrs.jpg",
+      imagen:
+        "https://res.cloudinary.com/chilegigs/image/upload/v1607467268/citas/profile1_zioyrs.jpg",
       nombre: "Dj Lucifer",
       cita: "Amo la musica tanto como esta página",
     },
     {
-      imagen: "https://res.cloudinary.com/chilegigs/image/upload/v1607467265/citas/profile2_n2q8wi.jpg",
+      imagen:
+        "https://res.cloudinary.com/chilegigs/image/upload/v1607655370/citas/ognbzmmb1kysqytjlpks.jpg",
       nombre: "Dj Crap",
       cita: "Chilegigs es lo mejor que la ha pasado a nuestra industria",
     },
     {
-      imagen: "https://res.cloudinary.com/chilegigs/image/upload/v1607467262/citas/profile3_fvvmrj.jpg",
+      imagen:
+        "https://res.cloudinary.com/chilegigs/image/upload/v1607655411/citas/ui0j1ykp1bz7pgt3bvey.jpg",
       nombre: "Dj Tekila",
-      cita: "El mejor sitio para dar a conocer mi talento"
-    }
+      cita: "El mejor sitio para dar a conocer mi talento",
+    },
   ],
 };
 
