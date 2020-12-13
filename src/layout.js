@@ -26,10 +26,7 @@ const Layout = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/profile">
-              <span>No puede existir un perfil vacío</span>
-              <Spinner />
-            </Route>
+
             <Route exact path="/admin">
               <HelloWorld />
             </Route>
@@ -51,8 +48,16 @@ const Layout = () => {
             <Route exact path="/dj/profile/:username">
               <DjProfile />
             </Route>
+            <Route exact path="/dj/profile">
+              <span>No puede existir un perfil vacío</span>
+              <Spinner />
+            </Route>
             <Route exact path="/client/profile/:username">
               <ClientProfile />
+            </Route>
+            <Route exact path="/client/profile">
+              <span>No puede existir un perfil vacío</span>
+              <Spinner />
             </Route>
             <Route>
               <h1>No existe esta ruta</h1>

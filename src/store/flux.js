@@ -15,26 +15,26 @@ const getState = ({ getStore, getActions, setStore }) => {
       nav: [
         {
           label: "Home",
-          to: "../",
+          to: "/",
         },
         {
           label: "Dj's",
-          to: "../catalogo",
+          to: "/catalogo",
         },
         {
           label: "Editar Perfil Dj",
-          to: "../dj/edit",
+          to: "/dj/edit",
         },
-        { label: "Editar Perfil Cliente", to: "../client/edit" },
-        { label: "Gigs Dj", to: "../dj/gigs" },
-        { label: "Gigs Cliente", to: "../client/gigs" },
+        { label: "Editar Perfil Cliente", to: "/client/edit" },
+        { label: "Gigs Dj", to: "/dj/gigs" },
+        { label: "Gigs Cliente", to: "/client/gigs" },
         {
           label: "Cuenta",
-          to: "../account",
+          to: "/account",
         },
         {
           label: "Admin",
-          to: "../admin",
+          to: "/admin",
         },
       ],
     },
