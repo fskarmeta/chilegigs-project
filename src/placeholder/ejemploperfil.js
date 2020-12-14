@@ -1,4 +1,4 @@
-export const ejemploPerfil = {
+ export const ejemploPerfil = {
   id: 1234,
   dj_id: 3,
   status: "activo",
@@ -61,6 +61,7 @@ export const ejemploPerfil = {
     },
   ],
 };
+
 
 export const ejemploPerfilCliente = {
   status: "inactive",

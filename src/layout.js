@@ -9,6 +9,7 @@ import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
 import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import Home from "./views/home/home";
+import Catalogo from "./views/catalogoDjs/catalogo";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -23,6 +24,9 @@ const Layout = () => {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/profiles">
+              <Catalogo />
             </Route>
             <Route exact path="/dj/edit">
               <EditarPerfil />

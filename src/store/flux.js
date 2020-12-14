@@ -157,6 +157,22 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error.message);
           });
       },
+      getDjCatalogo: (id, token) => {
+        fetch(`${getStore().fetchUrl}profiles`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                setStore({
+                    getDjCatalogo: data
+                })
+            });
+    },
       updateProfile: (obj) => {
         // console.log(obj);
         fetch(`${getStore().fetchUrl}profile`, {
@@ -198,19 +214,3 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 export default getState;
 
-{/*getDjsDetails: id => {
-        let store = getStore()
-        fetch(`http://127.0.0.1:5000/catalogo/dj/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data)
-                setStore({
-                    getDjsDetails: data
-                })
-            });
-    },*/}
