@@ -28,6 +28,7 @@ export const DjProfile = () => {
   const [msg, setMsg] = useState(null);
   const [logMsg, setLogMsg] = useState(false);
   const [perfilInactivo, setPerfilInactivo] = useState(false);
+
   let { username } = useParams();
 
   let history = useHistory();
