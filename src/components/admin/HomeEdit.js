@@ -15,7 +15,7 @@ const HomeEditForm = () => {
 
   useEffect(() => {
     setHome(store.home);
-  }, [store.home]);
+  }, [home]);
 
   function homeToServer(obj) {
     console.log(obj);

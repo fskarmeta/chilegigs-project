@@ -15,5 +15,3 @@ https://github.com/victorcolina22/user-stories/wiki
 hay dos rutas con funcionalidades
 /admin/raider
 /admin/home
-
-pd: no tutorials, no templates :d
