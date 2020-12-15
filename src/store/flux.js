@@ -12,6 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       role: "",
       user_id: "",
       perfil_status: "",
+      gigs: [],
       nav: [
         {
           label: "Home",
@@ -69,6 +70,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 perfil_status: data.perfil.status,
                 LoggedIn: true,
               });
+              getActions().fetchAllUserGigs(
+                data.access_token.replace("Bearer ", "")
+              );
             }
           })
           .catch((error) => {
@@ -87,6 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           user_id: data.cuenta.id,
           // LoggedIn: true,
         });
+
         sessionStorage.setItem("chilegigs_token", data.token_de_acceso);
 
         if (data.cuenta.role.name === "dj") {
@@ -94,12 +99,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             data.cuenta.id,
             data.token_de_acceso
           );
+          getActions().fetchAllUserGigs(data.token_de_acceso);
         }
         if (data.cuenta.role.name === "client") {
           getActions().fetchIndividualClientProfileAfterLogin(
             data.cuenta.id,
             data.token_de_acceso
           );
+          getActions().fetchAllUserGigs(data.token_de_acceso);
         }
       },
       logOut: () => {
@@ -219,6 +226,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((error) => {
             console.log(error.message);
+          });
+      },
+      fetchAllUserGigs: (token) => {
+        fetch(`${getStore().fetchUrl}account/gig`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            setStore({ gigs: data });
+          })
+          .catch((error) => {
+            console.log(error);
           });
       },
     },

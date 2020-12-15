@@ -11,6 +11,7 @@ import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import { DjProfile } from "./views/dj/perfil";
 import { ClientProfile } from "./views/cliente/perfil";
 import { Cuenta } from "./views/general/cuenta";
+import Gigs from "./views/dj/gigs";
 import Home from "./views/home/home";
 import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
@@ -35,6 +36,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/dj/edit">
               <EditarPerfil />
+            </Route>
+            <Route exact path="/dj/gigs">
+              <Gigs />
             </Route>
             <Route exact path="/client/edit">
               <EditarPerfilCliente />
