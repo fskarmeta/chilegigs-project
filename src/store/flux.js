@@ -28,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
         { label: "Editar Perfil Cliente", to: "/client/edit" },
         { label: "Gigs Dj", to: "/dj/gigs" },
-        { label: "Gigs Cliente", to: "/client/gigs" },
+        { label: "Contrataciones", to: "/client/contrataciones" },
         {
           label: "Cuenta",
           to: "/account",

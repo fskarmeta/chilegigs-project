@@ -140,7 +140,7 @@ const CambiarClaveEnCuenta = () => {
               Enviar
             </span>
             <div className="d-flex flex-column mt-1">
-              <div ClassName="col-sm-4">
+              <div className="col-sm-4">
                 {match ? passNoMatch : null}
                 {passVal ? passValid : null}
                 {ok ? allOk : null}

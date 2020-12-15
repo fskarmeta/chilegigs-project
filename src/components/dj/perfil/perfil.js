@@ -10,12 +10,12 @@ import RequisitosDj from "./components_perfil/requisitos";
 import DatosPersonales from "./components_perfil/datos";
 import Fechas from "./components_perfil/fechas";
 import Booking from "../../gigs/booking/bookinicial";
-const DjPerfil = ({ fetchProfile }) => {
+const DjPerfil = ({ fetchProfile, datosPrivados }) => {
   const [perfil, setPerfil] = useState(fetchProfile);
   const { store, actions } = useContext(Context);
 
   // para cuando tengamos gigs y queramos renderear los datos personales
-  const [hasHired, setHasHired] = useState(true);
+
   const [alert, setAlert] = useState(false);
   //
 
@@ -103,6 +103,7 @@ const DjPerfil = ({ fetchProfile }) => {
               foodanddrinks={!!perfil && perfil.requisitos.foodanddrinks}
             />
             <DatosPersonales
+              datosPrivados={datosPrivados}
               nombre={perfil.datos.nombre}
               apellido={perfil.datos.apellido}
               nacionalidad={perfil.datos.nacionalidad}
@@ -113,7 +114,6 @@ const DjPerfil = ({ fetchProfile }) => {
               ciudad={perfil.datos.ciudad}
               region={perfil.datos.region}
               pais={perfil.datos.pais}
-              hasHired={hasHired}
             />
           </div>
         </div>

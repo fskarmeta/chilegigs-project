@@ -13,7 +13,7 @@ const options = {
 
 const optionsHoras = { hour: "2-digit", minute: "2-digit" };
 
-const ListaGigs = () => {
+const ListaContrataciones = () => {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -66,8 +66,8 @@ const ListaGigs = () => {
           <thead>
             <tr>
               <th>Día</th>
-              <th>Hora llegada</th>
-              <th>Cliente</th>
+              <th>Hora llegada DJ</th>
+              <th>DJ</th>
               <th>Evento</th>
               <th>Estado</th>
               <th>Detalles</th>
@@ -91,8 +91,8 @@ const ListaGigs = () => {
                       )}
                     </td>
                     <td>
-                      <Link to={`/client/profile/${gig.username_cliente}`}>
-                        {gig.username_cliente}
+                      <Link to={`/dj/profile/${gig.username_dj}`}>
+                        {gig.username_dj}
                       </Link>
                     </td>
                     <td>{gig.nombre_evento}</td>
@@ -110,4 +110,4 @@ const ListaGigs = () => {
   }
 };
 
-export default ListaGigs;
+export default ListaContrataciones;
