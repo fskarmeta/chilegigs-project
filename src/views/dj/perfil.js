@@ -51,6 +51,9 @@ export const DjProfile = () => {
         setDatosPrivados(true);
       }
     }
+    if (profile.dj_id === store.cuenta.id) {
+      setDatosPrivados(true);
+    }
   }, [profile]);
 
   const fetchProfile = (username) => {
