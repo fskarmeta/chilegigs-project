@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Context } from "../../../store/appContext";
 import { Modal, Table } from "react-bootstrap";
 import Spinner from "../../home/spinner";
@@ -19,6 +20,8 @@ const ListaGigs = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [gigs, setGigs] = useState(store.gigs);
 
+  let history = useHistory();
+
   useEffect(() => {
     if (!store.LoggedIn) {
       setError(true);
@@ -28,6 +31,9 @@ const ListaGigs = () => {
     }
   }, [store.LoggedIn]);
 
+  function goToGig(id) {
+    history.push(`/gigs/${id}`);
+  }
   const fetchGigs = () => {
     fetch(`${store.fetchUrl}account/gig`, {
       method: "GET",
@@ -98,7 +104,12 @@ const ListaGigs = () => {
                     <td>{gig.nombre_evento}</td>
                     <td>{gig.estado}</td>
                     <td>
-                      <span className="btn btn-primary">Detalles</span>
+                      <span
+                        className="btn btn-primary"
+                        onClick={() => goToGig(gig.id)}
+                      >
+                        Detalles
+                      </span>
                     </td>
                   </tr>
                 );

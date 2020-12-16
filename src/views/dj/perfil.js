@@ -44,7 +44,10 @@ export const DjProfile = () => {
 
   useEffect(() => {
     for (let gig of store.gigs) {
-      if (gig.dj_id === profile.dj_id) {
+      if (
+        gig.dj_id === profile.dj_id ||
+        gig.username_cliente === store.username
+      ) {
         setDatosPrivados(true);
       }
     }

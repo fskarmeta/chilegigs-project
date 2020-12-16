@@ -16,6 +16,7 @@ import Contrataciones from "./views/cliente/contrataciones";
 import Home from "./views/home/home";
 import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
+import GigComponent from "./views/gigs/gigspadre";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -46,6 +47,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/client/contrataciones">
               <Contrataciones />
+            </Route>
+            <Route exact path="/gigs/:id">
+              <GigComponent />
             </Route>
             <Route exact path="/recover/:token">
               <NuevaClave />

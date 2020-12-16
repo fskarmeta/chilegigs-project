@@ -87,7 +87,7 @@ const AgregarCancion = ({ updateProfile }) => {
           role="button"
           onClick={actualizarDatos}
         >
-          ActuarlizarDatos
+          Actuarlizar Datos
         </span>
         {ok ? todoOk : null}
       </div>

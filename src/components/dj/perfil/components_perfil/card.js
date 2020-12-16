@@ -51,7 +51,7 @@ const DjProfileCard = ({
         </ListGroupItem>
         <ListGroupItem>
           <div className="d-flex justify-content-between">
-            <span>Generos: </span>
+            <span className="mr-2">Generos: </span>
             <span>
               {!!generos &&
                 generos.map((gen, index) => (
