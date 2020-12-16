@@ -14,8 +14,27 @@ const HomeEditForm = () => {
   const [home, setHome] = useState(store.home);
 
   useEffect(() => {
-    setHome(store.home);
+    actions.getGlobalObjects();
+    // getGlobalObjects();
   }, [home]);
+
+  function getGlobalObjects() {
+    fetch(`${store.fetchUrl}objetos`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setHome(data.home);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
 
   function homeToServer(obj) {
     console.log(obj);
@@ -38,7 +57,7 @@ const HomeEditForm = () => {
       .catch((error) => {
         console.log(error.message);
       });
-    actions.getGlobalObjects();
+    getGlobalObjects();
   }
   // Ejemplo: key1 = "header", key2 = "cita", item = "La mejor página" | Actualiza propiedad del objeto
   function updateHome(key1, key2, item) {
@@ -50,6 +69,7 @@ const HomeEditForm = () => {
       ...objectCopy,
       [key1]: { ...objectCopy[key1], [key2]: item },
     });
+    getGlobalObjects();
   }
 
   // Agrega citas al array de citas de home.citas
@@ -65,7 +85,7 @@ const HomeEditForm = () => {
     setHome(objectCopy);
     //
     homeToServer(objectCopy);
-    setHome(store.home);
+    getGlobalObjects();
   }
 
   // traer devuelta un array con las citas que quedan y sustituyo el antiguo
@@ -77,7 +97,7 @@ const HomeEditForm = () => {
     //
     // put al home
     homeToServer(objectCopy);
-    setHome(store.home);
+    getGlobalObjects();
   }
   return (
     <div className="mt-5">

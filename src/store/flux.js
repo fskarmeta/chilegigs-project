@@ -171,20 +171,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getDjCatalogo: (id, token) => {
         fetch(`${getStore().fetchUrl}profiles`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         })
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data)
-                setStore({
-                    getDjCatalogo: data
-                })
+          .then((resp) => resp.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              getDjCatalogo: data,
             });
-    },
+          });
+      },
       updateProfile: (obj) => {
         // console.log(obj);
         fetch(`${getStore().fetchUrl}profile`, {
@@ -243,4 +243,3 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 export default getState;
-
