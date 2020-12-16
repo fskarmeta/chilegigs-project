@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { Navlist } from "./navlist";
+import "./styles/navbar.css";
 
 export const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">
-          <span>chilegigs</span>
+          <span>CHILEGIGS</span>
         </Link>
         <button
           className="navbar-toggler"

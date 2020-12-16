@@ -83,7 +83,7 @@ const Layout = () => {
               <h1>No existe esta ruta</h1>
             </Route>
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </ScrollToTop>
       </BrowserRouter>
     </div>

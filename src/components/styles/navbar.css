@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&display=swap");
+
+.navbar-brand {
+  font-family: "Audiowide", cursive;
+}
+
+.nav-link {
+  font-family: "Audiowide", cursive;
+}
