@@ -13,31 +13,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       user_id: "",
       perfil_status: "",
       gigs: [],
-      nav: [
-        {
-          label: "Home",
-          to: "/",
-        },
-        {
-          label: "Dj's",
-          to: "/catalogo",
-        },
-        {
-          label: "Editar Perfil Dj",
-          to: "/dj/edit",
-        },
-        { label: "Editar Perfil Cliente", to: "/client/edit" },
-        { label: "Gigs Dj", to: "/dj/gigs" },
-        { label: "Contrataciones", to: "/client/contrataciones" },
-        {
-          label: "Cuenta",
-          to: "/account",
-        },
-        {
-          label: "Admin",
-          to: "/admin",
-        },
-      ],
     },
 
     actions: {
