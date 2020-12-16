@@ -65,7 +65,7 @@ const Generador = ({
       <div className="col-md-12 d-flex bg success">
         <div className="d-flex flex-column">
           <div className="d-flex flex-column">
-            <label for="quantity">N°</label>
+            <label htmlFor="quantity">N°</label>
             <div>
               <input
                 type="number"
@@ -82,7 +82,7 @@ const Generador = ({
           </div>
         </div>
         <div className="d-flex flex-column ml-1">
-          <label for="quantity">Item</label>
+          <label htmlFor="quantity">Item</label>
           <div style={{ width: "13rem" }}>
             <Select
               name="servicios"

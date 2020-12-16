@@ -11,22 +11,66 @@ export const Navlist = () => {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to={`/dj/profile/${store.username}`}>
-            Perfil DJ
+          <Link className="nav-link" to={`/catalogo`}>
+            <i class="fas fa-compact-disc"></i> Dj's
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to={`/client/profile/${store.username}`}>
-            Perfil Cliente
-          </Link>
-        </li>
-        {store.nav.map((link, index) => (
-          <li className="nav-item" key={index}>
-            <Link className="nav-link" to={link.to}>
-              {`${link.label}`}
+        {store.role === "dj" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/dj/edit`}>
+              Editar Perfil DJ
             </Link>
           </li>
-        ))}
+        ) : null}
+        {store.role === "client" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/client/edit`}>
+              Editar Perfil Cliente
+            </Link>
+          </li>
+        ) : null}
+        {store.role === "dj" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/dj/gigs`}>
+              Gigs
+            </Link>
+          </li>
+        ) : null}
+        {store.role === "client" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/client/contrataciones`}>
+              Contrataciones
+            </Link>
+          </li>
+        ) : null}
+        {store.role === "dj" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/dj/profile/${store.username}`}>
+              Perfil DJ
+            </Link>
+          </li>
+        ) : null}
+        {store.role === "client" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/client/profile/${store.username}`}>
+              Perfil Cliente
+            </Link>
+          </li>
+        ) : null}
+        {store.LoggedIn ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/account`}>
+              Cuenta
+            </Link>
+          </li>
+        ) : null}
+        {store.role === "admin" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/admin`}>
+              Admin
+            </Link>
+          </li>
+        ) : null}
         {store.LoggedIn ? (
           <li
             className="nav-item login-link"

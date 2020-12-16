@@ -21,13 +21,14 @@ const mensajeLogin = (
 const perfilInactivoMensaje = <div>Este perfil aún no está activo</div>;
 
 export const DjProfile = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   const [profile, setProfile] = useState(ejemploPerfil);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [msg, setMsg] = useState(null);
   const [logMsg, setLogMsg] = useState(false);
   const [perfilInactivo, setPerfilInactivo] = useState(false);
+  const [datosPrivados, setDatosPrivados] = useState(false);
 
   let { username } = useParams();
 
@@ -40,6 +41,17 @@ export const DjProfile = () => {
       fetchProfile(username);
     }
   }, [store.LoggedIn]);
+
+  useEffect(() => {
+    for (let gig of store.gigs) {
+      if (
+        gig.dj_id === profile.dj_id ||
+        gig.username_cliente === store.username
+      ) {
+        setDatosPrivados(true);
+      }
+    }
+  }, [profile]);
 
   const fetchProfile = (username) => {
     fetch(`${store.fetchUrl}dj/profile/username/${username}`, {
@@ -99,7 +111,7 @@ export const DjProfile = () => {
   } else {
     return (
       <>
-        <DjPerfil fetchProfile={profile} />
+        <DjPerfil fetchProfile={profile} datosPrivados={datosPrivados} />
       </>
     );
   }

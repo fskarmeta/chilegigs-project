@@ -123,13 +123,19 @@ const Booking = ({
       telefono: telefono,
       direccion: direccion,
       hora_llegada: llegada,
+      duracion: duracion.value,
       hora_show: toca,
       transporte: transporte === 1 ? "Si" : "No",
       oferta: oferta,
       link_evento: url,
       privado: privado,
       mensaje: [
-        { mensaje: mensaje, fecha: new Date(), nombre: username_cliente },
+        {
+          mensaje: mensaje,
+          fecha: new Date(),
+          nombre: username_cliente,
+          estado: "Pendiente",
+        },
       ],
       leido_por_dj: false,
       leido_por_cliente: true,
@@ -140,6 +146,7 @@ const Booking = ({
   }
 
   function registerGigFetch(obj) {
+    console.log(obj);
     fetch(`${fetchUrl}gig/register`, {
       method: "POST",
       body: JSON.stringify(obj),

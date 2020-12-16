@@ -241,7 +241,10 @@ const ModalGeneral = ({ titulo }) => {
   return (
     <>
       <li className="nav-item login-link" onClick={handleShow}>
-        <span className="nav-link">{titulo}</span>
+        <span className="nav-link">
+          <i className="fas fa-sign-in-alt mr-1"></i>
+          {titulo}
+        </span>
       </li>
 
       <Modal show={show} onHide={handleClose}>

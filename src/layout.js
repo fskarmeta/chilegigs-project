@@ -11,10 +11,13 @@ import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import { DjProfile } from "./views/dj/perfil";
 import { ClientProfile } from "./views/cliente/perfil";
 import { Cuenta } from "./views/general/cuenta";
+import Gigs from "./views/dj/gigs";
+import Contrataciones from "./views/cliente/contrataciones";
 import Home from "./views/home/home";
 import Catalogo from "./views/catalogoDjs/catalogo";
 import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
+import GigComponent from "./views/gigs/gigspadre";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -28,7 +31,7 @@ const Layout = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/profiles">
+            <Route exact path="/catalogo">
               <Catalogo />
             </Route>
             <Route exact path="/account">
@@ -40,8 +43,17 @@ const Layout = () => {
             <Route exact path="/dj/edit">
               <EditarPerfil />
             </Route>
+            <Route exact path="/dj/gigs">
+              <Gigs />
+            </Route>
             <Route exact path="/client/edit">
               <EditarPerfilCliente />
+            </Route>
+            <Route exact path="/client/contrataciones">
+              <Contrataciones />
+            </Route>
+            <Route exact path="/gigs/:id">
+              <GigComponent />
             </Route>
             <Route exact path="/recover/:token">
               <NuevaClave />
