@@ -18,21 +18,21 @@ export const Navlist = () => {
         {store.role === "dj" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/dj/edit`}>
-              Editar Perfil DJ
+              <i class="fas fa-user-edit"></i> Editar Perfil
             </Link>
           </li>
         ) : null}
         {store.role === "client" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/client/edit`}>
-              Editar Perfil Cliente
+              <i class="fas fa-user-edit"></i> Editar Perfil
             </Link>
           </li>
         ) : null}
         {store.role === "dj" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/dj/gigs`}>
-              Gigs
+              <i class="fas fa-list-alt"></i> Gigs
             </Link>
           </li>
         ) : null}
@@ -46,28 +46,28 @@ export const Navlist = () => {
         {store.role === "dj" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/dj/profile/${store.username}`}>
-              Perfil DJ
+              <i class="fas fa-id-badge"></i> Perfil
             </Link>
           </li>
         ) : null}
         {store.role === "client" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/client/profile/${store.username}`}>
-              Perfil Cliente
+              <i class="fas fa-id-badge"></i> Perfil
             </Link>
           </li>
         ) : null}
         {store.LoggedIn ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/account`}>
-              Cuenta
+              <i class="fas fa-cog"></i> Cuenta
             </Link>
           </li>
         ) : null}
         {store.role === "admin" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/admin`}>
-              Admin
+              <i class="fas fa-tools"></i> Admin
             </Link>
           </li>
         ) : null}
@@ -79,7 +79,9 @@ export const Navlist = () => {
               history.push("/");
             }}
           >
-            <span className="nav-link">Log Out</span>
+            <span className="nav-link">
+              <i class="fas fa-sign-out-alt"></i> Log Out
+            </span>
           </li>
         ) : (
           <ModalGeneral titulo={"Log in"} />

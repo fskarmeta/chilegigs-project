@@ -18,6 +18,7 @@ import Catalogo from "./views/catalogoDjs/catalogo";
 import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
 import GigComponent from "./views/gigs/gigspadre";
+import Footer from "./components/home/Footer";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -82,6 +83,7 @@ const Layout = () => {
               <h1>No existe esta ruta</h1>
             </Route>
           </Switch>
+          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>
