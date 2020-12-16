@@ -19,7 +19,11 @@ const injectContext = (PassedComponent) => {
 
     useEffect(() => {
       state.actions.getGlobalObjects();
-    }, []);
+      let token = sessionStorage.getItem("chilegigs_token");
+      if (token) {
+        state.actions.autoLogin(token);
+      }
+    }, [setState]);
 
     return (
       <Context.Provider value={state}>

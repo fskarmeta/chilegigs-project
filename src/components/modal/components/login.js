@@ -3,13 +3,13 @@ import { Modal } from "react-bootstrap";
 
 const Login = ({
   LoginFetch,
-  handleClose,
   errorMsg,
   con,
   ErrorDeConexion,
   ocultarLoginMostrarCuentas,
   exito,
   creacionExitosa,
+  ocultarLoginMostrarRecuperar,
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -82,7 +82,7 @@ const Login = ({
             <Modal.Footer>
               <span
                 href="#"
-                onClick={handleClose}
+                onClick={ocultarLoginMostrarRecuperar}
                 className="texto-crea-cuenta"
               >
                 ¿olvidaste tu contraseña?

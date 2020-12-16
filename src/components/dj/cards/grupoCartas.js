@@ -1,68 +1,119 @@
-import React, { useContext, useRef } from 'react';
-import { Context } from '../../../store/appContext';
-import ReactStars from 'react-stars'
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useEffect, useState, useContext } from "react";
+import ClientPerfil from "../../../components/cliente/perfil/clientperfil";
+import DjProfileCard from "../../../components/dj/perfil/components_perfil/card";
+import { useHistory, Link } from "react-router-dom";
+import { Context } from "../../../store/appContext";
+import ReactDOM from "react-dom";
+import {
+    BrowserRouter as Router,
+    useParams,
+} from "react-router-dom";
+import Spinner from "../../../components/home/spinner";
 
 
-const GrupoCartas = props => {
-    const { store } = useContext(Context);
-    let nombre = useRef(null); 
+const GrupoCartas = () => {
+    const { store, actions } = useContext(Context);
+    const [profiles, setProfiles] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [error, setError] = useState(null);
+    const [msg, setMsg] = useState(null);
+    const [logMsg, setLogMsg] = useState(false);
 
-    
-    return (
-        <>
-            <div className="container mt-4">
-                <h1 className="charac mb-3">Nuestros Dj's</h1>
-                <div className="card-deck">
-                    <div className="row d-flex flex-row flex-nowrap overflow-auto">
-                        {
-                            !!store.profile &&
-                            store.profile.map((dj, index) => {
-                                const urlTest = dj.url.replace("http://localhost:3001/profiles", "");                                
+    useEffect(() => {
+
+        fetchProfiles();
+
+    }, [store.LoggedIn]);
+
+    let history = useHistory();
+
+    const fetchProfiles = () => {
+        fetch(`${store.fetchUrl}profiles`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data.msg) {
+                    setIsLoaded(true);
+                    setLogMsg(false);
+                    setMsg(data.msg);
+                }
+
+                setLogMsg(false);
+                setMsg(null);
+                setError(null);
+                setProfiles(data);
+                setIsLoaded(true);
+
+            })
+            .catch((error) => {
+                console.log(error.message);
+                setIsLoaded(true);
+                setError(error);
+            });
+    };
+
+    if (logMsg) {
+        return (
+            <>
+                <Spinner />
+            </>
+        );
+    }
+    if (error) {
+        return <div>Hubo un problema de conexion</div>;
+    } else if (!isLoaded) {
+        return <Spinner />;
+    } else if (msg) {
+        return <div>{msg}</div>;
+
+    } else {
+        return (
+            <>
+                <div className="container mt-5">
+                        <div className="mb-5"><h3>Nuestros Dj's</h3></div>
+                    <div className="col-md-12">
+                        <div className="row">
+                            
+                            {!!profiles && profiles.map((profile) => {
                                 return (
-                                 <div className="card" style={{ width: "16rem" }} key={index}>
-                                 <div className="d-flex justify-content-center">
-                                     <img src="https://www.6amgroup.com/wp-content/uploads/2018/03/nina_kraviz-1-teaser.jpg" className="card-img-top" style={{ height: "140px" }} alt="..." />
-                                 </div>
-     
-                                 <div className="card-body">
-                                     <h5 className="card-title d-flex justify-content-center" key={nombre}>{dj.artista}</h5>
-                                     <h6 className="card-title d-flex justify-content-center"><i className="fas fa-map-marker-alt">{dj.ciudad}</i></h6>
-                                     {/* <ReactStars  value={artista.suma_rating / artista.contrataciones}/>*/}
-                                     <div className="d-flex justify-content-between">
-                                         <p>Valoraciones</p>
-                                         <p>580</p>
-                                     </div>
-                                     <div className="d-flex justify-content-between">
-                                         <p>Contrataciones</p>
-                                         <p>500</p>
-                                     </div>
-                                     <div className="d-flex justify-content-between">
-                                         <p>Técnica</p>
-                                         <p>{dj.tecnica}</p>
-                                     </div>
-                                     <span className="d-flex justify-content-center">
-                                         <p><i className="fab fa-mixcloud"></i> <i className="fab fa-instagram"></i>{dj.instagram}</p>
-                                     </span>
-                                     <span className="d-flex justify-content-center">
-                                          <p>{dj.generos}</p>
-                                     </span>
-                                     <div className="d-flex justify-content-center">
-                                         <a href="#" className="btn btn-primary">Ver perfil</a>
-     
-                                     </div>
-     
-                                 </div>
-                             </div>
+
+                                    <div className="card col-md-3" style={{ width: "16rem" }} key={profile.id}>
+                                        <DjProfileCard
+                                            imagen={profile.imagen}
+                                            artista={profile.artista}
+                                            ciudad={profile.ciudad}
+                                            pais={profile.pais}
+                                            rating={profile.suma_rating}
+                                            contrataciones={profile.contrataciones}
+                                            tecnica={profile.tecnica}
+                                            generos={profile.generos}
+                                            instagram={profile.instagram}
+                                            soundcloud={profile.soundcloud}
+                                            mixcloud={profile.mixcloud}
+                                        />
+                                        <div className="d-flex justify-content-center">
+                                            <Link className="btn btn-primary" to={`/dj/profile/${profile.username}`} >Ver perfil</Link>
+
+                                        </div>
+
+                                    </div>
                                 )
                             })
-                        }
+                            }
+                        </div>
                     </div>
+
                 </div>
-            </div>
-        </>
-    )
-}
+
+            </>
+        );
+    }
+};
 
 export default GrupoCartas;

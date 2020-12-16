@@ -1,34 +1,46 @@
-import React from 'react';
+import React from "react";
+import Carousel from "react-bootstrap/Carousel";
 
-const Carousel = () => {
+
+const CarouselCatalogo = () => {
     return (
-        <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
-            <ol className="carousel-indicators">
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active"></li>
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-            </ol>
-            <div className="carousel-inner">
-                <div className="carousel-item active">
-                    <img src="..." className="d-block w-100" alt="..." />
-                </div>
-                <div className="carousel-item">
-                    <img src="..." className="d-block w-100" alt="..." />
-                </div>
-                <div className="carousel-item">
-                    <img src="..." className="d-block w-100" alt="..." />
-                </div>
-            </div>
-            <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Next</span>
-            </a>
-        </div>
+        <Carousel>
+            <Carousel.Item interval={1000}>
+                <img
+                    style={{width:"100%", height:"500px"}}
+                    className="d-block w-100"
+                    src="https://s2.qwant.com/thumbr/0x380/7/f/786f3ce47104030b039ad7de44588c0b0b3dd21ca6fb8bae9413c606355e62/BeyondTheTurntable-07.jpg?u=https%3A%2F%2Fwww.electronicbeats.net%2Fapp%2Fuploads%2F2018%2F09%2FBeyondTheTurntable-07.jpg&q=0&b=1&p=0&a=1"
+                    alt="First slide"
+                />
+                <Carousel.Caption>
+                    <h3>Dj Lucifer</h3>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item interval={500}>
+                <img
+                    style={{width:"100%", height:"500px"}}
+                    className="d-block w-100"
+                    src="https://s1.qwant.com/thumbr/0x380/9/4/d482643dcb11b59f9889796f2b8771f77c33b45708bb4674f6b771828e9b76/IMG_9731.jpg?u=https%3A%2F%2Fwww.edmtunes.com%2Fwp-content%2Fuploads%2F2017%2F07%2FIMG_9731.jpg&q=0&b=1&p=0&a=1"
+                    alt="Third slide"
+                />
+                <Carousel.Caption>
+                    <h3>Dj Cool</h3>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    style={{width:"100%", height:"500px"}}
+                    className="d-block w-100"
+                    src="https://s1.qwant.com/thumbr/0x380/b/e/e5448680c0440f12ab0e3d8c70dd0e7cb860a587726a0e268797c029c5884f/maxresdefault.jpg?u=https%3A%2F%2Fimg.youtube.com%2Fvi%2FIGUAChyue2I%2Fmaxresdefault.jpg&q=0&b=1&p=0&a=1"
+                    alt="Third slide"
+                />
+                <Carousel.Caption>
+                    <h3>Dj Bald</h3>
+                </Carousel.Caption>
+            </Carousel.Item>
+        </Carousel>
     );
 };
 
-export default Carousel;
+export default CarouselCatalogo;
+

@@ -5,6 +5,7 @@ import Biografia from "./edit-profile/biografia";
 import Detalles from "./edit-profile/detalles";
 import Requisitos from "./edit-profile/requisitos";
 import DatosPersonales from "./edit-profile/datospersonales";
+import AgregarCancion from "./edit-profile/cancion";
 //Estos son placeholder que representan ambos items que deberían estar en el store
 // import { objetosGlobales } from "../../placeholder/objetoglobal";
 // import { ejemploPerfil } from "../../placeholder/ejemploperfil";
@@ -25,14 +26,14 @@ const ProfileEditor = () => {
       actions.fetchIndividualDjProfileAfterLogin(store.user_id, store.token);
       console.log("unmount");
     };
-  }, []);
+  }, [perfil]);
 
   useEffect(() => {
     setPerfil(store.perfil);
     return () => {
       setPerfil(store.perfil);
     };
-  });
+  }, [perfil]);
 
   function updateProfile(obj) {
     console.log(obj);
@@ -69,6 +70,7 @@ const ProfileEditor = () => {
         </h4>
       ) : null}
       <Tarjeta updateProfile={updateProfile} />
+      <AgregarCancion updateProfile={updateProfile} />
       <Biografia updateProfile={updateProfile} />
       <Detalles updateProfile={updateProfile} />
       <Requisitos

@@ -8,14 +8,17 @@ import { AdminHome } from "./views/admin/home";
 import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
 import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
+import { DjProfile } from "./views/dj/perfil";
+import { ClientProfile } from "./views/cliente/perfil";
+import { Cuenta } from "./views/general/cuenta";
 import Home from "./views/home/home";
 import Catalogo from "./views/catalogoDjs/catalogo";
+import NuevaClave from "./views/general/clave";
+import Spinner from "./components/home/spinner";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
 
-  // simulacro de autentificación
-  const admin = true;
   return (
     <div className="d-flex flex-column">
       <BrowserRouter basename={basename}>
@@ -28,32 +31,44 @@ const Layout = () => {
             <Route exact path="/profiles">
               <Catalogo />
             </Route>
+            <Route exact path="/account">
+              <Cuenta />
+            </Route>
+            <Route exact path="/admin">
+              <HelloWorld />
+            </Route>
             <Route exact path="/dj/edit">
               <EditarPerfil />
             </Route>
             <Route exact path="/client/edit">
               <EditarPerfilCliente />
             </Route>
-            {admin ? (
-              <div className="row">
-                <div className="col-md-1">
-                  <AdminNav />
-                </div>
-                <div className="col-md-11">
-                  <Route exact path="/admin">
-                    <HelloWorld />
-                  </Route>
-                  <Route exact path="/admin/raider">
-                    <Raider />
-                  </Route>
-                  <Route exact path="/admin/home">
-                    <AdminHome />
-                  </Route>
-                </div>
-              </div>
-            ) : (
-              <h1>Ingreso prohibido</h1>
-            )}
+            <Route exact path="/recover/:token">
+              <NuevaClave />
+            </Route>
+            <Route exact path="/admin/home">
+              <AdminHome />
+            </Route>
+            <Route exact path="/admin/raider">
+              <Raider />
+            </Route>
+            <Route exact path="/dj/profile/:username">
+              <DjProfile />
+            </Route>
+            <Route exact path="/dj/profile">
+              <span>No puede existir un perfil vacío</span>
+              <Spinner />
+            </Route>
+            <Route exact path="/client/profile/:username">
+              <ClientProfile />
+            </Route>
+            <Route exact path="/client/profile">
+              <span>No puede existir un perfil vacío</span>
+              <Spinner />
+            </Route>
+            <Route>
+              <h1>No existe esta ruta</h1>
+            </Route>
           </Switch>
         </ScrollToTop>
       </BrowserRouter>

@@ -4,9 +4,12 @@ import { Context } from "../../store/appContext";
 import { Modal } from "react-bootstrap";
 import Login from "./components/login";
 import TipoDeCuenta from "./components/tipocuenta";
+import LoginExitoso from "./components/loginexitoso";
 import "./components/loginstyle.css";
 import "./modal.css";
 import CrearCuenta from "./components/crearcuenta";
+import Recuperar from "./components/recuperarpass";
+import RecuperacionExitosa from "./components/recuperacionexitosa";
 
 // OJO ACA ESTAN LOS FETCH PARA LOGEARSE Y CREAR CUENTA !
 
@@ -52,6 +55,21 @@ const ModalGeneral = ({ titulo }) => {
 
   const [crearCuentaClientComp, setCrearCuentaClientComp] = useState(false);
 
+  // mostrar modal login exitoso
+
+  const [exitosoComp, setExitosoComp] = useState(false);
+
+  // mostrar modal Recuperar constraseña
+
+  const [recuperarComp, setRecuperarComp] = useState(false);
+
+  // mostrar modal de Recuperación exitosa
+
+  const [recupExit, setRecupExit] = useState(false);
+  // useEffect(() => {
+  //   setStatus(store.perfil_status);
+  // }, [loginComp]);
+
   function ocultarLoginMostrarCuentas() {
     setLoginComp(false);
     setTipoCuentaComp(true);
@@ -72,6 +90,16 @@ const ModalGeneral = ({ titulo }) => {
     setCon(false);
   }
 
+  function ocultarLoginMostrarRecuperar() {
+    setErrorMsg("");
+    setLoginComp(false);
+    setExito(false);
+    setExitosoComp(false);
+    setRecupExit(false);
+    setCon(false);
+    setRecuperarComp(true);
+  }
+
   //cerrar modal
   const handleClose = () => {
     setShow(false);
@@ -81,10 +109,41 @@ const ModalGeneral = ({ titulo }) => {
     setCon(false);
     setErrorMsg("");
     setExito(false);
+    setExitosoComp(false);
+    setRecuperarComp(false);
+    setRecupExit(false);
     setLoginComp(true);
   };
 
   let history = useHistory();
+  function routeAfterLogin() {
+    console.log("hola desde rutas");
+    if (store.perfil_status === "inactive") {
+      console.log("inactivo");
+      if (store.role === "dj") {
+        history.push("/dj/edit");
+        actions.loginToTrue();
+        handleClose();
+        setExitosoComp(false);
+      }
+      if (store.role === "client") {
+        history.push("/client/edit");
+        actions.loginToTrue();
+        handleClose();
+        setExitosoComp(false);
+      }
+    } else {
+      actions.loginToTrue();
+      handleClose();
+      setExitosoComp(false);
+    }
+  }
+
+  function routerAfterRecuperacion() {
+    handleClose();
+    history.push("/");
+  }
+
   // fetch login
   //objeto que pasa acá se compone por {username: "" , password: ""}
   function LoginFetch(obj) {
@@ -103,20 +162,12 @@ const ModalGeneral = ({ titulo }) => {
         if (data.msg) {
           setErrorMsg(data.msg);
         } else {
-          // console.log(data);
-          // console.log("holi");
           actions.dataFromLogin(data);
-          // console.log(store.perfil_status);
-          // // console.log(fetchAndStatus);
-
           setErrorMsg("");
-          setShow(false);
-          if (data.cuenta.role.id === 2) {
-            history.push("/dj/edit");
-          }
-          if (data.cuenta.role.id === 3) {
-            history.push("/client/edit");
-          }
+
+          setExitosoComp(true);
+          setLoginComp(false);
+
           //mandar al home
         }
       })
@@ -129,7 +180,6 @@ const ModalGeneral = ({ titulo }) => {
   //fetch crear cuenta
   //objeto que pasa acá se compone por {username: "" , password: ""}
   function CreateAccountFetch(obj) {
-    console.log(obj);
     fetch(`${store.fetchUrl}user/register`, {
       method: "POST",
       body: JSON.stringify(obj),
@@ -160,6 +210,34 @@ const ModalGeneral = ({ titulo }) => {
       });
   }
 
+  // fetch recuperar contraseña
+
+  function recoverPassword(obj) {
+    fetch(`${store.fetchUrl}recover/password`, {
+      method: "PUT",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.msg) {
+          setErrorMsg(data.msg);
+        } else {
+          setErrorMsg("");
+          setRecuperarComp(false);
+          setRecupExit(true);
+          setCon(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setCon(true);
+      });
+  }
   return (
     <>
       <li className="nav-item login-link" onClick={handleShow}>
@@ -177,6 +255,7 @@ const ModalGeneral = ({ titulo }) => {
             con={con}
             ErrorDeConexion={ErrorDeConexion}
             ocultarLoginMostrarCuentas={ocultarLoginMostrarCuentas}
+            ocultarLoginMostrarRecuperar={ocultarLoginMostrarRecuperar}
           />
         </div>
         <div style={tipoCuentaComp ? mostrar : ocultar}>
@@ -203,6 +282,22 @@ const ModalGeneral = ({ titulo }) => {
             ErrorDeConexion={ErrorDeConexion}
             roleID={"3"}
             CreateAccountFetch={CreateAccountFetch}
+          />
+        </div>
+        <div style={exitosoComp ? mostrar : ocultar}>
+          <LoginExitoso routeAfterLogin={routeAfterLogin} />
+        </div>
+        <div style={recuperarComp ? mostrar : ocultar}>
+          <Recuperar
+            errorMsg={errorMsg}
+            con={con}
+            ErrorDeConexion={ErrorDeConexion}
+            recoverPassword={recoverPassword}
+          />
+        </div>
+        <div style={recupExit ? mostrar : ocultar}>
+          <RecuperacionExitosa
+            routerAfterRecuperacion={routerAfterRecuperacion}
           />
         </div>
       </Modal>

@@ -1,4 +1,3 @@
-import { object } from "prop-types";
 import React, { useState } from "react";
 
 export const Citas = ({ getCita }) => {
@@ -23,17 +22,10 @@ export const Citas = ({ getCita }) => {
     );
     const file = await res.json();
     setImage(file.secure_url);
-    let objectCopy = { ...object };
+    let objectCopy = { ...objeto };
     setObjeto({ ...objectCopy, imagen: file.secure_url });
     setLoading(false);
   };
-
-  // function setImg(e) {
-  //   let objectCopy = { ...objeto };
-  //   let img = e.target.value;
-  //   let replaced = img.replace(/^(.*[\\\/])/, "");
-  //   setObjeto({ ...objectCopy, imagen: `./img/home/${replaced}` });
-  // }
 
   return (
     <div className="col-md-12 mt-4">

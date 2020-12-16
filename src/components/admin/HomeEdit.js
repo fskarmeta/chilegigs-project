@@ -4,6 +4,7 @@ import { Header } from "./edit-home/header";
 import { Subheader } from "./edit-home/subheader";
 import { Citas } from "./edit-home/citas";
 import { BorrarCitas } from "./edit-home/borrar-citas";
+import { SetCategory } from "./form-admin-add-delete-items/component-formulario/set-category";
 // importacion de objeto de ejemplo
 // import Home from "../../placeholder/homeobject";
 
@@ -64,6 +65,7 @@ const HomeEditForm = () => {
     setHome(objectCopy);
     //
     homeToServer(objectCopy);
+    setHome(store.home);
   }
 
   // traer devuelta un array con las citas que quedan y sustituyo el antiguo
@@ -75,6 +77,7 @@ const HomeEditForm = () => {
     //
     // put al home
     homeToServer(objectCopy);
+    setHome(store.home);
   }
   return (
     <div className="mt-5">

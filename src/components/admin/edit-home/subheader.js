@@ -9,7 +9,7 @@ export const Subheader = ({ updateHome }) => {
   const [box2title, setBox2title] = useState("");
   const [box2text, setBox2text] = useState("");
 
-  const [cita, setCita] = useState("");
+  // const [cita, setCita] = useState("");
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -76,7 +76,7 @@ export const Subheader = ({ updateHome }) => {
       </div>
       <div className="row d-flex flex-column align-content-center">
         <span className="font-weight-light pb-1 mb-2">
-          Cambiar color de fondo
+          Cambiar color de fondo cajas y footer
         </span>
 
         <div>

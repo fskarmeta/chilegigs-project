@@ -15,30 +15,26 @@ const getState = ({ getStore, getActions, setStore }) => {
       nav: [
         {
           label: "Home",
-          to: "../home",
+          to: "/",
         },
         {
           label: "Dj's",
-          to: "../catalogo",
-        },
-        {
-          label: "Perfil",
-          to: "../profile",
+          to: "/profiles",
         },
         {
           label: "Editar Perfil Dj",
-          to: "../dj/edit",
+          to: "/dj/edit",
         },
-        { label: "Editar Perfil Cliente", to: "../client/edit" },
-        { label: "Gigs Dj", to: "../dj/gigs" },
-        { label: "Gigs Cliente", to: "../client/gigs" },
+        { label: "Editar Perfil Cliente", to: "/client/edit" },
+        { label: "Gigs Dj", to: "/dj/gigs" },
+        { label: "Gigs Cliente", to: "/client/gigs" },
         {
           label: "Cuenta",
-          to: "../account",
+          to: "/account",
         },
         {
           label: "Admin",
-          to: "../admin",
+          to: "/admin",
         },
       ],
     },
@@ -48,6 +44,40 @@ const getState = ({ getStore, getActions, setStore }) => {
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
+      autoLogin: (token) => {
+        fetch(`${getStore().fetchUrl}user/autologin`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            if (data.msg) {
+              console.log(data.msg);
+            } else {
+              setStore({
+                cuenta: data.cuenta,
+                token: data.access_token.replace("Bearer ", ""),
+                role: data.cuenta.role.name,
+                username: data.cuenta.username,
+                user_id: data.cuenta.id,
+                perfil: data.perfil,
+                perfil_status: data.perfil.status,
+                LoggedIn: true,
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      },
+      loginToTrue: () => {
+        setStore({ LoggedIn: true });
+      },
       dataFromLogin: (data) => {
         setStore({
           cuenta: data.cuenta,
@@ -55,9 +85,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           role: data.cuenta.role.name,
           username: data.cuenta.username,
           user_id: data.cuenta.id,
-          LoggedIn: true,
+          // LoggedIn: true,
         });
-        sessionStorage.setItem("token", data.token_de_acceso);
+        sessionStorage.setItem("chilegigs_token", data.token_de_acceso);
 
         if (data.cuenta.role.name === "dj") {
           getActions().fetchIndividualDjProfileAfterLogin(
@@ -83,7 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           user_id: "",
           perfil_status: "",
         });
-        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("chilegigs_token");
       },
       getGlobalObjects: () => {
         fetch(`${getStore().fetchUrl}objetos`, {
