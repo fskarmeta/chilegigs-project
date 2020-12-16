@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../components/home/HeaderHome.css";
 
 const HeaderHome = ({ header }) => {
@@ -15,9 +16,11 @@ const HeaderHome = ({ header }) => {
           <span className="texto-header">{header.cita}</span>
           <div className="col-md-12">
             <div className="btn">
-              <button type="button" className="boton">
-                Ver catálogo de DJ's
-              </button>
+              <Link to="/catalogo">
+                <button type="button" className="boton">
+                  Ver catálogo de DJ's
+                </button>
+              </Link>
             </div>
           </div>
         </div>

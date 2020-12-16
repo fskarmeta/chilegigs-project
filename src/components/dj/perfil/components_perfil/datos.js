@@ -13,7 +13,7 @@ const DatosPersonales = ({
   ciudad,
   region,
   pais,
-  hasHired,
+  datosPrivados,
 }) => {
   return (
     <Card className="border-0">
@@ -25,7 +25,7 @@ const DatosPersonales = ({
           </Tippy>
         </Card.Title>
         <Card.Text>
-          {hasHired ? (
+          {datosPrivados ? (
             <div className="row">
               <div className="col-md-3 mt-1 d-flex flex-column">
                 <span className="">Nombre:</span>

@@ -15,7 +15,7 @@ const DjProfileCard = ({
   mixcloud,
 }) => {
   return (
-    <Card className="border rounded">
+    <Card className="border rounded" style={{ height: "40rem" }}>
       <Card.Img variant="top" src={!!imagen && imagen} />
       <Card.Body>
         <Card.Title className="text-center">{artista && artista}</Card.Title>
@@ -51,7 +51,7 @@ const DjProfileCard = ({
         </ListGroupItem>
         <ListGroupItem>
           <div className="d-flex justify-content-between">
-            <span>Generos: </span>
+            <span className="mr-2">Generos: </span>
             <span>
               {!!generos &&
                 generos.map((gen, index) => (

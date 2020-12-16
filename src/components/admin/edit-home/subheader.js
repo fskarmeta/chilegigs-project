@@ -76,7 +76,7 @@ export const Subheader = ({ updateHome }) => {
       </div>
       <div className="row d-flex flex-column align-content-center">
         <span className="font-weight-light pb-1 mb-2">
-          Cambiar color de fondo
+          Cambiar color de fondo cajas y footer
         </span>
 
         <div>

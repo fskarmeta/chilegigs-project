@@ -76,6 +76,7 @@ function CategoryEditForm() {
           colorDeFondo={""}
           global={global.foodanddrinks}
           objectAttr={"foodanddrinks"}
+          updateGlobalState={updateGlobalState}
         />
       </div>
     </div>
