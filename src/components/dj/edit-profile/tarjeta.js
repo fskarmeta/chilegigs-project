@@ -17,7 +17,7 @@ const validacionServicios = (
 );
 
 const validacionTecnica = (
-  <small className="text-danger pl-1">Elije una porfavor</small>
+  <small className="text-danger pl-1">Elije una por favor</small>
 );
 
 const validacionSocialMedia = (
@@ -27,7 +27,7 @@ const validacionSocialMedia = (
 );
 
 const validacionImagen = (
-  <small className="text-danger pl-1">Elije una porfavor</small>
+  <small className="text-danger pl-1">Elije una por favor</small>
 );
 
 const validacionTarjeta = (

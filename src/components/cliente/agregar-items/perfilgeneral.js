@@ -5,7 +5,7 @@ import unknownUserImagePath from "./unknown-user.jpg";
 import { EditarPerfil } from "../../../views/dj/editar_perfil";
 
 const validacionImagen = (
-  <small className="text-danger pl-1">Elije una foto de perfil porfavor</small>
+  <small className="text-danger pl-1">Elije una foto de perfil por favor</small>
 );
 
 const validacionOk = (

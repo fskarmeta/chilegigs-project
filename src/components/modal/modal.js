@@ -19,7 +19,7 @@ const ErrorDeConexion = (
 
 const creacionExitosa = (
   <small className="text-success">
-    Cuenta creada exitosamente, porfavor ingresa con tu cuenta
+    Cuenta creada exitosamente, por favor ingresa con tu cuenta
   </small>
 );
 const mostrar = { display: "block" };

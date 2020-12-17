@@ -66,7 +66,7 @@ const ProfileEditor = () => {
     <div className="container">
       {store.perfil_status === "inactive" ? (
         <h4 className="text-center m-3">
-          Porfavor crea un perfil para activar tu cuenta
+          Por favor crea un perfil para activar tu cuenta
         </h4>
       ) : null}
       <Tarjeta updateProfile={updateProfile} />
