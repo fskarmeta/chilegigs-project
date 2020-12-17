@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CarouselCatalogo from "./carousel";
-import GrupoCartas from "../../components/dj/cards/grupoCartas";
-import Filtros from "./filtros";
+import CarouselCatalogo from "../../components/general/cards/carousel";
+import GrupoCartas from "../../components/general/cards/grupoCartas";
+import Filtros from "../../components/general/cards/filtros";
 
 const Catalogo = () => {
   return (
