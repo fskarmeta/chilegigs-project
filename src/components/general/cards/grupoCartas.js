@@ -32,7 +32,7 @@ const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
         if (data.msg) {
           setIsLoaded(true);
           setLogMsg(false);
-          setMsg(data.msg);
+          return setMsg(data.msg);
         }
 
         setLogMsg(false);

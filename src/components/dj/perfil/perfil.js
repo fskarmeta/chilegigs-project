@@ -53,6 +53,7 @@ const DjPerfil = ({ fetchProfile, datosPrivados }) => {
             djId={!!perfil && perfil.dj_id}
             fetchUrl={store.fetchUrl}
             token={store.token}
+            artistName={!!perfil && perfil.artista}
           />
         </Modal.Body>
         <Modal.Footer>

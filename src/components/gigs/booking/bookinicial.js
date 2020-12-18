@@ -58,6 +58,7 @@ const Booking = ({
   djId,
   token,
   fetchUrl,
+  artistName,
 }) => {
   const [dia, setDia] = useState(new Date());
   const [tipo, setTipo] = useState("");
@@ -129,6 +130,7 @@ const Booking = ({
       oferta: oferta,
       link_evento: url,
       privado: privado,
+      artist_name: artistName,
       mensaje: [
         {
           mensaje: mensaje,

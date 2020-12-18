@@ -28,12 +28,14 @@ const ProfileEditor = () => {
     };
   }, [perfil]);
 
+  // dependencia nueva, puse el action en vez de perfil, cambiar por si llega a haber un bug!!
   useEffect(() => {
+    actions.fetchIndividualDjProfileAfterLogin(store.user_id, store.token);
     setPerfil(store.perfil);
     return () => {
       setPerfil(store.perfil);
     };
-  }, [perfil]);
+  }, [actions.fetchIndividualDjProfileAfterLogin]);
 
   function updateProfile(obj) {
     console.log(obj);
