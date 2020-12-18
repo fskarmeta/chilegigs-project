@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../../store/appContext";
-import { Modal, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import Spinner from "../../home/spinner";
 
 const options = {

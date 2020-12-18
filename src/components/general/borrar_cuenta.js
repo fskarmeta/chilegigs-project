@@ -3,19 +3,13 @@ import { useHistory } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext";
 
-const passValid = (
-  <small className="text-danger pl-2">
-    Contraseñas con almenos una mayúscula, una minúscula y un número
-  </small>
-);
-
 const passNoMatch = (
-  <small className="text-danger">Contraseñas no coinciden</small>
+  <small className="text-danger">Tienes que ingresar una contraseña</small>
 );
 
 const allOk = (
   <small className="text-success">
-    Contraseña modificada, por favor vuelve a ingresar...
+    Cuenta borrada, gracias por haber participado de chilegigs !
   </small>
 );
 
@@ -23,20 +17,15 @@ const errorFetch = (
   <small className="text-danger">Hubo un error de conexion</small>
 );
 
-const CambiarClaveEnCuenta = () => {
+const BorrarCuenta = () => {
   const { store, actions } = useContext(Context);
 
-  //clave antigua
-
-  const [oldPass, setOldPass] = useState("");
-
-  //calves nuevas
-  const [pass1, setPass1] = useState("");
-  const [pass2, setPass2] = useState("");
+  //calve
+  const [pass, setPass] = useState("");
 
   //validaciones
   const [match, setMatch] = useState(false);
-  const [passVal, setPassVal] = useState(false);
+
   const [ok, setOk] = useState(false);
 
   //fetch
@@ -47,28 +36,18 @@ const CambiarClaveEnCuenta = () => {
   let history = useHistory();
 
   function cambiarClave() {
-    if (oldPass === "") {
-      return setPassVal(true);
-    }
-    if (pass1 !== pass2) {
-      setPassVal(false);
+    if (pass === "") {
       return setMatch(true);
     }
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(pass2)) {
-      setMatch(false);
-      return setPassVal(true);
-    }
     let obj = {
-      old_password: oldPass,
-      new_password: pass1,
+      password: pass,
     };
-    console.log(obj);
-    mandarNuevaClave(obj);
+    borrarCuenta(obj);
   }
 
-  function mandarNuevaClave(obj) {
-    fetch(`${store.fetchUrl}account/update/password`, {
-      method: "PUT",
+  function borrarCuenta(obj) {
+    fetch(`${store.fetchUrl}user/delete`, {
+      method: "DELETE",
       body: JSON.stringify(obj),
       headers: {
         "Content-Type": "application/json",
@@ -83,8 +62,6 @@ const CambiarClaveEnCuenta = () => {
           setMsg(data.msg);
         } else {
           setMsg("");
-          setMatch(false);
-          setPassVal(false);
           setOk(true);
           setTimeout(function () {
             actions.logOut();
@@ -101,48 +78,28 @@ const CambiarClaveEnCuenta = () => {
   return (
     <>
       <div ClassName="container">
-        <div className="mb-2">
-          <span className="font-weight-bold">Cambiar Contraseña</span>
+        <div className="mb-2 mt-5">
+          <span className="font-weight-bold">Borrar Cuenta</span>
         </div>
         <div ClassName="row">
           <div ClassName="col-sm-4">
-            <label>Contraseña Antigua</label>
+            <label>Contraseña</label>
             <div ClassName="form-group pass_show">
               <input
                 type="password"
-                value={oldPass}
+                value={pass}
                 ClassName="form-control"
-                placeholder="Clave antigua"
-                onChange={(e) => setOldPass(e.target.value)}
+                placeholder="Tu constraseña"
+                onChange={(e) => setPass(e.target.value)}
               />
             </div>
-            <label>Nueva Contraseña</label>
-            <div ClassName="form-group pass_show">
-              <input
-                type="password"
-                value={pass1}
-                ClassName="form-control"
-                placeholder="Nueva clave"
-                onChange={(e) => setPass1(e.target.value)}
-              />
-            </div>
-            <label>Confirmar Nueva Constraseña</label>
-            <div ClassName="form-group pass_show">
-              <input
-                type="password"
-                value={pass2}
-                ClassName="form-control"
-                placeholder="Confirmar clave"
-                onChange={(e) => setPass2(e.target.value)}
-              />
-            </div>
+
             <span className="btn btn-primary mt-3" onClick={cambiarClave}>
               Enviar
             </span>
             <div className="d-flex flex-column mt-1">
-              <div className="col-sm-4">
+              <div ClassName="col-sm-4">
                 {match ? passNoMatch : null}
-                {passVal ? passValid : null}
                 {ok ? allOk : null}
                 {error ? errorFetch : null}
                 {msg.length > 0 ? (
@@ -157,4 +114,4 @@ const CambiarClaveEnCuenta = () => {
   );
 };
 
-export default CambiarClaveEnCuenta;
+export default BorrarCuenta;

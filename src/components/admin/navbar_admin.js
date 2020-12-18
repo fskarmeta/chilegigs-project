@@ -6,7 +6,9 @@ export const AdminNav = () => {
       <div className="border-right border-dark col-md-12">
         <div className="row d-flex flex-column border-bottom border-dark">
           <div className="btn">
-            <i className="fas fa-globe-americas fa-3x"></i>
+            <Link className="btn" to="../admin">
+              <i className="fas fa-globe-americas fa-3x"></i>
+            </Link>
           </div>
           <span className="m-1 font-weight-bold align-self-center">
             General

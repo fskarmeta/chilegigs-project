@@ -20,7 +20,9 @@ export const AdminHome = () => {
           <AdminNav />
         </div>
         <div className="col-md-11">
-          <HomeEditForm />
+          <div className="container">
+            <HomeEditForm />
+          </div>
         </div>
       </div>
     </div>

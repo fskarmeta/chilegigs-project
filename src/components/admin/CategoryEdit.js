@@ -15,8 +15,28 @@ function CategoryEditForm() {
   // fetch de los objetos
 
   useEffect(() => {
-    setGlobal(store.requisitos);
+    actions.getGlobalObjects();
+    // setGlobal(store.requisitos);
   }, [global]);
+
+  function getGlobalObjects() {
+    fetch(`${store.fetchUrl}objetos`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setGlobal(data.requisitos);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+
   // actualizando el state con lo cambios y PUT fetch
   function updateGlobalState(attr, obj) {
     let globalCopy = { ...global };
@@ -26,7 +46,9 @@ function CategoryEditForm() {
     requisitosToServer(globalCopy);
     //mandar la actualización del fetch (here comes the PUT)
     //updateObject(globalCopy)
+    getGlobalObjects();
   }
+
   function requisitosToServer(obj) {
     console.log(obj);
     fetch(`${store.fetchUrl}objetos/requisitos`, {
@@ -48,7 +70,7 @@ function CategoryEditForm() {
       .catch((error) => {
         console.log(error.message);
       });
-    actions.getGlobalObjects();
+    getGlobalObjects();
   }
   return (
     <div className="row">
