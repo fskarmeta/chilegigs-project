@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+
 import { Context } from "../../../store/appContext";
 
 const { Modal } = require("react-bootstrap");
 
 const LoginExitoso = ({ routeAfterLogin }) => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   return (
     <>
       <Modal.Header closeButton>

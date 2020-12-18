@@ -77,14 +77,3 @@
 .texto-crea-cuenta:hover {
   color: rgb(24, 51, 33);
 }
-
-.fa-eye {
-  position: relative;
-  top: 38%;
-  right: 22%;
-  left: 44%;
-}
-.fa-eye:hover {
-  color: #00fcb6;
-  cursor: pointer;
-}

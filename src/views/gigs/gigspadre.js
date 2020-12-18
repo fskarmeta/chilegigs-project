@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
-import { useHistory } from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 import DjGig from "../../components/gigs/gig_dj";
 import ClientGig from "../../components/gigs/gig_cliente";
 

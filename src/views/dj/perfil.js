@@ -2,13 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import DjPerfil from "../../components/dj/perfil/perfil";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
-import ReactDOM from "react-dom";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 import { ejemploPerfil } from "../../placeholder/ejemploperfil";
 import Spinner from "../../components/home/spinner";
 

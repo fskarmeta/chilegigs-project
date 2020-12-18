@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { Modal } from "react-bootstrap";
 import Login from "./components/login";

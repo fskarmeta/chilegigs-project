@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { Context } from "../../store/appContext";
+// import { useHistory } from "react-router-dom";
+// import { Context } from "../../store/appContext";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import ToggleButton from "react-bootstrap/ToggleButton";
@@ -40,7 +40,7 @@ const ClientGig = ({
   updateGig,
   id,
 }) => {
-  const { store, actions } = useContext(Context);
+  // const { store, actions } = useContext(Context);
   const [msg, setMsg] = useState("");
   const [msgWarning, setMsgWarning] = useState(false);
   const [confirmar, setConfirmar] = useState(false);
@@ -49,7 +49,7 @@ const ClientGig = ({
     setconfirmadoODeclinadoOCanceladoOPendiente,
   ] = useState(false);
   const [pideCambios, setPideCambios] = useState(false);
-  const [ejemploGig, setEjemploGig] = useState({});
+  // const [ejemploGig, setEjemploGig] = useState({});
 
   // cambios
   const [llegada, setLLegada] = useState(new Date(gig.hora_llegada));
