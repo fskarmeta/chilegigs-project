@@ -45,7 +45,7 @@ export const DjProfile = () => {
         setDatosPrivados(true);
       }
     }
-    if (profile.dj_id === store.cuenta.id) {
+    if (profile.dj_id === store.cuenta.id || store.role === "admin") {
       setDatosPrivados(true);
     }
   }, [profile]);

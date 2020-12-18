@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import "./lista.css";
 
-const AccountsTable = ({ users, type }) => {
+const AccountsTable = ({ users, type, deleteAccount }) => {
   return (
     <>
       <Table striped borderless hover>
@@ -27,7 +27,12 @@ const AccountsTable = ({ users, type }) => {
                   </td>
                   <td>{user.email}</td>
                   <td>
-                    <small className="text-danger">Borrar</small>
+                    <small
+                      className="text-danger account-delete"
+                      onClick={() => deleteAccount(user.id)}
+                    >
+                      Borrar
+                    </small>
                   </td>
                 </tr>
               );

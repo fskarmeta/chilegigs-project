@@ -238,6 +238,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error);
           });
       },
+      deleteAccountFromAdmin: (id) => {
+        fetch(`${getStore().fetchUrl}admin/accounts/delete/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getStore().token}`,
+          },
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      },
     },
   };
 };

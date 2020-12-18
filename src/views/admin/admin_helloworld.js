@@ -6,7 +6,7 @@ import { AdminNav } from "../../components/admin/navbar_admin";
 import { Card } from "react-bootstrap";
 
 export const HelloWorld = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [isLoaded, setIsLoaded] = useState(true);
   const [error, setError] = useState(null);
   const [info, setInfo] = useState({});
@@ -20,6 +20,11 @@ export const HelloWorld = () => {
       fetchInfo();
     }
   }, [isLoaded]);
+
+  function deleteAccount(id) {
+    actions.deleteAccountFromAdmin(id);
+    fetchInfo();
+  }
 
   function fetchInfo() {
     fetch(`${store.fetchUrl}admin/accounts/info`, {
@@ -105,11 +110,16 @@ export const HelloWorld = () => {
                 <AccountsTable
                   users={!!info && info.lastclients}
                   type={"client"}
+                  deleteAccount={deleteAccount}
                 />
               </div>
               <div className="col-md-12">
                 <h5 className="m-2">Últimos 10 Dj</h5>
-                <AccountsTable users={!!info && info.lastdjs} type={"dj"} />
+                <AccountsTable
+                  users={!!info && info.lastdjs}
+                  type={"dj"}
+                  deleteAccount={deleteAccount}
+                />
               </div>
             </div>
           </div>
