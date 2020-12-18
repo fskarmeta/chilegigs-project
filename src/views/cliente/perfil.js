@@ -1,13 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import ClientPerfil from "../../components/cliente/perfil/clientperfil";
 import { Context } from "../../store/appContext";
-import ReactDOM from "react-dom";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 import { ejemploPerfil } from "../../placeholder/ejemploperfil";
 import Spinner from "../../components/home/spinner";
 

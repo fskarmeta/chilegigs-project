@@ -5,7 +5,6 @@ import { Navbar } from "./components/navbar";
 import { HelloWorld } from "./views/admin/admin_helloworld";
 import { Raider } from "./views/admin/raiders";
 import { AdminHome } from "./views/admin/home";
-import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
 import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import { DjProfile } from "./views/dj/perfil";

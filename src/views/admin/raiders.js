@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext";
 
 import CategoryEditForm from "../../components/admin/CategoryEdit";
