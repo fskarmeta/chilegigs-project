@@ -18,6 +18,8 @@ import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
 import GigComponent from "./views/gigs/gigspadre";
 import Footer from "./components/home/Footer";
+import TablaClientes from "./views/admin/tabla_clientes";
+import TablaDjs from "./views/admin/tabla_djs";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -63,6 +65,12 @@ const Layout = () => {
             </Route>
             <Route exact path="/admin/raider">
               <Raider />
+            </Route>
+            <Route exact path="/admin/clients">
+              <TablaClientes />
+            </Route>
+            <Route exact path="/admin/djs">
+              <TablaDjs />
             </Route>
             <Route exact path="/dj/profile/:username">
               <DjProfile />

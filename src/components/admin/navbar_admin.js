@@ -22,13 +22,17 @@ export const AdminNav = () => {
         </div>
         <div className="row d-flex flex-column border-bottom border-dark">
           <div className="btn">
-            <i className="fas fa-record-vinyl fa-3x"></i>
+            <Link className="btn" to="../admin/djs">
+              <i className="fas fa-record-vinyl fa-3x"></i>
+            </Link>
           </div>
           <span className="align-self-center font-weight-bold">DJ's</span>
         </div>
         <div className="row d-flex flex-column border-bottom border-dark">
           <div className="btn">
-            <i className="fas fa-users fa-3x"></i>
+            <Link className="btn" to="../admin/clients">
+              <i className="fas fa-users fa-3x"></i>
+            </Link>
           </div>
           <span className="align-self-center font-weight-bold">Clientes</span>
         </div>

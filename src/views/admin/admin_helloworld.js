@@ -1,15 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
-import AccountsTable from "../../components/admin/general/lista";
 import { AdminNav } from "../../components/admin/navbar_admin";
+import AccountsTable from "../../components/admin/general/lista";
 import { Card } from "react-bootstrap";
 
 export const HelloWorld = () => {
   const { store, actions } = useContext(Context);
   const [isLoaded, setIsLoaded] = useState(true);
   const [error, setError] = useState(null);
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState(null);
 
   let history = useHistory();
 
@@ -80,7 +80,7 @@ export const HelloWorld = () => {
                             <div className="d-flex flex-column">
                               <h4>Clientes</h4>
                               <h5 className="m-1 font-weight-bold">
-                                {info.clients}
+                                {!!info && info.clients}
                               </h5>
                             </div>
                           </Card.Body>
@@ -92,7 +92,7 @@ export const HelloWorld = () => {
                             <div className="d-flex flex-column">
                               <h4>Dj's</h4>
                               <h5 className="m-1 font-weight-bold">
-                                {info.djs}
+                                {!!info && info.djs}
                               </h5>
                             </div>
                           </Card.Body>
