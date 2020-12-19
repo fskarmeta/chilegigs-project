@@ -16,7 +16,11 @@ const DjProfileCard = ({
 }) => {
   return (
     <Card className="border rounded" style={{ height: "40rem" }}>
-      <Card.Img variant="top" src={!!imagen && imagen} />
+      <Card.Img
+        variant="top"
+        src={!!imagen && imagen}
+        style={{ maxHeight: "20rem" }}
+      />
       <Card.Body>
         <Card.Title className="text-center">{artista && artista}</Card.Title>
         <Card.Text>
@@ -25,7 +29,7 @@ const DjProfileCard = ({
               {ciudad}, {pais}
             </span>
           </div>
-          <div className="col-md-12 d-flex justify-content-center">
+          <div className="col-md-12 d-flex justify-content-center mb-5">
             <ReactStars
               value={
                 (!!rating && rating) / (!!contrataciones && contrataciones)

@@ -23,6 +23,7 @@ export const DjProfile = () => {
   const [logMsg, setLogMsg] = useState(false);
   const [perfilInactivo, setPerfilInactivo] = useState(false);
   const [datosPrivados, setDatosPrivados] = useState(false);
+  const [gigs, setGigs] = useState(null);
 
   let { username } = useParams();
 
@@ -74,7 +75,8 @@ export const DjProfile = () => {
           setLogMsg(false);
           setMsg(null);
           setError(null);
-          setProfile(data);
+          setProfile(data.profile);
+          setGigs(data.gigs);
           setIsLoaded(true);
         }
       })
@@ -108,7 +110,11 @@ export const DjProfile = () => {
   } else {
     return (
       <>
-        <DjPerfil fetchProfile={profile} datosPrivados={datosPrivados} />
+        <DjPerfil
+          fetchProfile={profile}
+          datosPrivados={datosPrivados}
+          gigs={gigs}
+        />
       </>
     );
   }

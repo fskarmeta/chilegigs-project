@@ -10,7 +10,7 @@ import RequisitosDj from "./components_perfil/requisitos";
 import DatosPersonales from "./components_perfil/datos";
 import Fechas from "./components_perfil/fechas";
 import Booking from "../../gigs/booking/bookinicial";
-const DjPerfil = ({ fetchProfile, datosPrivados }) => {
+const DjPerfil = ({ fetchProfile, datosPrivados, gigs }) => {
   const [perfil, setPerfil] = useState(fetchProfile);
   const { store, actions } = useContext(Context);
 
@@ -63,30 +63,36 @@ const DjPerfil = ({ fetchProfile, datosPrivados }) => {
         </Modal.Footer>
       </Modal>
       <div className="container">
-        {perfil.agregar_cancion && perfil.agregar_cancion ? (
-          <Mix mix={perfil.url_cancion} />
-        ) : null}
+        <div className="col-md-12">
+          {perfil.agregar_cancion && perfil.agregar_cancion ? (
+            <Mix mix={perfil.url_cancion} />
+          ) : null}
+        </div>
 
         <div className="row">
           <div className="col-md-4">
-            <DjProfileCard
-              imagen={perfil.imagen}
-              artista={perfil.artista}
-              ciudad={perfil.ciudad}
-              pais={perfil.pais}
-              rating={perfil.suma_rating}
-              contrataciones={perfil.contrataciones}
-              tecnica={perfil.tecnica}
-              generos={perfil.generos}
-              instagram={perfil.instagram}
-              soundcloud={perfil.soundcloud}
-              mixcloud={perfil.mixcloud}
-            />
-            <span className="btn btn-dark w-100 mt-3" onClick={handleShow}>
-              Agenda este DJ aquí !
-            </span>
-            {alert ? warning : null}
-            <Fechas />
+            <div className="col-md-12 col-sm-12">
+              <DjProfileCard
+                imagen={perfil.imagen}
+                artista={perfil.artista}
+                ciudad={perfil.ciudad}
+                pais={perfil.pais}
+                rating={perfil.suma_rating}
+                contrataciones={perfil.contrataciones}
+                tecnica={perfil.tecnica}
+                generos={perfil.generos}
+                instagram={perfil.instagram}
+                soundcloud={perfil.soundcloud}
+                mixcloud={perfil.mixcloud}
+              />
+              <div className="col-md-12">
+                <span className="btn btn-dark w-100 mt-3" onClick={handleShow}>
+                  Agenda este DJ aquí !
+                </span>
+                {alert ? warning : null}
+                <Fechas gigs={gigs} />
+              </div>
+            </div>
           </div>
           <div className="col-md-8">
             <Bio biografia={perfil.biografia} />
