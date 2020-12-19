@@ -84,6 +84,7 @@ const DjPerfil = ({ fetchProfile, datosPrivados, gigs }) => {
                 instagram={perfil.instagram}
                 soundcloud={perfil.soundcloud}
                 mixcloud={perfil.mixcloud}
+                username={perfil.username}
               />
               <div className="col-md-12">
                 <span className="btn btn-dark w-100 mt-3" onClick={handleShow}>

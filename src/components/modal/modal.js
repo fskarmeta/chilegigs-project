@@ -117,9 +117,7 @@ const ModalGeneral = ({ titulo }) => {
 
   let history = useHistory();
   function routeAfterLogin() {
-    console.log("hola desde rutas");
     if (store.perfil_status === "inactive") {
-      console.log("inactivo");
       if (store.role === "dj") {
         history.push("/dj/edit");
         actions.loginToTrue();

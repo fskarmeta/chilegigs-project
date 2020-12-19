@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -6,6 +6,38 @@ import ModalGeneral from "./modal/modal";
 
 export const Navlist = () => {
   const { store, actions } = useContext(Context);
+
+  //Mensajes no leídos por el usuario actual
+  const [notReaded, setNotReaded] = useState(false);
+  const [number, setNumber] = useState(0);
+
+  useEffect(() => {
+    if (store.role === "dj") {
+      let counter = 0;
+      for (let gig of store.gigs) {
+        if (!gig.leido_por_dj) {
+          counter++;
+        }
+        setNumber(counter);
+      }
+      if (counter > 0) {
+        setNotReaded(true);
+      }
+    }
+    if (store.role === "client") {
+      let counter = 0;
+      for (let gig of store.gigs) {
+        if (!gig.leido_por_cliente) {
+          counter++;
+        }
+        setNumber(counter);
+      }
+      if (counter > 0) {
+        setNotReaded(true);
+      }
+    }
+  });
+
   let history = useHistory();
   return (
     <div className="collapse navbar-collapse" id="navbarNav">
@@ -17,29 +49,21 @@ export const Navlist = () => {
         </li>
         {store.role === "dj" ? (
           <li className="nav-item">
-            <Link className="nav-link" to={`/dj/edit`}>
-              <i class="fas fa-user-edit"></i> Editar Perfil
-            </Link>
-          </li>
-        ) : null}
-        {store.role === "client" ? (
-          <li className="nav-item">
-            <Link className="nav-link" to={`/client/edit`}>
-              <i class="fas fa-user-edit"></i> Editar Perfil
-            </Link>
-          </li>
-        ) : null}
-        {store.role === "dj" ? (
-          <li className="nav-item">
             <Link className="nav-link" to={`/dj/gigs`}>
-              <i class="fas fa-list-alt"></i> Gigs
+              <i class="fas fa-list-alt"></i> Gigs{" "}
+              {notReaded ? (
+                <span className="animate__animated animate__bounce">
+                  {number}
+                </span>
+              ) : null}
             </Link>
           </li>
         ) : null}
         {store.role === "client" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/client/contrataciones`}>
-              Contrataciones
+              <i class="fas fa-list-alt"></i> Contrataciones{" "}
+              {notReaded ? number : null}
             </Link>
           </li>
         ) : null}
@@ -54,6 +78,20 @@ export const Navlist = () => {
           <li className="nav-item">
             <Link className="nav-link" to={`/client/profile/${store.username}`}>
               <i class="fas fa-id-badge"></i> Perfil
+            </Link>
+          </li>
+        ) : null}
+        {store.role === "dj" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/dj/edit`}>
+              <i class="fas fa-user-edit"></i> Editar
+            </Link>
+          </li>
+        ) : null}
+        {store.role === "client" ? (
+          <li className="nav-item">
+            <Link className="nav-link" to={`/client/edit`}>
+              <i class="fas fa-user-edit"></i> Editar
             </Link>
           </li>
         ) : null}

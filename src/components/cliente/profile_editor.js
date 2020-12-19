@@ -15,7 +15,6 @@ const ClientProfileEditor = () => {
         store.user_id,
         store.token
       );
-      console.log("unmount");
     };
   }, []);
 

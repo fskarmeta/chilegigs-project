@@ -1,4 +1,5 @@
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import ReactStars from "react-stars";
 
 const DjProfileCard = ({
@@ -13,23 +14,31 @@ const DjProfileCard = ({
   instagram,
   soundcloud,
   mixcloud,
+  username,
 }) => {
   return (
     <Card className="border rounded" style={{ height: "40rem" }}>
-      <Card.Img
-        variant="top"
-        src={!!imagen && imagen}
-        style={{ maxHeight: "20rem" }}
-      />
+      <Link to={`/dj/profile/${username}`}>
+        <Card.Img
+          variant="top"
+          src={!!imagen && imagen}
+          style={{ maxHeight: "20rem" }}
+        />
+      </Link>
       <Card.Body>
-        <Card.Title className="text-center">{artista && artista}</Card.Title>
-        <Card.Text>
+        <Link
+          to={`/dj/profile/${username}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Card.Title className="text-center">{artista && artista}</Card.Title>
+        </Link>
+        <Card.Text className="mb-2">
           <div className="col-md-12 d-flex justify-content-center">
             <span>
               {ciudad}, {pais}
             </span>
           </div>
-          <div className="col-md-12 d-flex justify-content-center mb-5">
+          <div className="col-md-12 d-flex justify-content-center">
             <ReactStars
               value={
                 (!!rating && rating) / (!!contrataciones && contrataciones)
@@ -59,7 +68,9 @@ const DjProfileCard = ({
             <span>
               {!!generos &&
                 generos.map((gen, index) => (
-                  <span key={index}>{`${gen} / `}</span>
+                  <small>
+                    <span key={index}>{`${gen} / `}</span>
+                  </small>
                 ))}
             </span>
           </div>

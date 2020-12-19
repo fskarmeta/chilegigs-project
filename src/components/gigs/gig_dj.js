@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../../store/appContext";
 const DjGig = ({
   options,
   warning,
@@ -9,7 +9,7 @@ const DjGig = ({
   updateGig,
   id,
 }) => {
-  // const [gig, setGig] = useState(gig);
+  const { store, actions } = useContext(Context);
   const [msg, setMsg] = useState("");
   const [msgWarning, setMsgWarning] = useState(false);
   const [
@@ -30,6 +30,9 @@ const DjGig = ({
     if (gig.estado === "Dj pide cambios") {
       setPideCambios(true);
     }
+    return () => {
+      actions.fetchAllUserGigs(store.token);
+    };
   });
 
   function gigAceptado() {

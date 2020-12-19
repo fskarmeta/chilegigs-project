@@ -96,8 +96,8 @@ const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
                   .map((profile) => {
                     return (
                       <div
-                        className="card col-md-3 mt-2"
-                        //   style={{ width: "16rem" }}
+                        className="card border-0 col-md-3 mt-2"
+                        // style={{ width: "16rem" }}
                         key={profile.id}
                       >
                         <DjProfileCard
@@ -112,15 +112,8 @@ const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
                           instagram={profile.instagram}
                           soundcloud={profile.soundcloud}
                           mixcloud={profile.mixcloud}
+                          username={profile.username}
                         />
-                        <div className="d-flex justify-content-center">
-                          <Link
-                            className="btn btn-primary m-2"
-                            to={`/dj/profile/${profile.username}`}
-                          >
-                            Ver perfil
-                          </Link>
-                        </div>
                       </div>
                     );
                   })}

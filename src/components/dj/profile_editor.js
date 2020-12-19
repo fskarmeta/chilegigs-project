@@ -24,7 +24,6 @@ const ProfileEditor = () => {
   useEffect(() => {
     return () => {
       actions.fetchIndividualDjProfileAfterLogin(store.user_id, store.token);
-      console.log("unmount");
     };
   }, [perfil]);
 
