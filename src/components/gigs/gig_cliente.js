@@ -67,7 +67,8 @@ const ClientGig = ({
       gig.estado === "Cancelado" ||
       gig.estado === "Declinado" ||
       gig.estado === "Pendiente" ||
-      gig.estado === "Confirmado"
+      gig.estado === "Confirmado" ||
+      gig.estado === "Terminado"
     ) {
       setconfirmadoODeclinadoOCanceladoOPendiente(true);
     }

@@ -107,6 +107,15 @@ const ListaGigs = () => {
                       >
                         Detalles
                       </span>
+                      {new Date(new Date(gig.dia_evento).getTime() + 86400000) <
+                        new Date() && !gig.feedback_dj ? (
+                        <Link
+                          className="btn btn-success"
+                          to={`/feedback/${gig.id}`}
+                        >
+                          Feedback
+                        </Link>
+                      ) : null}
                     </td>
                   </tr>
                 );

@@ -20,6 +20,7 @@ import GigComponent from "./views/gigs/gigspadre";
 // import Footer from "./components/home/Footer";
 import TablaClientes from "./views/admin/tabla_clientes";
 import TablaDjs from "./views/admin/tabla_djs";
+import FeedbackView from "./views/gigs/feedback";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -41,6 +42,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/admin">
               <HelloWorld />
+            </Route>
+            <Route exact path="/feedback/:id">
+              <FeedbackView />
             </Route>
             <Route exact path="/dj/edit">
               <EditarPerfil />

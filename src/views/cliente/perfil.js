@@ -21,6 +21,7 @@ export const ClientProfile = () => {
   const [msg, setMsg] = useState(null);
   const [logMsg, setLogMsg] = useState(false);
   const [perfilInactivo, setPerfilInactivo] = useState(false);
+  const [feedbacks, setFeedback] = useState(null);
   let { username } = useParams();
 
   useEffect(() => {
@@ -50,7 +51,8 @@ export const ClientProfile = () => {
             setLogMsg(false);
             setMsg(null);
             setError(null);
-            setProfile(data);
+            setProfile(data.profile);
+            setFeedback(data.feedbacks);
             setIsLoaded(true);
           }
         })
@@ -86,7 +88,7 @@ export const ClientProfile = () => {
   } else {
     return (
       <>
-        <ClientPerfil fetchProfile={profile} />
+        <ClientPerfil fetchProfile={profile} feedback={feedbacks} />
       </>
     );
   }

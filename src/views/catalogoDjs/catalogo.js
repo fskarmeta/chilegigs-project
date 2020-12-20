@@ -18,7 +18,7 @@ const Catalogo = () => {
     setServicio("");
   }
   return (
-    <div>
+    <div className="mb-5">
       <Filtros
         setElectronica={setElectronica}
         setGroovy={setGroovy}

@@ -198,7 +198,7 @@ const ProfileEditor = ({ updateProfile }) => {
                     className="form-control"
                     name="pais"
                     id="pais"
-                    placeholder="pais"
+                    placeholder="País"
                     ref={register({
                       required: true,
                       minLength: 3,

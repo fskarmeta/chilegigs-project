@@ -87,10 +87,10 @@ const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
   } else {
     return (
       <>
-        <div className="container mt-5">
-          <div className="mb-5">
+        <div className="container-fluid mt-5">
+          {/* <div className="mb-5">
             <h3>Catálogo</h3>
-          </div>
+          </div> */}
           <div className="col-md-12">
             <div className="row">
               {!!profiles &&
@@ -119,7 +119,7 @@ const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
                   .map((profile) => {
                     return (
                       <div
-                        className="card border-0 col-md-3 mt-2"
+                        className="card border-0 col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 mt-2"
                         // style={{ width: "16rem" }}
                         key={profile.id}
                       >

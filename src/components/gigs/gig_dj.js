@@ -23,7 +23,8 @@ const DjGig = ({
       gig.estado === "Aceptado" ||
       gig.estado === "Declinado" ||
       gig.estado === "Confirmado" ||
-      gig.estado === "Cancelado"
+      gig.estado === "Cancelado" ||
+      gig.estado === "Terminado"
     ) {
       setAceptadoODeclinadoOConfirmado(true);
     }

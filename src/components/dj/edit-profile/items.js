@@ -179,7 +179,7 @@ export const serviciosOptions = [
 ];
 
 export const tecnicaOptions = [
-  { value: "Analoga", label: "Analoga" },
+  { value: "Análoga", label: "Análoga" },
   { value: "Digital", label: "Digital" },
   { value: "Ambas", label: "Ambas" },
 ];

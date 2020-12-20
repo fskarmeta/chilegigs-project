@@ -42,7 +42,7 @@ const TablaDjs = () => {
           setError(error);
         });
     }
-  }, [history, store.fetchUrl, store.role, store.token]);
+  }, [history, store.fetchUrl, store.role, store.token, isLoaded]);
 
   function deleteAccount(id) {
     actions.deleteAccountFromAdmin(id);

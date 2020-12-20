@@ -54,29 +54,6 @@ const ListaContrataciones = () => {
     history.push(`/gigs/${id}`);
   }
 
-  // const fetchGigs = () => {
-  //   fetch(`${store.fetchUrl}account/gig`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${store.token}`,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // console.log(data);
-  //       setIsLoaded(true);
-  //       setGigs(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //       setIsLoaded(true);
-  //       setError(error);
-  //     });
-  // };
-
   if (error) {
     return <div>Hubo un error de conexión</div>;
   } else if (!isLoaded) {
@@ -130,6 +107,15 @@ const ListaContrataciones = () => {
                       >
                         Detalles
                       </span>
+                      {new Date(new Date(gig.dia_evento).getTime() + 86400000) <
+                        new Date() && !gig.feedback_client ? (
+                        <Link
+                          className="btn btn-success"
+                          to={`/feedback/${gig.id}`}
+                        >
+                          Feedback
+                        </Link>
+                      ) : null}
                     </td>
                   </tr>
                 );

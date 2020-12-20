@@ -10,7 +10,9 @@ import RequisitosDj from "./components_perfil/requisitos";
 import DatosPersonales from "./components_perfil/datos";
 import Fechas from "./components_perfil/fechas";
 import Booking from "../../gigs/booking/bookinicial";
-const DjPerfil = ({ fetchProfile, datosPrivados, gigs }) => {
+import Mensajes from "./components_perfil/mensajes";
+
+const DjPerfil = ({ fetchProfile, datosPrivados, gigs, feedback }) => {
   const [perfil] = useState(fetchProfile);
   const { store } = useContext(Context);
 
@@ -63,15 +65,15 @@ const DjPerfil = ({ fetchProfile, datosPrivados, gigs }) => {
         </Modal.Footer>
       </Modal>
       <div className="container">
-        <div className="col-md-12">
-          {perfil.agregar_cancion && perfil.agregar_cancion ? (
-            <Mix mix={perfil.url_cancion} />
-          ) : null}
-        </div>
-
         <div className="row">
+          <div className="col-md-12">
+            {perfil.agregar_cancion && perfil.agregar_cancion ? (
+              <Mix mix={perfil.url_cancion} />
+            ) : null}
+          </div>
+
           <div className="col-md-4">
-            <div className="col-md-12 col-sm-12">
+            <div>
               <DjProfileCard
                 imagen={perfil.imagen}
                 artista={perfil.artista}
@@ -95,7 +97,7 @@ const DjPerfil = ({ fetchProfile, datosPrivados, gigs }) => {
               </div>
             </div>
           </div>
-          <div className="col-md-8">
+          <div className="col-md-8 mb-5">
             <Bio biografia={perfil.biografia} />
             <GeneralEspectaculo
               servicios={perfil.servicios}
@@ -123,6 +125,7 @@ const DjPerfil = ({ fetchProfile, datosPrivados, gigs }) => {
               region={perfil.datos.region}
               pais={perfil.datos.pais}
             />
+            <Mensajes mensajes={feedback} />
           </div>
         </div>
       </div>
