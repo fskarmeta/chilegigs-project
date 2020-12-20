@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
-import { BrowserRouter as Router, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DjGig from "../../components/gigs/gig_dj";
 import ClientGig from "../../components/gigs/gig_cliente";
 
@@ -42,10 +42,6 @@ const GigComponent = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    getGig(id);
-  }, [isLoaded]);
-
-  function getGig(id) {
     fetch(`${store.fetchUrl}gig/${id}`, {
       method: "GET",
       headers: {
@@ -74,7 +70,7 @@ const GigComponent = () => {
         setIsLoaded(true);
         setError(error);
       });
-  }
+  }, [id, store.fetchUrl, store.token]);
 
   function updateGig(obj, id) {
     fetch(`${store.fetchUrl}gig/update/${id}`, {

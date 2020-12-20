@@ -77,7 +77,7 @@ const ClientGig = ({
     return () => {
       actions.fetchAllUserGigs(store.token);
     };
-  });
+  }, [actions, gig.estado, store.token]);
 
   //Para el transporte si /no
   const handleChange = (val) => setTransporte(val);

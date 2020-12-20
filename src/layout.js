@@ -17,7 +17,7 @@ import Catalogo from "./views/catalogoDjs/catalogo";
 import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
 import GigComponent from "./views/gigs/gigspadre";
-import Footer from "./components/home/Footer";
+// import Footer from "./components/home/Footer";
 import TablaClientes from "./views/admin/tabla_clientes";
 import TablaDjs from "./views/admin/tabla_djs";
 

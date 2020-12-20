@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import DjPerfil from "../../components/dj/perfil/perfil";
-import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
-import { BrowserRouter as Router, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ejemploPerfil } from "../../placeholder/ejemploperfil";
 import Spinner from "../../components/home/spinner";
 
@@ -27,15 +26,45 @@ export const DjProfile = () => {
 
   let { username } = useParams();
 
-  let history = useHistory();
-
   useEffect(() => {
     if (!store.LoggedIn) {
       setLogMsg(true);
     } else {
-      fetchProfile(username);
+      fetch(`${store.fetchUrl}dj/profile/username/${username}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${store.token}`,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          if (data.msg) {
+            setIsLoaded(true);
+            setLogMsg(false);
+            setMsg(data.msg);
+          }
+          if (data.status === "inactive") {
+            setPerfilInactivo(true);
+            setIsLoaded(true);
+          } else {
+            setLogMsg(false);
+            setMsg(null);
+            setError(null);
+            setProfile(data.profile);
+            setGigs(data.gigs);
+            setIsLoaded(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+          setIsLoaded(true);
+          setError(error);
+        });
     }
-  }, [store.LoggedIn]);
+  }, [store.LoggedIn, store.fetchUrl, store.token, username]);
 
   useEffect(() => {
     for (let gig of store.gigs) {
@@ -49,43 +78,44 @@ export const DjProfile = () => {
     if (profile.dj_id === store.cuenta.id || store.role === "admin") {
       setDatosPrivados(true);
     }
-  }, [profile]);
+  }, [profile, store.cuenta.id, store.gigs, store.role, store.username]);
 
-  const fetchProfile = (username) => {
-    fetch(`${store.fetchUrl}dj/profile/username/${username}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${store.token}`,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        if (data.msg) {
-          setIsLoaded(true);
-          setLogMsg(false);
-          setMsg(data.msg);
-        }
-        if (data.status === "inactive") {
-          setPerfilInactivo(true);
-          setIsLoaded(true);
-        } else {
-          setLogMsg(false);
-          setMsg(null);
-          setError(null);
-          setProfile(data.profile);
-          setGigs(data.gigs);
-          setIsLoaded(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setIsLoaded(true);
-        setError(error);
-      });
-  };
+  // const fetchProfile = (username) => {
+  //   fetch(`${store.fetchUrl}dj/profile/username/${username}`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${store.token}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       if (data.msg) {
+  //         setIsLoaded(true);
+  //         setLogMsg(false);
+  //         setMsg(data.msg);
+  //       }
+  //       if (data.status === "inactive") {
+  //         setPerfilInactivo(true);
+  //         setIsLoaded(true);
+  //       } else {
+  //         setLogMsg(false);
+  //         setMsg(null);
+  //         setError(null);
+  //         setProfile(data.profile);
+  //         setGigs(data.gigs);
+  //         setIsLoaded(true);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //       setIsLoaded(true);
+  //       setError(error);
+  //     });
+  // };
+
   if (logMsg) {
     return (
       <>

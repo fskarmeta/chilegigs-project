@@ -15,7 +15,7 @@ const options = {
 const optionsHoras = { hour: "2-digit", minute: "2-digit" };
 
 const ListaGigs = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [gigs, setGigs] = useState(store.gigs);
@@ -27,35 +27,32 @@ const ListaGigs = () => {
       setError(true);
     } else {
       setError(null);
-      fetchGigs();
+      fetch(`${store.fetchUrl}account/gig`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${store.token}`,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          // console.log(data);
+          setIsLoaded(true);
+          setGigs(data);
+        })
+        .catch((error) => {
+          console.log(error.message);
+          setIsLoaded(true);
+          setError(error);
+        });
     }
-  }, [store.LoggedIn]);
+  }, [store.LoggedIn, store.fetchUrl, store.token]);
 
   function goToGig(id) {
     history.push(`/gigs/${id}`);
   }
-  const fetchGigs = () => {
-    fetch(`${store.fetchUrl}account/gig`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${store.token}`,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        setIsLoaded(true);
-        setGigs(data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setIsLoaded(true);
-        setError(error);
-      });
-  };
 
   if (error) {
     return <div>Hubo un error de conexión</div>;

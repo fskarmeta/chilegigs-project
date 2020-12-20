@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import DjProfileCard from "../../../components/dj/perfil/components_perfil/card";
-import { useHistory, Link } from "react-router-dom";
 import { Context } from "../../../store/appContext";
 import Spinner from "../../../components/home/spinner";
 
 const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   const [profiles, setProfiles] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
@@ -13,12 +12,6 @@ const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
   const [logMsg, setLogMsg] = useState(false);
 
   useEffect(() => {
-    fetchProfiles();
-  }, [store.LoggedIn]);
-
-  let history = useHistory();
-
-  const fetchProfiles = () => {
     fetch(`${store.fetchUrl}profiles`, {
       method: "GET",
       headers: {
@@ -46,7 +39,37 @@ const GrupoCartas = ({ electronica, groovy, comercial, tecnica, servicio }) => {
         setIsLoaded(true);
         setError(error);
       });
-  };
+  }, [store.LoggedIn, store.fetchUrl]);
+
+  // const fetchProfiles = () => {
+  //   fetch(`${store.fetchUrl}profiles`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       if (data.msg) {
+  //         setIsLoaded(true);
+  //         setLogMsg(false);
+  //         return setMsg(data.msg);
+  //       }
+
+  //       setLogMsg(false);
+  //       setMsg(null);
+  //       setError(null);
+  //       setProfiles(data);
+  //       setIsLoaded(true);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //       setIsLoaded(true);
+  //       setError(error);
+  //     });
+  // };
 
   if (logMsg) {
     return (

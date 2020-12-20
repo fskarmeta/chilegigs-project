@@ -4,7 +4,7 @@ import ClientProfileCard from "./components_perfil/card";
 import Bio from "./components_perfil/bio";
 
 const ClientPerfil = ({ fetchProfile }) => {
-  const [profile, setProfile] = useState(fetchProfile);
+  const [profile] = useState(fetchProfile);
   return (
     <div className="container">
       <div className="row">

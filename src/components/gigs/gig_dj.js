@@ -33,7 +33,7 @@ const DjGig = ({
     return () => {
       actions.fetchAllUserGigs(store.token);
     };
-  });
+  }, [actions, gig.estado, store.token]);
 
   function gigAceptado() {
     if (msg === "") {

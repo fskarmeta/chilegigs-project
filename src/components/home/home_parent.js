@@ -19,9 +19,6 @@ const HomeParent = () => {
   const [home, setHome] = useState(Home);
 
   useEffect(() => {
-    getGlobalObjects();
-  }, []);
-  const getGlobalObjects = () => {
     fetch(`${store.fetchUrl}objetos`, {
       method: "GET",
       headers: {
@@ -41,7 +38,7 @@ const HomeParent = () => {
         setIsLoaded(true);
         setHome(Home);
       });
-  };
+  }, [store.fetchUrl]);
 
   if (!isLoaded) {
     return <Spinner />;

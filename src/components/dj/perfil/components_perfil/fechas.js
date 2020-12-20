@@ -1,14 +1,13 @@
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 const optionsHoras = { hour: "2-digit", minute: "2-digit" };
 
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
+// const options = {
+//   weekday: "long",
+//   year: "numeric",
+//   month: "long",
+//   day: "numeric",
+// };
 
 const Fechas = ({ gigs }) => {
   return (
@@ -63,6 +62,7 @@ const Fechas = ({ gigs }) => {
                           style={{ textDecoration: "none", color: "inherit" }}
                           href={`${gig.link_evento}`}
                           target="_blank"
+                          rel="noreferrer"
                         >
                           Link
                         </a>

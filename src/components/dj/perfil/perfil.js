@@ -11,8 +11,8 @@ import DatosPersonales from "./components_perfil/datos";
 import Fechas from "./components_perfil/fechas";
 import Booking from "../../gigs/booking/bookinicial";
 const DjPerfil = ({ fetchProfile, datosPrivados, gigs }) => {
-  const [perfil, setPerfil] = useState(fetchProfile);
-  const { store, actions } = useContext(Context);
+  const [perfil] = useState(fetchProfile);
+  const { store } = useContext(Context);
 
   // para cuando tengamos gigs y queramos renderear los datos personales
 

@@ -5,7 +5,7 @@ import "tippy.js/dist/tippy.css";
 
 import Generador from "./agregar-items/generador";
 const Requisitos = ({ objetoGlobal, perfil, updateRequisitosProfile }) => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   return (
     <div className="border border-dark p-3 mt-2 rounded">
       <div className="d-flex justify-content-start mb-1 ml-1">

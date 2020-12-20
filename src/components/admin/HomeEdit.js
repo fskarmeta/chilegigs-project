@@ -4,7 +4,7 @@ import { Header } from "./edit-home/header";
 import { Subheader } from "./edit-home/subheader";
 import { Citas } from "./edit-home/citas";
 import { BorrarCitas } from "./edit-home/borrar-citas";
-import { SetCategory } from "./form-admin-add-delete-items/component-formulario/set-category";
+// import { SetCategory } from "./form-admin-add-delete-items/component-formulario/set-category";
 // importacion de objeto de ejemplo
 // import Home from "../../placeholder/homeobject";
 

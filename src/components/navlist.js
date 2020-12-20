@@ -36,7 +36,7 @@ export const Navlist = () => {
         setNotReaded(true);
       }
     }
-  });
+  }, [store.role, store.gigs]);
 
   let history = useHistory();
   return (

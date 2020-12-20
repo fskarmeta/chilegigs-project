@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
 import Tarjeta from "./edit-profile/tarjeta";
 import Biografia from "./edit-profile/biografia";
@@ -14,27 +14,11 @@ const ProfileEditor = () => {
   //setear al objetoglobal el fetch del objeto global de requisitos
   const { store, actions } = useContext(Context);
 
-  const [status, setStatus] = useState(store.perfil_status);
+  // const [status, setStatus] = useState(store.perfil_status);
 
-  const [objetoGlobal, setObjetosGlobal] = useState(store.requisitos);
+  // const [objetoGlobal, setObjetosGlobal] = useState(store.requisitos);
   //setear acá el perfil del usurio actual desde el store
   const [perfil, setPerfil] = useState(store.perfil);
-
-  // useeffect fetch de perfil y/o objetos globales
-  useEffect(() => {
-    return () => {
-      actions.fetchIndividualDjProfileAfterLogin(store.user_id, store.token);
-    };
-  }, [perfil]);
-
-  // dependencia nueva, puse el action en vez de perfil, cambiar por si llega a haber un bug!!
-  useEffect(() => {
-    actions.fetchIndividualDjProfileAfterLogin(store.user_id, store.token);
-    setPerfil(store.perfil);
-    return () => {
-      setPerfil(store.perfil);
-    };
-  }, [actions.fetchIndividualDjProfileAfterLogin]);
 
   function updateProfile(obj) {
     console.log(obj);
@@ -75,7 +59,7 @@ const ProfileEditor = () => {
       <Biografia updateProfile={updateProfile} />
       <Detalles updateProfile={updateProfile} />
       <Requisitos
-        objetoGlobal={objetoGlobal}
+        objetoGlobal={store.requisitos}
         perfil={perfil}
         updateRequisitosProfile={updateRequisitosProfile}
       />

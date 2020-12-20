@@ -16,9 +16,33 @@ const TablaDjs = () => {
     if (store.role !== "admin") {
       history.push("/");
     } else {
-      fetchInfo();
+      fetch(`${store.fetchUrl}admin/accounts/djs`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${store.token}`,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          if (data.msg) {
+            setIsLoaded(true);
+            console.log(data.msg);
+          } else {
+            setError(null);
+            setInfo(data);
+            setIsLoaded(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+          setIsLoaded(true);
+          setError(error);
+        });
     }
-  });
+  }, [history, store.fetchUrl, store.role, store.token]);
 
   function deleteAccount(id) {
     actions.deleteAccountFromAdmin(id);

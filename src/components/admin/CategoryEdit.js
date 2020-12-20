@@ -8,16 +8,29 @@ import { EditCategories } from "./form-admin-add-delete-items/form-edit-categori
 // const fetchURL = "";
 
 function CategoryEditForm() {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
 
   const [global, setGlobal] = useState(store.requisitos);
   // const [ok, setOk] = useState(false);
   // fetch de los objetos
 
   useEffect(() => {
-    actions.getGlobalObjects();
-    // setGlobal(store.requisitos);
-  }, [global]);
+    fetch(`${store.fetchUrl}objetos`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setGlobal(data.requisitos);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, [store.fetchUrl]);
 
   function getGlobalObjects() {
     fetch(`${store.fetchUrl}objetos`, {
