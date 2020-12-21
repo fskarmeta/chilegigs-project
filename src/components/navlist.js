@@ -45,13 +45,13 @@ export const Navlist = () => {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to={`/catalogo`}>
-            <i class="fas fa-compact-disc"></i> Dj's
+            <i className="fas fa-compact-disc"></i> Dj's
           </Link>
         </li>
         {store.role === "dj" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/dj/gigs`}>
-              <i class="fas fa-list-alt"></i> Gigs{" "}
+              <i className="fas fa-list-alt"></i> Gigs{" "}
               {notReaded ? (
                 <span className="animate__animated animate__bounce">
                   {number}
@@ -63,7 +63,7 @@ export const Navlist = () => {
         {store.role === "client" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/client/contrataciones`}>
-              <i class="fas fa-list-alt"></i> Contrataciones{" "}
+              <i className="fas fa-list-alt"></i> Contrataciones{" "}
               {notReaded ? number : null}
             </Link>
           </li>
@@ -71,42 +71,42 @@ export const Navlist = () => {
         {store.role === "dj" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/dj/profile/${store.username}`}>
-              <i class="fas fa-id-badge"></i> Perfil
+              <i className="fas fa-id-badge"></i> Perfil
             </Link>
           </li>
         ) : null}
         {store.role === "client" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/client/profile/${store.username}`}>
-              <i class="fas fa-id-badge"></i> Perfil
+              <i className="fas fa-id-badge"></i> Perfil
             </Link>
           </li>
         ) : null}
         {store.role === "dj" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/dj/edit`}>
-              <i class="fas fa-user-edit"></i> Editar
+              <i className="fas fa-user-edit"></i> Editar
             </Link>
           </li>
         ) : null}
         {store.role === "client" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/client/edit`}>
-              <i class="fas fa-user-edit"></i> Editar
+              <i className="fas fa-user-edit"></i> Editar
             </Link>
           </li>
         ) : null}
         {store.LoggedIn ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/account`}>
-              <i class="fas fa-cog"></i> Cuenta
+              <i className="fas fa-cog"></i> Cuenta
             </Link>
           </li>
         ) : null}
         {store.role === "admin" ? (
           <li className="nav-item">
             <Link className="nav-link" to={`/admin`}>
-              <i class="fas fa-tools"></i> Admin
+              <i className="fas fa-tools"></i> Admin
             </Link>
           </li>
         ) : null}
@@ -119,7 +119,7 @@ export const Navlist = () => {
             }}
           >
             <span className="nav-link">
-              <i class="fas fa-sign-out-alt"></i> Log Out
+              <i className="fas fa-sign-out-alt"></i> Log Out
             </span>
           </li>
         ) : (

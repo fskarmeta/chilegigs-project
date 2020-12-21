@@ -72,6 +72,37 @@ const GigComponent = () => {
       });
   }, [id, store.fetchUrl, store.token]);
 
+  function fetchGig() {
+    fetch(`${store.fetchUrl}gig/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${store.token}`,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.msg) {
+          setIsLoaded(true);
+          setLogMsg(false);
+          setMsg(data.msg);
+        } else {
+          setLogMsg(false);
+          setMsg(null);
+          setError(null);
+          setGig(data);
+          setIsLoaded(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setIsLoaded(true);
+        setError(error);
+      });
+  }
+
   function updateGig(obj, id) {
     fetch(`${store.fetchUrl}gig/update/${id}`, {
       method: "PUT",
@@ -111,6 +142,7 @@ const GigComponent = () => {
             cambios={cambios}
             updateGig={updateGig}
             id={id}
+            fetchGig={fetchGig}
           />
         ) : store.role === "client" ? (
           <ClientGig
@@ -121,6 +153,7 @@ const GigComponent = () => {
             cambios={cambios}
             updateGig={updateGig}
             id={id}
+            fetchGig={fetchGig}
           />
         ) : null}
       </div>

@@ -3,6 +3,10 @@ import { Context } from "../../store/appContext";
 import { Badge } from "react-bootstrap";
 import { colorState } from "../general/helper";
 
+const mensajeEnviado = (
+  <small className="text-success">Mensaje ha sido enviado !</small>
+);
+
 const DjGig = ({
   options,
   warning,
@@ -21,13 +25,16 @@ const DjGig = ({
   ] = useState(false);
   const [pideCambios, setPideCambios] = useState(false);
 
+  const [msgSended, setMsgSended] = useState(false);
+
   useEffect(() => {
     if (
       gig.estado === "Aceptado" ||
       gig.estado === "Declinado" ||
       gig.estado === "Confirmado" ||
       gig.estado === "Cancelado" ||
-      gig.estado === "Terminado"
+      gig.estado === "Terminado" ||
+      gig.estado === "Dj pide cambios"
     ) {
       setAceptadoODeclinadoOConfirmado(true);
     }
@@ -38,6 +45,31 @@ const DjGig = ({
       actions.fetchAllUserGigs(store.token);
     };
   }, [actions, gig.estado, store.token]);
+
+  function soloMensaje() {
+    if (msg === "") {
+      return setMsgWarning(true);
+    } else {
+      let gigCopy = { ...gig };
+      let mensajesArray = gigCopy.mensaje;
+      mensajesArray.unshift({
+        nombre: gig.username_dj,
+        fecha: new Date(),
+        estado: "Sin cambios",
+        mensaje: msg,
+      });
+      let data = {
+        ...gig,
+        mensaje: mensajesArray,
+        leido_por_dj: true,
+        leido_por_cliente: false,
+      };
+      updateGig(data, id);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+    }
+  }
 
   function gigAceptado() {
     if (msg === "") {
@@ -62,6 +94,9 @@ const DjGig = ({
       };
       updateGig(data, id);
       setAceptadoODeclinadoOConfirmado(true);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
     }
   }
 
@@ -89,6 +124,9 @@ const DjGig = ({
 
       updateGig(data, id);
       setAceptadoODeclinadoOConfirmado(true);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
     }
   }
 
@@ -116,6 +154,8 @@ const DjGig = ({
       updateGig(data, id);
       setMsg("");
       setPideCambios(true);
+      setMsgSended(true);
+      setMsgWarning(false);
     }
   }
 
@@ -208,10 +248,34 @@ const DjGig = ({
         </div>
       </div>
       {aceptadoODeclinadoOConfirmado ? (
-        <span className="font-weight-bold m-5">
-          Este Gig ha sido aceptado, confirmado o declinado, ya no se pueden
-          hacer cambios.
-        </span>
+        <div className="col-md-12 d-flex flex-column">
+          <span className="font-weight-bold">
+            Por el momento solo puedes enviar un mensaje.
+          </span>
+          <span className="font-weight-light gig-text">
+            <textarea
+              id="emensaje"
+              rows="3"
+              className="col-md-10 mt-2"
+              value={msg}
+              onChange={(e) => setMsg(e.target.value)}
+            ></textarea>
+            {msgWarning ? warning : null}
+          </span>
+          <div>
+            <span className="btn btn-success m-1" onClick={soloMensaje}>
+              Enviar Mensaje
+            </span>
+            {msgSended ? mensajeEnviado : null}
+            {gig.estado === "Pendiente" ||
+            gig.estado === "Modificado por Cliente" ||
+            gig.estado === "Dj pide cambios" ? (
+              <span className="btn btn-danger m-1" onClick={gigDeclinado}>
+                Declinar Booking
+              </span>
+            ) : null}
+          </div>
+        </div>
       ) : (
         <div class="card">
           <div class="card-body">
@@ -233,7 +297,23 @@ const DjGig = ({
               </div>
               <div className="col-md-12">
                 {pideCambios ? (
-                  cambios
+                  <div>
+                    <span className="btn btn-success m-1" onClick={soloMensaje}>
+                      Enviar Mensaje
+                    </span>
+
+                    {gig.estado === "Pendiente" ||
+                    gig.estado === "Modificado por Cliente" ||
+                    gig.estado === "Dj pide cambios" ? (
+                      <span
+                        className="btn btn-danger m-1"
+                        onClick={gigDeclinado}
+                      >
+                        Declinar Booking
+                      </span>
+                    ) : null}
+                    {msgSended ? mensajeEnviado : null}
+                  </div>
                 ) : (
                   <>
                     <span className="btn btn-success m-1" onClick={gigAceptado}>

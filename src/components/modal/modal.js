@@ -165,7 +165,10 @@ const ModalGeneral = ({ titulo }) => {
 
           setExitosoComp(true);
           setLoginComp(false);
-
+          let token = sessionStorage.getItem("chilegigs_token");
+          if (token) {
+            actions.autoLogin(token);
+          }
           //mandar al home
         }
       })
