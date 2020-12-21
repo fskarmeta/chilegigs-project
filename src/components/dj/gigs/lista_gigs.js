@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Table } from "react-bootstrap";
+import { Table, Badge } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../../store/appContext";
 import Spinner from "../../home/spinner";
+import { colorState } from "../../general/helper";
 
 const options = {
   weekday: "long",
@@ -80,7 +81,12 @@ const ListaGigs = () => {
             {!!gigs &&
               gigs.map((gig) => {
                 return (
-                  <tr key={gig.id}>
+                  <tr
+                    key={gig.id}
+                    style={{
+                      backgroundColor: `${gig.leido_por_dj ? "" : "#DAEAD1"}`,
+                    }}
+                  >
                     <td>
                       {new Date(gig.dia_evento).toLocaleDateString(
                         "es-CL",
@@ -99,7 +105,11 @@ const ListaGigs = () => {
                       </Link>
                     </td>
                     <td>{gig.nombre_evento}</td>
-                    <td>{gig.estado}</td>
+                    <td>
+                      <Badge variant={`${colorState(gig.estado)}`}>
+                        {gig.estado}
+                      </Badge>
+                    </td>
                     <td>
                       <span
                         className="btn btn-primary"

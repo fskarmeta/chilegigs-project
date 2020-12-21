@@ -3,6 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
+import { Badge } from "react-bootstrap";
+import { colorState } from "../general/helper";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
@@ -177,7 +179,9 @@ const ClientGig = ({
         <div className="row">
           <div className="col-md-4">
             <span className="font-weight-bold">Estado: </span>
-            <span className="font-weight-light gig-text">{gig.estado}</span>
+            <span className="font-weight-light gig-text">
+              <Badge variant={`${colorState(gig.estado)}`}>{gig.estado}</Badge>
+            </span>
           </div>
         </div>
         <div className="row mt-2">

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
+import { Badge } from "react-bootstrap";
+import { colorState } from "../general/helper";
+
 const DjGig = ({
   options,
   warning,
@@ -122,7 +125,9 @@ const DjGig = ({
         <div className="row">
           <div className="col-md-4">
             <span className="font-weight-bold">Estado: </span>
-            <span className="font-weight-light gig-text">{gig.estado}</span>
+            <span className="font-weight-light gig-text">
+              <Badge variant={`${colorState(gig.estado)}`}>{gig.estado}</Badge>
+            </span>
           </div>
         </div>
         <div className="row mt-2">

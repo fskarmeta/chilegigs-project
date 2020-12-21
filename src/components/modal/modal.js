@@ -245,7 +245,12 @@ const ModalGeneral = ({ titulo }) => {
         </span>
       </li>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        keyboard={false}
+        backdrop="static"
+      >
         <div style={loginComp ? mostrar : ocultar}>
           <Login
             exito={exito}

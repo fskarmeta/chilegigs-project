@@ -197,37 +197,6 @@ const Booking = ({
           </Form.Row>
           <Form.Row className="mt-2">
             <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
-              <span>Día del Evento</span>
-              <DatePicker selected={dia} onChange={(date) => setDia(date)} />
-              {invalidDay ? dayWarning : null}
-            </Col>
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
-              <span>Hora llegada DJ</span>
-              <DatePicker
-                selected={llegada}
-                onChange={(date) => setLLegada(date)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-              />
-            </Col>
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
-              <span>Hora que toca DJ</span>
-              <DatePicker
-                selected={toca}
-                onChange={(date) => setToca(date)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-              />
-            </Col>
-          </Form.Row>
-          <Form.Row className="mt-2">
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
               <span>
                 Evento es privado?
                 <Tippy content="Si es publico podremos publicitar el nombre del evento con el link en nuestra página">
@@ -281,6 +250,37 @@ const Booking = ({
                 type={"radio"}
                 id={`1`}
                 onChange={() => setRequisitos(true)}
+              />
+            </Col>
+          </Form.Row>
+          <Form.Row className="mt-2">
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
+              <span>Día del Evento</span>
+              <DatePicker selected={dia} onChange={(date) => setDia(date)} />
+              {invalidDay ? dayWarning : null}
+            </Col>
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
+              <span>Hora llegada DJ</span>
+              <DatePicker
+                selected={llegada}
+                onChange={(date) => setLLegada(date)}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+              />
+            </Col>
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
+              <span>Hora que toca DJ</span>
+              <DatePicker
+                selected={toca}
+                onChange={(date) => setToca(date)}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
               />
             </Col>
           </Form.Row>

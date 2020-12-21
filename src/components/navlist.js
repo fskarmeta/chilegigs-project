@@ -12,7 +12,7 @@ export const Navlist = () => {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    if (store.role === "dj") {
+    if (store.role === "dj" && store.gigs.length > 0) {
       let counter = 0;
       for (let gig of store.gigs) {
         if (!gig.leido_por_dj) {
@@ -24,7 +24,8 @@ export const Navlist = () => {
         setNotReaded(true);
       }
     }
-    if (store.role === "client") {
+
+    if (store.role === "client" && store.gigs.length > 0) {
       let counter = 0;
       for (let gig of store.gigs) {
         if (!gig.leido_por_cliente) {

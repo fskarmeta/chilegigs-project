@@ -23,14 +23,14 @@ const DjPerfil = ({ fetchProfile, datosPrivados, gigs, feedback }) => {
 
   const warning = (
     <small className="text-danger text-center">
-      Solamente clientes pueden hacer booking!
+      Solamente clientes con cuentas activas pueden hacer booking!
     </small>
   );
   // Modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => {
-    if (store.cuenta.role.id !== 3) {
+    if (store.cuenta.role.id !== 3 || store.perfil.status === "inactive") {
       setAlert(true);
       setTimeout(function () {
         setAlert(false);
