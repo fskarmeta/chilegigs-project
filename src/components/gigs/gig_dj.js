@@ -15,6 +15,7 @@ const DjGig = ({
   gig,
   updateGig,
   id,
+  previousPage,
 }) => {
   const { store, actions } = useContext(Context);
   const [msg, setMsg] = useState("");
@@ -68,6 +69,7 @@ const DjGig = ({
       setMsgSended(true);
       setMsg("");
       setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -97,6 +99,7 @@ const DjGig = ({
       setMsgSended(true);
       setMsg("");
       setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -127,6 +130,7 @@ const DjGig = ({
       setMsgSended(true);
       setMsg("");
       setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -156,6 +160,7 @@ const DjGig = ({
       setPideCambios(true);
       setMsgSended(true);
       setMsgWarning(false);
+      previousPage();
     }
   }
 

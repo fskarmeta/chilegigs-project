@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import DjGig from "../../components/gigs/gig_dj";
 import ClientGig from "../../components/gigs/gig_cliente";
 
@@ -39,6 +39,7 @@ const GigComponent = () => {
   const [msg, setMsg] = useState(null);
   const [logMsg, setLogMsg] = useState(false);
 
+  let history = useHistory();
   let { id } = useParams();
 
   useEffect(() => {
@@ -71,6 +72,12 @@ const GigComponent = () => {
         setError(error);
       });
   }, [id, store.fetchUrl, store.token]);
+
+  function previousPage() {
+    setTimeout(function () {
+      history.goBack();
+    }, 1000);
+  }
 
   function fetchGig() {
     fetch(`${store.fetchUrl}gig/${id}`, {
@@ -143,6 +150,7 @@ const GigComponent = () => {
             updateGig={updateGig}
             id={id}
             fetchGig={fetchGig}
+            previousPage={previousPage}
           />
         ) : store.role === "client" ? (
           <ClientGig
@@ -154,6 +162,7 @@ const GigComponent = () => {
             updateGig={updateGig}
             id={id}
             fetchGig={fetchGig}
+            previousPage={previousPage}
           />
         ) : null}
       </div>

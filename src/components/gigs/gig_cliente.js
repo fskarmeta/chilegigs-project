@@ -45,7 +45,7 @@ const ClientGig = ({
   gig,
   updateGig,
   id,
-  fetchGig,
+  previousPage,
 }) => {
   const { store, actions } = useContext(Context);
   const [msg, setMsg] = useState("");
@@ -117,6 +117,7 @@ const ClientGig = ({
       setMsgSended(true);
       setMsg("");
       setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -149,6 +150,7 @@ const ClientGig = ({
       setMsgSended(true);
       setMsg("");
       setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -178,6 +180,7 @@ const ClientGig = ({
       setMsgSended(true);
       setMsg("");
       setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -212,6 +215,7 @@ const ClientGig = ({
       setMsgSended(true);
       setMsg("");
       setMsgWarning(false);
+      previousPage();
     }
   }
 
