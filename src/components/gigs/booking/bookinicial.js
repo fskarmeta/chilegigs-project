@@ -228,16 +228,6 @@ const Booking = ({
           </Form.Row>
           <Form.Row className="mt-2">
             <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
-              <span>Tipo de Evento</span>
-              <Select
-                options={serviciosOptions}
-                value={tipo}
-                onChange={setTipo}
-              />
-            </Col>
-          </Form.Row>
-          <Form.Row className="mt-2">
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
               <span>
                 Evento es privado?
                 <Tippy content="Si es publico podremos publicitar el nombre del evento con el link en nuestra página">
@@ -262,6 +252,49 @@ const Booking = ({
               </ToggleButtonGroup>
             </Col>
           </Form.Row>
+          <Form.Row className="mt-2">
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
+              <span>Facilitas Transporte?</span>
+
+              <ToggleButtonGroup
+                type="radio"
+                name="options"
+                defaultValue={2}
+                value={transporte}
+                onChange={handleChange}
+                color="black"
+                className="mt-2"
+              >
+                <ToggleButton value={1} variant="secondary">
+                  Si
+                </ToggleButton>
+                <ToggleButton value={2} variant="secondary">
+                  No
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </Col>
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12 mt-2">
+              <span>Has leído los requisitos mínimos del DJ?</span>
+              <Form.Check
+                inline
+                label="Si"
+                type={"radio"}
+                id={`1`}
+                onChange={() => setRequisitos(true)}
+              />
+            </Col>
+          </Form.Row>
+          <Form.Row className="mt-2">
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
+              <span>Tipo de Evento</span>
+              <Select
+                options={serviciosOptions}
+                value={tipo}
+                onChange={setTipo}
+              />
+            </Col>
+          </Form.Row>
+
           <Form.Row className="mt-2">
             <Col className="d-flex flex-column">
               <span>Nombre del Evento</span>
@@ -315,38 +348,7 @@ const Booking = ({
               />
             </Col>
           </Form.Row>
-          <Form.Row className="mt-2">
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
-              <span>Facilitas Transporte?</span>
 
-              <ToggleButtonGroup
-                type="radio"
-                name="options"
-                defaultValue={2}
-                value={transporte}
-                onChange={handleChange}
-                color="black"
-                className="mt-2"
-              >
-                <ToggleButton value={1} variant="secondary">
-                  Si
-                </ToggleButton>
-                <ToggleButton value={2} variant="secondary">
-                  No
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </Col>
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12 mt-2">
-              <span>Has leído los requisitos mínimos del DJ?</span>
-              <Form.Check
-                inline
-                label="Si"
-                type={"radio"}
-                id={`1`}
-                onChange={() => setRequisitos(true)}
-              />
-            </Col>
-          </Form.Row>
           <Form.Row>
             <Col className="d-flex flex-column col-md-12 mt-3">
               <span>Tu oferta en CLP</span>
