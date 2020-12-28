@@ -494,7 +494,12 @@ const ClientGig = ({
                         </span>
                         <span>
                           Estado:
-                          <span>{` ${msg.estado}`}</span>
+                          <span>
+                            {" "}
+                            <Badge variant={`${colorState(msg.estado)}`}>
+                              {msg.estado}
+                            </Badge>
+                          </span>
                         </span>
                         <span className="font-weight-bol">Mensaje:</span>
                         <span className="gig-texto-mensaje ml-3">

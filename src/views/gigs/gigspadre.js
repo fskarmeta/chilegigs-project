@@ -140,7 +140,7 @@ const GigComponent = () => {
   } else {
     return (
       <div className="container">
-        {store.role === "dj" ? (
+        {store.role === "dj" || store.role === "admin" ? (
           <DjGig
             gig={gig}
             option={options}

@@ -13,7 +13,9 @@ const HeaderHome = ({ header }) => {
     <>
       <div className="container-fluid" style={fondo}>
         <div className="row">
-          <span className="texto-header">{header.cita}</span>
+          <span className="texto-header col-md-6 text-light">
+            {header.cita}
+          </span>
           <div className="col-md-12">
             <div className="btn">
               <Link to="/catalogo">
