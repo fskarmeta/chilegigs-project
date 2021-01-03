@@ -7,10 +7,10 @@
 
 .texto-header {
   position: absolute;
-  top: 200px;
+  top: 300px;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: rgba(255, 255, 255, 0.548);
   -webkit-animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
   animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
