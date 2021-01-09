@@ -20,6 +20,7 @@ import GigComponent from "./views/gigs/gigspadre";
 // import Footer from "./components/home/Footer";
 import TablaClientes from "./views/admin/tabla_clientes";
 import TablaDjs from "./views/admin/tabla_djs";
+import AdminGigsView from "./views/admin/tabla_gigs.js";
 import FeedbackView from "./views/gigs/feedback";
 
 const Layout = () => {
@@ -75,6 +76,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/admin/djs">
               <TablaDjs />
+            </Route>
+            <Route exact path="/admin/gigs">
+              <AdminGigsView />
             </Route>
             <Route exact path="/dj/profile/:username">
               <DjProfile />

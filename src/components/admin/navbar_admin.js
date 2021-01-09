@@ -38,7 +38,9 @@ export const AdminNav = () => {
         </div>
         <div className="row d-flex flex-column border-bottom border-dark">
           <div className="btn">
-            <i className="fas fa-list fa-3x"></i>
+            <Link className="btn" to="../admin/gigs">
+              <i className="fas fa-list fa-3x"></i>
+            </Link>
           </div>
           <span className="align-self-center font-weight-bold">Gigs</span>
         </div>
