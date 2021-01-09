@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Table, Badge } from "react-bootstrap";
 import { colorState } from "../../general/helper";
-import "./lista.css";
 
 const GigsTable = ({ gigs }) => {
   return (
