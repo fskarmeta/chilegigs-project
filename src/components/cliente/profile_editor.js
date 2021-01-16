@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
 // import { ejemploPerfilCliente } from "../../placeholder/ejemploperfil";
 import ProfileEditor from "./agregar-items/perfilgeneral";
@@ -9,15 +9,14 @@ const ClientProfileEditor = () => {
   // acá tiene que llegar el perfil del usuario
   const [perfil, setPerfil] = useState(store.perfil);
 
-  useEffect(() => {
-    return () => {
-      actions.fetchIndividualClientProfileAfterLogin(
-        store.user_id,
-        store.token
-      );
-      console.log("unmount");
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     actions.fetchIndividualClientProfileAfterLogin(
+  //       store.user_id,
+  //       store.token
+  //     );
+  //   };
+  // }, [actions, store.token, store.user_id]);
 
   function updateProfile(obj) {
     let objCopy = { ...perfil };
@@ -32,7 +31,7 @@ const ClientProfileEditor = () => {
     <div className="container">
       {store.perfil_status === "inactive" ? (
         <h4 className="text-center m-3">
-          Porfavor crea un perfil para activar tu cuenta
+          Por favor crea un perfil para activar tu cuenta
         </h4>
       ) : null}
       <ProfileEditor updateProfile={updateProfile} />

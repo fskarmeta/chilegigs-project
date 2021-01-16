@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
-import { useHistory } from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import DjGig from "../../components/gigs/gig_dj";
 import ClientGig from "../../components/gigs/gig_cliente";
 
@@ -45,13 +39,47 @@ const GigComponent = () => {
   const [msg, setMsg] = useState(null);
   const [logMsg, setLogMsg] = useState(false);
 
+  let history = useHistory();
   let { id } = useParams();
 
   useEffect(() => {
-    getGig(id);
-  }, [isLoaded]);
+    fetch(`${store.fetchUrl}gig/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${store.token}`,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.msg) {
+          setIsLoaded(true);
+          setLogMsg(false);
+          setMsg(data.msg);
+        } else {
+          setLogMsg(false);
+          setMsg(null);
+          setError(null);
+          setGig(data);
+          setIsLoaded(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setIsLoaded(true);
+        setError(error);
+      });
+  }, [id, store.fetchUrl, store.token]);
 
-  function getGig(id) {
+  function previousPage() {
+    setTimeout(function () {
+      history.goBack();
+    }, 1000);
+  }
+
+  function fetchGig() {
     fetch(`${store.fetchUrl}gig/${id}`, {
       method: "GET",
       headers: {
@@ -112,7 +140,7 @@ const GigComponent = () => {
   } else {
     return (
       <div className="container">
-        {store.role === "dj" ? (
+        {store.role === "dj" || store.role === "admin" ? (
           <DjGig
             gig={gig}
             option={options}
@@ -121,6 +149,8 @@ const GigComponent = () => {
             cambios={cambios}
             updateGig={updateGig}
             id={id}
+            fetchGig={fetchGig}
+            previousPage={previousPage}
           />
         ) : store.role === "client" ? (
           <ClientGig
@@ -131,6 +161,8 @@ const GigComponent = () => {
             cambios={cambios}
             updateGig={updateGig}
             id={id}
+            fetchGig={fetchGig}
+            previousPage={previousPage}
           />
         ) : null}
       </div>

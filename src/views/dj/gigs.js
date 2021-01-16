@@ -1,5 +1,4 @@
 import ListaGigs from "../../components/dj/gigs/lista_gigs";
-import ListaContrataciones from "../../components/cliente/contrataciones/lista_contrataciones";
 
 const Gigs = () => {
   return (

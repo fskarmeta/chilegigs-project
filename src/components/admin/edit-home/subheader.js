@@ -74,8 +74,8 @@ export const Subheader = ({ updateHome }) => {
           </label>
         </div>
       </div>
-      <div className="row d-flex flex-column align-content-center">
-        <span className="font-weight-light pb-1 mb-2">
+      <div className="row d-flex flex-column align-content-center mt-5">
+        <span className="font-weight-light  mb-2">
           Cambiar color de fondo cajas y footer
         </span>
 
@@ -83,7 +83,7 @@ export const Subheader = ({ updateHome }) => {
           <ChromePicker color={color} onChange={(e) => setColor(e.hex)} />
         </div>
       </div>
-      <div className="row d-flex justify-content-center">
+      <div className="row d-flex justify-content-center mt-1">
         <span
           name="addcategory"
           className="btn btn-primary mt-1"

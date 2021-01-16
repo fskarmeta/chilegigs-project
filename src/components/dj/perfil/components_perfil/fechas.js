@@ -1,39 +1,77 @@
-import { Table, Card } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
-const Fechas = () => {
+const optionsHoras = { hour: "2-digit", minute: "2-digit" };
+
+// const options = {
+//   weekday: "long",
+//   year: "numeric",
+//   month: "long",
+//   day: "numeric",
+// };
+
+const Fechas = ({ gigs }) => {
   return (
     <>
       <h5 className="text-center mt-3 mb-1 font-italic">Próximas Fechas</h5>
       <Table striped borderless hover>
         <thead>
           <tr>
-            <th>Día</th>
-            <th>Hora</th>
-            <th>Lugar</th>
-            <th>Detalles</th>
+            <th>
+              <small className="font-weight-bold">Dia</small>
+            </th>
+            <th>
+              <small className="font-weight-bold">Hora</small>
+            </th>
+            <th>
+              <small className="font-weight-bold">Evento</small>
+            </th>
+            <th>
+              <small className="font-weight-bold">Link</small>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>22/11/2020</td>
-            <td>22:00</td>
-            <td>Club Sauna</td>
-            <td>
-              <Card.Link
-                style={{ textDecoration: "none", color: "inherit" }}
-                href="https://www.google.com"
-                target="_blank"
-              >
-                Link
-              </Card.Link>
-            </td>
-          </tr>
-          <tr>
-            <td>26/11/2020</td>
-            <td>3:00</td>
-            <td>Evento Privado</td>
-            <td></td>
-          </tr>
+          {!!gigs &&
+            gigs.map((gig) => {
+              return (
+                <tr>
+                  <td>
+                    <small>
+                      {new Date(gig.dia_evento).toLocaleDateString()}
+                    </small>
+                  </td>
+                  <td>
+                    <small>
+                      {new Date(gig.hora_show).toLocaleString(
+                        "es-CL",
+                        optionsHoras
+                      )}
+                    </small>
+                  </td>
+                  <td>
+                    <small>
+                      {gig.privado ? "Evento privado" : gig.nombre_evento}
+                    </small>
+                  </td>
+                  <td>
+                    {gig.privado ? (
+                      ""
+                    ) : (
+                      <small>
+                        <a
+                          style={{ textDecoration: "none", color: "inherit" }}
+                          href={`${gig.link_evento}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Link
+                        </a>
+                      </small>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </Table>
     </>

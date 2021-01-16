@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 import { Context } from "../../../store/appContext";
 import { useForm } from "react-hook-form";
 import unknownUserImagePath from "./unknown-user.jpg";
-import { EditarPerfil } from "../../../views/dj/editar_perfil";
+// import { EditarPerfil } from "../../../views/dj/editar_perfil";
 
 const validacionImagen = (
-  <small className="text-danger pl-1">Elije una foto de perfil porfavor</small>
+  <small className="text-danger pl-1">Elije una foto de perfil por favor</small>
 );
 
 const validacionOk = (
@@ -198,7 +198,7 @@ const ProfileEditor = ({ updateProfile }) => {
                     className="form-control"
                     name="pais"
                     id="pais"
-                    placeholder="pais"
+                    placeholder="País"
                     ref={register({
                       required: true,
                       minLength: 3,

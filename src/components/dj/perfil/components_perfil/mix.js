@@ -1,9 +1,4 @@
-import React, { useEffect } from "react";
-
 const Mix = ({ mix }) => {
-  useEffect(() => {
-    console.log(encodeURIComponent(mix));
-  });
   return (
     <div className="col-md-12">
       <div className="row">

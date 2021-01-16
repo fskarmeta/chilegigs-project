@@ -14,14 +14,11 @@ import Spinner from "./spinner";
 //pasar comos props los objetos globales (objetos)
 
 const HomeParent = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   const [isLoaded, setIsLoaded] = useState(false);
   const [home, setHome] = useState(Home);
 
   useEffect(() => {
-    getGlobalObjects();
-  }, []);
-  const getGlobalObjects = () => {
     fetch(`${store.fetchUrl}objetos`, {
       method: "GET",
       headers: {
@@ -41,7 +38,7 @@ const HomeParent = () => {
         setIsLoaded(true);
         setHome(Home);
       });
-  };
+  }, [store.fetchUrl]);
 
   if (!isLoaded) {
     return <Spinner />;

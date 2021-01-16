@@ -58,6 +58,7 @@ const Booking = ({
   djId,
   token,
   fetchUrl,
+  artistName,
 }) => {
   const [dia, setDia] = useState(new Date());
   const [tipo, setTipo] = useState("");
@@ -70,7 +71,7 @@ const Booking = ({
   const [transporte, setTransporte] = useState(2);
   const [oferta, setOferta] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [privado, setPrivado] = useState(false);
+  const [privado, setPrivado] = useState(2);
   const [requisitos, setRequisitos] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [invalid, setInvalid] = useState(false);
@@ -88,6 +89,7 @@ const Booking = ({
   const username_dj = djUsername;
 
   const handleChange = (val) => setTransporte(val);
+  const handleChange2 = (val) => setPrivado(val);
 
   function mandarBooking() {
     if (dia.toDateString() === new Date().toDateString()) {
@@ -128,7 +130,8 @@ const Booking = ({
       transporte: transporte === 1 ? "Si" : "No",
       oferta: oferta,
       link_evento: url,
-      privado: privado,
+      privado: transporte === 1 ? true : false,
+      artist_name: artistName,
       mensaje: [
         {
           mensaje: mensaje,
@@ -194,6 +197,64 @@ const Booking = ({
           </Form.Row>
           <Form.Row className="mt-2">
             <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
+              <span>
+                Evento es privado?
+                <Tippy content="Si es publico podremos publicitar el nombre del evento con el link en nuestra página">
+                  <i className="fas fa-info-circle"></i>
+                </Tippy>
+              </span>
+              <ToggleButtonGroup
+                type="radio"
+                name="options"
+                defaultValue={2}
+                value={privado}
+                onChange={handleChange2}
+                color="black"
+                className="mt-2"
+              >
+                <ToggleButton value={1} variant="secondary">
+                  Si
+                </ToggleButton>
+                <ToggleButton value={2} variant="secondary">
+                  No
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </Col>
+          </Form.Row>
+          <Form.Row className="mt-2">
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
+              <span>Facilitas Transporte?</span>
+
+              <ToggleButtonGroup
+                type="radio"
+                name="options"
+                defaultValue={2}
+                value={transporte}
+                onChange={handleChange}
+                color="black"
+                className="mt-2"
+              >
+                <ToggleButton value={1} variant="secondary">
+                  Si
+                </ToggleButton>
+                <ToggleButton value={2} variant="secondary">
+                  No
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </Col>
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12 mt-2">
+              <span>Has leído los requisitos mínimos del DJ?</span>
+              <Form.Check
+                inline
+                label="Si"
+                type={"radio"}
+                id={`1`}
+                onChange={() => setRequisitos(true)}
+              />
+            </Col>
+          </Form.Row>
+          <Form.Row className="mt-2">
+            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
               <span>Día del Evento</span>
               <DatePicker selected={dia} onChange={(date) => setDia(date)} />
               {invalidDay ? dayWarning : null}
@@ -233,23 +294,7 @@ const Booking = ({
               />
             </Col>
           </Form.Row>
-          <Form.Row className="mt-2">
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
-              <span>
-                Evento es privado?
-                <Tippy content="Si es publico podremos publicitar el nombre del evento con el link en nuestra página">
-                  <i className="fas fa-info-circle"></i>
-                </Tippy>
-              </span>
-              <Form.Check
-                inline
-                label="Si"
-                type={"radio"}
-                id={`1`}
-                onChange={() => setPrivado(true)}
-              />
-            </Col>
-          </Form.Row>
+
           <Form.Row className="mt-2">
             <Col className="d-flex flex-column">
               <span>Nombre del Evento</span>
@@ -303,39 +348,7 @@ const Booking = ({
               />
             </Col>
           </Form.Row>
-          <Form.Row className="mt-2">
-            <Col className="d-flex flex-column col-md-6 col-sm-12 col-xs-12">
-              <span>Facilitas Transporte?</span>
-              <div>
-                <ToggleButtonGroup
-                  type="radio"
-                  name="options"
-                  defaultValue={2}
-                  value={transporte}
-                  onChange={handleChange}
-                  color="black"
-                  className="mt-2"
-                >
-                  <ToggleButton value={1} variant="secondary">
-                    Si
-                  </ToggleButton>
-                  <ToggleButton value={2} variant="secondary">
-                    No
-                  </ToggleButton>
-                </ToggleButtonGroup>
-              </div>
-            </Col>
-            <Col className="d-flex flex-column col-md-12 col-sm-12 col-xs-12">
-              <span>Has leído los requisitos mínimos del DJ?</span>
-              <Form.Check
-                inline
-                label="Si"
-                type={"radio"}
-                id={`1`}
-                onChange={() => setRequisitos(true)}
-              />
-            </Col>
-          </Form.Row>
+
           <Form.Row>
             <Col className="d-flex flex-column col-md-12 mt-3">
               <span>Tu oferta en CLP</span>

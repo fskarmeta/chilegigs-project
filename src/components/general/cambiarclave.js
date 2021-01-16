@@ -15,7 +15,7 @@ const passNoMatch = (
 
 const allOk = (
   <small className="text-success">
-    Contraseña modificada, porfavor vuelve a ingresar...
+    Contraseña modificada, por favor vuelve a ingresar...
   </small>
 );
 

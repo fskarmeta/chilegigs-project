@@ -8,7 +8,7 @@ const DatosCuenta = () => {
       <div class="col-sm-12">
         <div class="card border-0">
           <div class="card-body">
-            <h5 class="card-title">Tus datos</h5>
+            <h5 class="card-title">Tus Datos</h5>
             <div class="card-text">
               <div className="d-flex flex-column">
                 <div>

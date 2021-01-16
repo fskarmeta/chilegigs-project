@@ -4,4 +4,4 @@ const Home = () => {
   return <HomeParent />;
 };
 
-export default HomeParent;
+export default Home;

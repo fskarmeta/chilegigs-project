@@ -1,0 +1,7 @@
+.account-delete {
+  cursor: pointer;
+}
+
+.account-delete:hover {
+  color: rgb(87, 4, 4) !important;
+}

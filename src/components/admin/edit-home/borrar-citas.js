@@ -7,7 +7,6 @@ export const BorrarCitas = ({ citasArray, citasBorradas }) => {
   //   const [current, setCurrent] = useState(Number);
 
   useEffect(() => {
-    console.log("hola");
     // setCitas(store.home.citas);
     return () => {
       setCitas(store.home.citas);

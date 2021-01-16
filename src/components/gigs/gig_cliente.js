@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
+import { Badge } from "react-bootstrap";
+import { colorState } from "../general/helper";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
@@ -31,6 +33,10 @@ const confirmarMsg = (
   </small>
 );
 
+const mensajeEnviado = (
+  <small className="text-success">Mensaje ha sido enviado !</small>
+);
+
 const ClientGig = ({
   options,
   warning,
@@ -39,6 +45,7 @@ const ClientGig = ({
   gig,
   updateGig,
   id,
+  previousPage,
 }) => {
   const { store, actions } = useContext(Context);
   const [msg, setMsg] = useState("");
@@ -49,7 +56,7 @@ const ClientGig = ({
     setconfirmadoODeclinadoOCanceladoOPendiente,
   ] = useState(false);
   const [pideCambios, setPideCambios] = useState(false);
-  const [ejemploGig, setEjemploGig] = useState({});
+  // const [ejemploGig, setEjemploGig] = useState({});
 
   // cambios
   const [llegada, setLLegada] = useState(new Date(gig.hora_llegada));
@@ -62,23 +69,57 @@ const ClientGig = ({
   const [oferta, setOferta] = useState(gig.oferta);
 
   //
+
+  const [msgSended, setMsgSended] = useState(false);
+
   useEffect(() => {
     if (
       gig.estado === "Cancelado" ||
       gig.estado === "Declinado" ||
       gig.estado === "Pendiente" ||
-      gig.estado === "Confirmado"
+      gig.estado === "Confirmado" ||
+      gig.estado === "Terminado" ||
+      gig.estado === "Modificado por Cliente"
     ) {
       setconfirmadoODeclinadoOCanceladoOPendiente(true);
     }
     if (gig.estado === "Modificado por Cliente") {
       setPideCambios(true);
     }
-  });
+    return () => {
+      actions.fetchAllUserGigs(store.token);
+    };
+  }, [actions, gig.estado, store.token]);
 
   //Para el transporte si /no
   const handleChange = (val) => setTransporte(val);
   //
+
+  function soloMensaje() {
+    if (msg === "") {
+      return setMsgWarning(true);
+    } else {
+      let gigCopy = { ...gig };
+      let mensajesArray = gigCopy.mensaje;
+      mensajesArray.unshift({
+        nombre: gig.username_cliente,
+        fecha: new Date(),
+        estado: "Sin cambios",
+        mensaje: msg,
+      });
+      let data = {
+        ...gig,
+        mensaje: mensajesArray,
+        leido_por_dj: false,
+        leido_por_cliente: true,
+      };
+      updateGig(data, id);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+      previousPage();
+    }
+  }
 
   function clienteConfirmo() {
     if (gig.estado !== "Aceptado") {
@@ -106,6 +147,10 @@ const ClientGig = ({
       };
       updateGig(data, id);
       setconfirmadoODeclinadoOCanceladoOPendiente(true);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -132,6 +177,10 @@ const ClientGig = ({
       };
       updateGig(data, id);
       setconfirmadoODeclinadoOCanceladoOPendiente(true);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -162,8 +211,11 @@ const ClientGig = ({
       };
 
       updateGig(data, id);
-      setMsg("");
       setPideCambios(true);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -173,7 +225,9 @@ const ClientGig = ({
         <div className="row">
           <div className="col-md-4">
             <span className="font-weight-bold">Estado: </span>
-            <span className="font-weight-light gig-text">{gig.estado}</span>
+            <span className="font-weight-light gig-text">
+              <Badge variant={`${colorState(gig.estado)}`}>{gig.estado}</Badge>
+            </span>
           </div>
         </div>
         <div className="row mt-2">
@@ -323,10 +377,34 @@ const ClientGig = ({
         </div>
       </div>
       {confirmadoODeclinadoOCanceladoOPendiente ? (
-        <span className="font-weight-bold m-5">
-          No se pueden hacer cambios por el momento, booking tiene un estado
-          confirmado/declinado/cancelado o hay una respuesta pendiente.
-        </span>
+        <div className="col-md-12 d-flex flex-column">
+          <span className="font-weight-bold">
+            Por el momento solo puedes enviar un mensaje.
+          </span>
+          <span className="font-weight-light gig-text">
+            <textarea
+              id="emensaje"
+              rows="3"
+              className="col-md-10 mt-2"
+              value={msg}
+              onChange={(e) => setMsg(e.target.value)}
+            ></textarea>
+            {msgWarning ? warning : null}
+          </span>
+          <div>
+            <span className="btn btn-success m-1" onClick={soloMensaje}>
+              Enviar Mensaje
+            </span>
+            {msgSended ? mensajeEnviado : null}
+            {gig.estado === "Pendiente" ||
+            gig.estado === "Modificado por Cliente" ||
+            gig.estado === "Dj pide cambios" ? (
+              <span className="btn btn-danger m-1" onClick={clienteCancelo}>
+                Cancelar Booking
+              </span>
+            ) : null}
+          </div>
+        </div>
       ) : (
         <div class="card">
           <div class="card-body">
@@ -348,7 +426,23 @@ const ClientGig = ({
               </div>
               <div className="col-md-12">
                 {pideCambios ? (
-                  cambios
+                  <div>
+                    <span className="btn btn-success m-1" onClick={soloMensaje}>
+                      Enviar Mensaje
+                    </span>
+                    {msgSended ? mensajeEnviado : null}
+                    {gig.estado === "Pendiente" ||
+                    gig.estado === "Modificado por Cliente" ||
+                    gig.estado === "Dj pide cambios" ? (
+                      <span
+                        className="btn btn-danger m-1"
+                        onClick={clienteCancelo}
+                      >
+                        Cancelar Booking
+                      </span>
+                    ) : null}
+                    {msgWarning ? warning : null}
+                  </div>
                 ) : (
                   <>
                     <span
@@ -400,7 +494,12 @@ const ClientGig = ({
                         </span>
                         <span>
                           Estado:
-                          <span>{` ${msg.estado}`}</span>
+                          <span>
+                            {" "}
+                            <Badge variant={`${colorState(msg.estado)}`}>
+                              {msg.estado}
+                            </Badge>
+                          </span>
                         </span>
                         <span className="font-weight-bol">Mensaje:</span>
                         <span className="gig-texto-mensaje ml-3">

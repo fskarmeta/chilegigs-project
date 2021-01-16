@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
+// import "../modal.css";
 
 const Login = ({
   LoginFetch,
@@ -13,6 +14,11 @@ const Login = ({
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
   function LoginFunction(e) {
     e.preventDefault();
@@ -50,14 +56,19 @@ const Login = ({
                 <div className="form-group">
                   <i className="fa fa-lock"></i>
                   <input
-                    type="password"
+                    type={passwordShown ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="form-control"
-                    placeholder="contraseña"
+                    placeholder="Contraseña"
                     required="required"
                   />
+                  <i
+                    className="far fa-eye"
+                    onClick={togglePasswordVisiblity}
+                  ></i>
                 </div>
+
                 <div className="form-group">
                   <input
                     type="submit"

@@ -1,3 +1,11 @@
 .login-link {
   cursor: pointer;
 }
+
+.fa-eye {
+  margin-left: 14rem;
+}
+.fa-eye:hover {
+  color: #00fcb6;
+  cursor: pointer;
+}

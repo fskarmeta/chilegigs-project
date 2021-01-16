@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { Modal } from "react-bootstrap";
 import Login from "./components/login";
@@ -19,7 +19,7 @@ const ErrorDeConexion = (
 
 const creacionExitosa = (
   <small className="text-success">
-    Cuenta creada exitosamente, porfavor ingresa con tu cuenta
+    Cuenta creada exitosamente, por favor ingresa con tu cuenta
   </small>
 );
 const mostrar = { display: "block" };
@@ -117,9 +117,7 @@ const ModalGeneral = ({ titulo }) => {
 
   let history = useHistory();
   function routeAfterLogin() {
-    console.log("hola desde rutas");
     if (store.perfil_status === "inactive") {
-      console.log("inactivo");
       if (store.role === "dj") {
         history.push("/dj/edit");
         actions.loginToTrue();
@@ -167,7 +165,10 @@ const ModalGeneral = ({ titulo }) => {
 
           setExitosoComp(true);
           setLoginComp(false);
-
+          let token = sessionStorage.getItem("chilegigs_token");
+          if (token) {
+            actions.autoLogin(token);
+          }
           //mandar al home
         }
       })
@@ -247,7 +248,12 @@ const ModalGeneral = ({ titulo }) => {
         </span>
       </li>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        keyboard={false}
+        backdrop="static"
+      >
         <div style={loginComp ? mostrar : ocultar}>
           <Login
             exito={exito}

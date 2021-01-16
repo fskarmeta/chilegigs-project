@@ -173,13 +173,13 @@ export const serviciosOptions = [
   { value: "Festivales", label: "Festivales" },
   { value: "Matrimonios", label: "Matrimonios" },
   { value: "Cumpleaños", label: "Cumpleaños" },
-  { value: "Evento Corporativos", label: "Evento Corporativos" },
+  { value: "Eventos Corporativos", label: "Evento Corporativos" },
   { value: "Fiestas Privadas", label: "Fiestas Privadas" },
   { value: "Afters", label: "Afters" },
 ];
 
 export const tecnicaOptions = [
-  { value: "Analoga", label: "Analoga" },
+  { value: "Análoga", label: "Análoga" },
   { value: "Digital", label: "Digital" },
   { value: "Ambas", label: "Ambas" },
 ];

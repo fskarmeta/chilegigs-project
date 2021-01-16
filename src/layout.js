@@ -5,7 +5,6 @@ import { Navbar } from "./components/navbar";
 import { HelloWorld } from "./views/admin/admin_helloworld";
 import { Raider } from "./views/admin/raiders";
 import { AdminHome } from "./views/admin/home";
-import { AdminNav } from "./components/admin/navbar_admin";
 import { EditarPerfil } from "./views/dj/editar_perfil";
 import { EditarPerfilCliente } from "./views/cliente/editar_perfil";
 import { DjProfile } from "./views/dj/perfil";
@@ -18,7 +17,11 @@ import Catalogo from "./views/catalogoDjs/catalogo";
 import NuevaClave from "./views/general/clave";
 import Spinner from "./components/home/spinner";
 import GigComponent from "./views/gigs/gigspadre";
-import Footer from "./components/home/Footer";
+// import Footer from "./components/home/Footer";
+import TablaClientes from "./views/admin/tabla_clientes";
+import TablaDjs from "./views/admin/tabla_djs";
+import AdminGigsView from "./views/admin/tabla_gigs.js";
+import FeedbackView from "./views/gigs/feedback";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -40,6 +43,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/admin">
               <HelloWorld />
+            </Route>
+            <Route exact path="/feedback/:id">
+              <FeedbackView />
             </Route>
             <Route exact path="/dj/edit">
               <EditarPerfil />
@@ -64,6 +70,15 @@ const Layout = () => {
             </Route>
             <Route exact path="/admin/raider">
               <Raider />
+            </Route>
+            <Route exact path="/admin/clients">
+              <TablaClientes />
+            </Route>
+            <Route exact path="/admin/djs">
+              <TablaDjs />
+            </Route>
+            <Route exact path="/admin/gigs">
+              <AdminGigsView />
             </Route>
             <Route exact path="/dj/profile/:username">
               <DjProfile />

@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext";
 
 import CategoryEditForm from "../../components/admin/CategoryEdit";
@@ -16,7 +15,7 @@ export const Raider = () => {
   });
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mb-5">
       <div className="row">
         <div className="col-md-1">
           <AdminNav />

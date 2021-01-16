@@ -1,4 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../../store/appContext";
+import { Badge } from "react-bootstrap";
+import { colorState } from "../general/helper";
+
+const mensajeEnviado = (
+  <small className="text-success">Mensaje ha sido enviado !</small>
+);
 
 const DjGig = ({
   options,
@@ -8,8 +15,9 @@ const DjGig = ({
   gig,
   updateGig,
   id,
+  previousPage,
 }) => {
-  // const [gig, setGig] = useState(gig);
+  const { store, actions } = useContext(Context);
   const [msg, setMsg] = useState("");
   const [msgWarning, setMsgWarning] = useState(false);
   const [
@@ -18,19 +26,52 @@ const DjGig = ({
   ] = useState(false);
   const [pideCambios, setPideCambios] = useState(false);
 
+  const [msgSended, setMsgSended] = useState(false);
+
   useEffect(() => {
     if (
       gig.estado === "Aceptado" ||
       gig.estado === "Declinado" ||
       gig.estado === "Confirmado" ||
-      gig.estado === "Cancelado"
+      gig.estado === "Cancelado" ||
+      gig.estado === "Terminado" ||
+      gig.estado === "Dj pide cambios"
     ) {
       setAceptadoODeclinadoOConfirmado(true);
     }
     if (gig.estado === "Dj pide cambios") {
       setPideCambios(true);
     }
-  });
+    return () => {
+      actions.fetchAllUserGigs(store.token);
+    };
+  }, [actions, gig.estado, store.token]);
+
+  function soloMensaje() {
+    if (msg === "") {
+      return setMsgWarning(true);
+    } else {
+      let gigCopy = { ...gig };
+      let mensajesArray = gigCopy.mensaje;
+      mensajesArray.unshift({
+        nombre: gig.username_dj,
+        fecha: new Date(),
+        estado: "Sin cambios",
+        mensaje: msg,
+      });
+      let data = {
+        ...gig,
+        mensaje: mensajesArray,
+        leido_por_dj: true,
+        leido_por_cliente: false,
+      };
+      updateGig(data, id);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+      previousPage();
+    }
+  }
 
   function gigAceptado() {
     if (msg === "") {
@@ -55,6 +96,10 @@ const DjGig = ({
       };
       updateGig(data, id);
       setAceptadoODeclinadoOConfirmado(true);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -82,6 +127,10 @@ const DjGig = ({
 
       updateGig(data, id);
       setAceptadoODeclinadoOConfirmado(true);
+      setMsgSended(true);
+      setMsg("");
+      setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -109,6 +158,9 @@ const DjGig = ({
       updateGig(data, id);
       setMsg("");
       setPideCambios(true);
+      setMsgSended(true);
+      setMsgWarning(false);
+      previousPage();
     }
   }
 
@@ -118,7 +170,9 @@ const DjGig = ({
         <div className="row">
           <div className="col-md-4">
             <span className="font-weight-bold">Estado: </span>
-            <span className="font-weight-light gig-text">{gig.estado}</span>
+            <span className="font-weight-light gig-text">
+              <Badge variant={`${colorState(gig.estado)}`}>{gig.estado}</Badge>
+            </span>
           </div>
         </div>
         <div className="row mt-2">
@@ -199,10 +253,34 @@ const DjGig = ({
         </div>
       </div>
       {aceptadoODeclinadoOConfirmado ? (
-        <span className="font-weight-bold m-5">
-          Este Gig ha sido aceptado, confirmado o declinado, ya no se pueden
-          hacer cambios.
-        </span>
+        <div className="col-md-12 d-flex flex-column">
+          <span className="font-weight-bold">
+            Por el momento solo puedes enviar un mensaje.
+          </span>
+          <span className="font-weight-light gig-text">
+            <textarea
+              id="emensaje"
+              rows="3"
+              className="col-md-10 mt-2"
+              value={msg}
+              onChange={(e) => setMsg(e.target.value)}
+            ></textarea>
+            {msgWarning ? warning : null}
+          </span>
+          <div>
+            <span className="btn btn-success m-1" onClick={soloMensaje}>
+              Enviar Mensaje
+            </span>
+            {msgSended ? mensajeEnviado : null}
+            {gig.estado === "Pendiente" ||
+            gig.estado === "Modificado por Cliente" ||
+            gig.estado === "Dj pide cambios" ? (
+              <span className="btn btn-danger m-1" onClick={gigDeclinado}>
+                Declinar Booking
+              </span>
+            ) : null}
+          </div>
+        </div>
       ) : (
         <div class="card">
           <div class="card-body">
@@ -224,7 +302,24 @@ const DjGig = ({
               </div>
               <div className="col-md-12">
                 {pideCambios ? (
-                  cambios
+                  <div>
+                    <span className="btn btn-success m-1" onClick={soloMensaje}>
+                      Enviar Mensaje
+                    </span>
+
+                    {gig.estado === "Pendiente" ||
+                    gig.estado === "Modificado por Cliente" ||
+                    gig.estado === "Dj pide cambios" ? (
+                      <span
+                        className="btn btn-danger m-1"
+                        onClick={gigDeclinado}
+                      >
+                        Declinar Booking
+                      </span>
+                    ) : null}
+                    {msgSended ? mensajeEnviado : null}
+                    {msgWarning ? warning : null}
+                  </div>
                 ) : (
                   <>
                     <span className="btn btn-success m-1" onClick={gigAceptado}>
@@ -269,7 +364,12 @@ const DjGig = ({
                         </span>
                         <span>
                           Estado:
-                          <span>{` ${msg.estado}`}</span>
+                          <span>
+                            {" "}
+                            <Badge variant={`${colorState(msg.estado)}`}>
+                              {msg.estado}
+                            </Badge>
+                          </span>
                         </span>
                         <span className="font-weight-bol">Mensaje:</span>
                         <span className="gig-texto-mensaje ml-3">

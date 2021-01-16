@@ -15,7 +15,7 @@ const passNoMatch = (
 
 const allOk = (
   <small className="text-success">
-    Contraseña modificada, porfavor vuelve a ingresar...
+    Contraseña modificada, por favor vuelve a ingresar...
   </small>
 );
 
@@ -126,7 +126,7 @@ const CambiarClaveEnCuenta = () => {
                 onChange={(e) => setPass1(e.target.value)}
               />
             </div>
-            <label>Confirmar Constraseña</label>
+            <label>Confirmar Nueva Constraseña</label>
             <div ClassName="form-group pass_show">
               <input
                 type="password"
